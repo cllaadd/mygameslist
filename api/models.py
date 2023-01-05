@@ -38,3 +38,23 @@ class UserOut(BaseModel):
     id: str
     email: str
     full_name: str
+
+
+class GameIn(BaseModel):
+    id: str
+    name: str
+    description: str
+    genre: str
+    user_id: str
+
+
+class GameOut(BaseModel):
+    id: str
+    name: str
+    description: str
+    genre: str
+    user_id: str
+
+
+class Game(GameIn):
+    id: PydanticObjectId

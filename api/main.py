@@ -1,10 +1,14 @@
 from fastapi import FastAPI
-from routers import users
 from fastapi.middleware.cors import CORSMiddleware
-from routers import users
+from routers import users, games
 import os
 
+
 app = FastAPI()
+
+@app.get("/")
+async def root():
+    return {"message": "Hello World"}
 
 app.add_middleware(
     CORSMiddleware,
@@ -17,3 +21,4 @@ app.add_middleware(
 )
 
 app.include_router(users.router)
+app.include_router(games.router)
