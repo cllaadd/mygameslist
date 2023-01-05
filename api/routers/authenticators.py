@@ -19,7 +19,7 @@ class Auth(Authenticator):
     def get_hashed_password(self, user: User) -> str:
         return user.password
 
-    def get_User_data_for_cookie(self, user: User) -> UserOut:
+    def get_user_data_for_cookie(self, user: User) -> UserOut:
         return user.email, UserOut(**user.dict())
 
 
