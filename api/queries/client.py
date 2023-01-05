@@ -5,9 +5,6 @@ import pymongo
 DATABASE_URL = os.environ["DATABASE_URL"]
 client = pymongo.MongoClient(DATABASE_URL)
 
-# client = pymongo.MongoClient(os.environ["DATABASE_URL"])
-# mygamelist = os.environ['MONGODATABASE']
-
 
 class Queries:
     @property

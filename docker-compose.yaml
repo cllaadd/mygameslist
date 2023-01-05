@@ -5,7 +5,7 @@ services:
   mongo:
     image: mongo:6
     volumes:
-        # - ./setup/mongodb:/docker-entrypoint-initdb.d
+        - ./setup/mongodb:/docker-entrypoint-initdb.d
         - mongo-data:/data/db
     environment:
         MONGO_INITDB_ROOT_USERNAME: root

@@ -6,6 +6,10 @@ import os
 
 app = FastAPI()
 
+@app.get("/")
+async def root():
+    return {"message": "I got it to work!"}
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
