@@ -7,7 +7,7 @@ from fastapi import (
     Request
 )
 from pydantic import BaseModel
-from models import GameIn, GameOut, Game
+from models import GameIn, GameOut, GameList
 from queries.games import (
     GameQueries
 )
@@ -21,3 +21,8 @@ async def create_game(
     repo: GameQueries = Depends(),
 ):
     return repo.create(game)
+
+
+@router.get("/games/", response_model=GameList)
+async def get_all_games(repo: GameQueries = Depends()):
+    return GameList(games=repo.get_all())

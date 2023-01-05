@@ -6,8 +6,7 @@ from models import GameIn, GameOut, Game
 
 class GameQueries(Queries):
     DB_NAME = "mygamelist"
-    COLLECTION_NAME = "games"
-
+    COLLECTION = "games"
 
     def create(
         self, game: GameIn
@@ -16,3 +15,11 @@ class GameQueries(Queries):
         self.collection.insert_one(props)
         props["id"] = str(props["_id"])
         return GameOut(**props)
+
+    def get_all(self) -> List[GameOut]:
+        games = []
+        db = self.collection.find()
+        for document in db:
+            document["id"] = str(document["_id"])
+            games.append(GameOut(**document))
+        return games

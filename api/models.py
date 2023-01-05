@@ -58,3 +58,7 @@ class GameOut(BaseModel):
 
 class Game(GameIn):
     id: PydanticObjectId
+
+
+class GameList(BaseModel):
+    games: List[GameOut]
