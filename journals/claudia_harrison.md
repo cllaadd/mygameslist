@@ -18,3 +18,7 @@ Presented wireframes to instructors. Got advice on color palette. Discussed how 
 1/03/2023
 
 Presented our project idea to the class. Began thinking about routers. Added missing wireframe for creating a list. Discussed whether we wanted to add a reviews or followers model and whether we could do user avatars. Cloned the project base code down and creatred GitLab group for our team.
+
+1/04/2023
+
+Talked to Dalonte about the benefits and drawbacks of SQL vs non SQL databases. Began building containers for the database and fastapi backend.
