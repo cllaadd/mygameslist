@@ -7,6 +7,7 @@ from fastapi import (
     Request
 )
 from pydantic import BaseModel
+import requests
 from models import GameIn, GameOut, GameList
 from queries.games import (
     GameQueries
