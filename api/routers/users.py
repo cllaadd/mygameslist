@@ -41,74 +41,74 @@ def create_user(self, data):
         result = self.get_user(result.inserted)
 
 
-# @router.get("/token", response_model=UserToken | None)
-# async def get_token(
-#     request: Request,
-#     user: User = Depends(authenticator.get_account_data),
-# ) -> UserToken | None:
-#     if authenticator.cookie_name in request.cookies:
-#         token_data = {
-#             "access_token": request.cookies[authenticator.cookie_name],
-#             "type": "Bearer",
-#             "user": user,
-#         }
-#         return UserToken(**token_data)
+@router.get("/token", response_model=UserToken | None)
+async def get_token(
+    request: Request,
+    user: User = Depends(authenticator.try_get_current_account_data),
+) -> UserToken | None:
+    if authenticator.cookie_name in request.cookies:
+        token_data = {
+            "access_token": request.cookies[authenticator.cookie_name],
+            "type": "Bearer",
+            "user": user,
+        }
+        return UserToken(**token_data)
 
 
-# @router.put(
-#     "/api/user/{user_id}",
-#     response_model=UserToken | HttpError,
-# )
-# async def update_User(
-#     user_id: str,
-#     info: UserUpdateIn,
-#     request: Request,
-#     response: Response,
-#     repo: UserQueries = Depends(),
-# ):
-#     if info.password is not None:
-#         hashed_password = authenticator.hash_password(info.password)
-#     else:
-#         hashed_password = None
+@router.put(
+    "/api/user/{user_id}",
+    response_model=UserToken | HttpError,
+)
+async def update_User(
+    user_id: str,
+    info: UserUpdateIn,
+    request: Request,
+    response: Response,
+    repo: UserQueries = Depends(),
+):
+    if info.password is not None:
+        hashed_password = authenticator.hash_password(info.password)
+    else:
+        hashed_password = None
 
-#     try:
-#         user = repo.update(user_id, info, hashed_password)
-#     except DuplicateUserError:
-#         raise HTTPException(
-#             status_code=status.HTTP_400_BAD_REQUEST,
-#             detail="Cannot create a user with those credentials",
-#         )
+    try:
+        user = repo.update(user_id, info, hashed_password)
+    except DuplicateUserError:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Cannot create a user with those credentials",
+        )
 
-#     form = UserForm(username=info.email, password=info.password)
-#     token = await authenticator.login(response, request, form, repo)
-#     return UserToken(user=user, **token.dict())
+    form = UserForm(username=info.email, password=info.password)
+    token = await authenticator.login(response, request, form, repo)
+    return UserToken(user=user, **token.dict())
 
 
-# @router.post("/api/user/", response_model=UserToken | HttpError)
-# async def create_User(
-#     info: UserIn,
-#     request: Request,
-#     response: Response,
-#     repo: UserQueries = Depends(),
-# ):
+@router.post("/api/user/", response_model=UserToken | HttpError)
+async def create_User(
+    info: UserIn,
+    request: Request,
+    response: Response,
+    repo: UserQueries = Depends(),
+):
 
-#     hashed_password = authenticator.hash_password(
-#         info.password
-#     )
-#     try:
-#         user = repo.create(info, hashed_password)
-#     except DuplicateUserError:
-#         raise HTTPException(
-#             status_code=status.HTTP_400_BAD_REQUEST,
-#             detail="Cannot create a user with those credentials",
-#         )
+    hashed_password = authenticator.hash_password(
+        info.password
+    )
+    try:
+        user = repo.create(info, hashed_password)
+    except DuplicateUserError:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Cannot create a user with those credentials",
+        )
 
-#     form = UserForm(username=info.email, password=info.password)
+    form = UserForm(username=info.email, password=info.password)
 
-#     token = await authenticator.login(
-#         response, request, form, repo
-#         )
-#     return UserToken(user=user, **token.dict())
+    token = await authenticator.login(
+        response, request, form, repo
+        )
+    return UserToken(user=user, **token.dict())
 
 
 @router.get("/api/users/", response_model=list[UserOut])
