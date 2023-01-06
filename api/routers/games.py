@@ -15,7 +15,7 @@ from queries.games import (
 router = APIRouter()
 
 
-@router.post("/games", response_model=GameOut)
+@router.post("/games/", response_model=GameOut)
 async def create_game(
     game: GameIn,
     repo: GameQueries = Depends(),

@@ -21,4 +21,8 @@ Presented our project idea to the class. Began thinking about routers. Added mis
 
 1/04/2023
 
-Talked to Dalonte about the benefits and drawbacks of SQL vs non SQL databases. Began building containers for the database and fastapi backend.
+Talked to Dalonte about the benefits and drawbacks of SQL vs non SQL databases. Began building containers for the database and fastapi backend. Got early version of game model working. Started on user model and authentication.
+
+1/05/2023
+
+Finished user model. Game model will need to draw from the igdb api so we worked on that. Next is games list model and that will complete our three basic models.

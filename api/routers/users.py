@@ -14,7 +14,6 @@ from queries.users import (
     DuplicateUserError,
 )
 from models import User, UserIn, UserOut, UserUpdateIn
-from queries.client import client
 
 
 class UserForm(BaseModel):
@@ -31,14 +30,6 @@ class HttpError(BaseModel):
 
 
 router = APIRouter()
-
-
-# @router.post("/users", response_model=UserOut)
-# def create_user(self, data):
-#     db = client["mygamelist"]
-#     result = db.users.insert_one(data.dict())
-#     if result.inserted_id:
-#         result = self.get_user(result.inserted)
 
 
 @router.get("/token", response_model=UserToken | None)

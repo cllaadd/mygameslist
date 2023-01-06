@@ -1,15 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routers import users, games
-from routers.authenticators import authenticator
+# from routers.authenticators import authenticator
 import os
 
 
 app = FastAPI()
-
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
 
 app.add_middleware(
     CORSMiddleware,
