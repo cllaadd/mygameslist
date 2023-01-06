@@ -6,8 +6,8 @@ from fastapi import (
     status,
     Request
 )
-# from jwtdown_fastapi.authentication import Token
-# from .authenticators import authenticator
+from jwtdown_fastapi.authentication import Token
+from .authenticators import authenticator
 from pydantic import BaseModel
 from queries.users import (
     UserQueries,
@@ -22,8 +22,8 @@ class UserForm(BaseModel):
     password: str
 
 
-# class UserToken(Token):
-#     user: UserOut
+class UserToken(Token):
+    user: UserOut
 
 
 class HttpError(BaseModel):
@@ -32,19 +32,19 @@ class HttpError(BaseModel):
 
 router = APIRouter()
 
-# @router.post("")
-# def create_user(self,data):
-#     db = client[dbname]
-#     result = db.users.insert_one(data.dict())
-#     if result.inserted_id:
-#         result = self.get_user(result.inserted)
 
+@router.post("/users", response_model=UserOut)
+def create_user(self, data):
+    db = client["mygamelist"]
+    result = db.users.insert_one(data.dict())
+    if result.inserted_id:
+        result = self.get_user(result.inserted)
 
 
 # @router.get("/token", response_model=UserToken | None)
 # async def get_token(
 #     request: Request,
-#     user: User = Depends(authenticator.try_get_current_user_data),
+#     user: User = Depends(authenticator.get_account_data),
 # ) -> UserToken | None:
 #     if authenticator.cookie_name in request.cookies:
 #         token_data = {
@@ -111,15 +111,15 @@ router = APIRouter()
 #     return UserToken(user=user, **token.dict())
 
 
-# @router.get("/api/users/", response_model=list[UserOut])
-# async def get_users(repo: UserQueries = Depends()):
-#     return repo.get_all()
+@router.get("/api/users/", response_model=list[UserOut])
+async def get_users(repo: UserQueries = Depends()):
+    return repo.get_all()
 
 
-# @router.delete("/api/users/{user_id}", response_model=bool)
-# async def delete_user(
-#     user_id: str,
-#     repo: UserQueries = Depends(),
-# ):
-#     repo.delete(user_id)
-#     return True
+@router.delete("/api/users/{user_id}", response_model=bool)
+async def delete_user(
+    user_id: str,
+    repo: UserQueries = Depends(),
+):
+    repo.delete(user_id)
+    return True

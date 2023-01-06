@@ -6,12 +6,12 @@ from queries.users import UserQueries
 
 
 class Auth(Authenticator):
-    async def get_user_data(
+    async def get_account_data(
         self, username: str, users: UserQueries
     ) -> User:
         return users.get(username)
 
-    def get_user_getter(
+    def get_account_getter(
         self, users: UserQueries = Depends()
     ) -> UserQueries:
         return users
