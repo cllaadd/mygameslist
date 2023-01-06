@@ -43,17 +43,41 @@ class UserOut(BaseModel):
 class GameIn(BaseModel):
     id: str
     name: str
-    description: str
-    genre: str
+    game_modes: str
+    genres: str
+    cover: str
+    similar_games: str
+    category: str
+    collection: str
+    involved_companies: str
+    platforms: str
+    player_perspectives: str
+    themes: str
+    summary: str
+    storyline: str
+    first_release_date: str
     user_id: str
+
 
 
 class GameOut(BaseModel):
     id: str
     name: str
-    description: str
-    genre: str
+    game_modes: str
+    genres: str
+    cover: str
+    similar_games: str
+    category: str
+    collection: str
+    involved_companies: str
+    platforms: str
+    player_perspectives: str
+    themes: str
+    summary: str
+    storyline: str
+    first_release_date: str
     user_id: str
+
 
 
 class Game(GameIn):
