@@ -41,3 +41,27 @@ class UserQueries(Queries):
             raise DuplicateUserError()
         props["id"] = str(props["_id"])
         return User(**props)
+
+    def delete(self, id: str) -> bool:
+        return self.collection.delete_one({"_id": ObjectId(id)})
+
+    def update(
+        self,
+        id: str,
+        info: UserUpdateIn,
+        hashed_password: Union[None, str]
+    ):
+        props = info.dict()
+        if hashed_password is not None:
+            props["password"] = hashed_password
+
+        try:
+            self.collection.find_one_and_update(
+                {"_id": ObjectId(id)},
+                {"$set": props},
+                return_document=ReturnDocument.AFTER,
+            )
+        except DuplicateKeyError:
+            raise DuplicateUserError()
+
+        return User(**props, id=id)
