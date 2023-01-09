@@ -43,17 +43,11 @@ class UserOut(BaseModel):
 class GameIn(BaseModel):
     id: str
     name: str
-    description: str
-    genre: str
-    user_id: str
 
 
 class GameOut(BaseModel):
     id: str
     name: str
-    description: str
-    genre: str
-    user_id: str
 
 
 class Game(GameIn):
