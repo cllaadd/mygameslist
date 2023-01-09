@@ -57,6 +57,7 @@ class GameIn(BaseModel):
     storyline: str
     first_release_date: str
     user_id: str
+    errors: str
 
 
 
@@ -77,11 +78,13 @@ class GameOut(BaseModel):
     storyline: str
     first_release_date: str
     user_id: str
+    errors: str
 
 
 
-class Game(GameIn):
-    id: PydanticObjectId
+class GameSearchOut(BaseModel):
+    game: GameOut
+
 
 
 class GameList(BaseModel):
