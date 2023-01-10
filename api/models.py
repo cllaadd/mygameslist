@@ -57,9 +57,8 @@ class GameIn(BaseModel):
     summary: List[str]
     storyline: List[str]
     first_release_date: List[str]
-    Account_id: str
+    account_id: str
     errors: List[str]
-
 
 
 class GameOut(BaseModel):
@@ -77,32 +76,36 @@ class GameOut(BaseModel):
     summary: List[str]
     storyline: List[str]
     first_release_date: List[str]
-    Account_id: str
+    account_id: str
     errors: List[str]
-
 
 
 class GameSearchOut(BaseModel):
     game: GameOut
 
+
 class GameList(BaseModel):
     games: List[GameOut]
 
+
 class MyGameListIn(BaseModel):
-    Account_id: str
+    account_id: str
     name: str
     description: str
     game_ids: list
+
 
 class MyGameList(MyGameListIn):
     id: PydanticObjectId
 
+
 class MyGameListOut(MyGameListIn):
     id: int
-    Account_id: str
+    account_id: str
     name: str
     description: str
     game_ids: list
+
 
 class MyGameListList(BaseModel):
     MyGameLists: List[MyGameListOut]
