@@ -18,26 +18,28 @@ class PydanticObjectId(ObjectId):
         return value
 
 
-class UserIn(BaseModel):
-    email: str
+class AccountIn(BaseModel):
+    username: str
     password: str
-    full_name: str
 
 
-class UserUpdateIn(BaseModel):
-    email: Optional[str]
+class AccountUpdateIn(BaseModel):
+    username: Optional[str]
     password: Optional[str]
-    full_name: Optional[str]
 
 
-class User(UserIn):
+class Account(AccountIn):
     id: PydanticObjectId
 
 
-class UserOut(BaseModel):
+class AccountOut(BaseModel):
     id: str
-    email: str
-    full_name: str
+    username: str
+    password: str
+
+
+class AccountRepo(BaseModel):
+    games: List[AccountOut]
 
 
 class GameIn(BaseModel):
@@ -55,7 +57,7 @@ class GameIn(BaseModel):
     summary: List[str]
     storyline: List[str]
     first_release_date: List[str]
-    user_id: str
+    Account_id: str
     errors: List[str]
 
 
@@ -75,7 +77,7 @@ class GameOut(BaseModel):
     summary: List[str]
     storyline: List[str]
     first_release_date: List[str]
-    user_id: str
+    Account_id: str
     errors: List[str]
 
 
@@ -87,7 +89,7 @@ class GameList(BaseModel):
     games: List[GameOut]
 
 class MyGameListIn(BaseModel):
-    user_id: str
+    Account_id: str
     name: str
     description: str
     game_ids: list
@@ -97,7 +99,7 @@ class MyGameList(MyGameListIn):
 
 class MyGameListOut(MyGameListIn):
     id: int
-    user_id: str
+    Account_id: str
     name: str
     description: str
     game_ids: list
