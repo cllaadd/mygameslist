@@ -2,13 +2,17 @@ import requests
 import time
 from search_game_name import search_game
 import os
+try:
+    from keys import isad_api_key
+    api_key = isad_api_key
+except:
+    api_key = os.environ['isad_api_key']
 
-api_key = os.environ['isad_api_key']
 delay = 2
 
 
 def get_game_plain(search_game):
-    api_key = os.environ['isad_api_key']
+
     url = f'https://api.isthereanydeal.com/v02/search/search/?key={api_key}&q={search_game}&limit=1'
 
     response = requests.get(url)
@@ -21,7 +25,7 @@ def get_game_plain(search_game):
         print(response.status_code)
 
 def get_game_price(game_plain):
-    api_key = os.environ['isad_api_key']
+
     url = f'https://api.isthereanydeal.com/v01/game/prices/?key={api_key}&plains={game_plain}'
 
     response = requests.get(url)
