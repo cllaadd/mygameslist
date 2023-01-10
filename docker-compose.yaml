@@ -23,7 +23,6 @@ services:
       WAIT_HOSTS: mongo:27017
       WAIT_BEFORE: 5
       WAIT_TIMEOUT: 60
-      igdb_client_id: ${igdb_client_id}
     ports:
       - 8000:8000
     volumes:

@@ -2,6 +2,11 @@ import requests
 from datetime import datetime, timedelta
 from search_game_name import search_game
 import os
+try:
+    from keys import igdb_client_id, igdb_access_key
+except:
+    igdb_client_id = os.environ['igdb_client_id']
+    igdb_access_key = os.environ['igdb_access_key']
 
 def find_game_data():
     fields = (
@@ -24,8 +29,8 @@ def find_game_data():
     url = 'https://api.igdb.com/v4/games/'
 
     header = {
-        'Client-ID': os.environ['igdb_client_id'],
-        'Authorization': os.environ['igdb_access_key'],
+        'Client-ID': igdb_client_id,
+        'Authorization': igdb_access_key,
         'TLS': '1.2'
     }
 

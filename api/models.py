@@ -41,44 +41,42 @@ class UserOut(BaseModel):
 
 
 class GameIn(BaseModel):
-    id: str
     name: str
-    game_modes: str
-    genres: str
-    cover: str
-    similar_games: str
-    category: str
-    collection: str
-    involved_companies: str
-    platforms: str
-    player_perspectives: str
-    themes: str
-    summary: str
-    storyline: str
-    first_release_date: str
+    game_modes: List[str]
+    genres: List[str]
+    cover: List[str]
+    similar_games: List[str]
+    category: List[str]
+    collection: List[str]
+    involved_companies: List[str]
+    platforms: List[str]
+    player_perspectives: List[str]
+    themes: List[str]
+    summary: List[str]
+    storyline: List[str]
+    first_release_date: List[str]
     user_id: str
-    errors: str
+    errors: List[str]
 
 
 
 class GameOut(BaseModel):
-    id: str
     name: str
-    game_modes: str
-    genres: str
-    cover: str
-    similar_games: str
-    category: str
-    collection: str
-    involved_companies: str
-    platforms: str
-    player_perspectives: str
-    themes: str
-    summary: str
-    storyline: str
-    first_release_date: str
+    game_modes: List[str]
+    genres: List[str]
+    cover: List[str]
+    similar_games: List[str]
+    category: List[str]
+    collection: List[str]
+    involved_companies: List[str]
+    platforms: List[str]
+    player_perspectives: List[str]
+    themes: List[str]
+    summary: List[str]
+    storyline: List[str]
+    first_release_date: List[str]
     user_id: str
-    errors: str
+    errors: List[str]
 
 
 
