@@ -21,13 +21,13 @@ class PydanticObjectId(ObjectId):
 class UserIn(BaseModel):
     email: str
     password: str
-    full_name: str
+    username: str
 
 
 class UserUpdateIn(BaseModel):
     email: Optional[str]
     password: Optional[str]
-    full_name: Optional[str]
+    username: Optional[str]
 
 
 class User(UserIn):
@@ -37,7 +37,7 @@ class User(UserIn):
 class UserOut(BaseModel):
     id: str
     email: str
-    full_name: str
+    username: str
 
 
 class GameIn(BaseModel):
@@ -56,3 +56,30 @@ class Game(GameIn):
 
 class GameList(BaseModel):
     games: List[GameOut]
+
+
+class MGLDetailsIn(BaseModel):
+    name: str
+    description: str
+
+
+class MGLIn(BaseModel):
+    user_id: str
+    name: str
+    description: str
+
+
+class MGLOut(MGLIn):
+    id: str
+    user_id: Optional[str]
+    name: str
+    description: str
+    games: list
+
+
+class MGL(MGLIn):
+    id: PydanticObjectId
+
+
+class MGLList(BaseModel):
+    MGLs: List[MGLOut]
