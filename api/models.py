@@ -18,23 +18,91 @@ class PydanticObjectId(ObjectId):
         return value
 
 
-class UserIn(BaseModel):
-    email: str
+class AccountIn(BaseModel):
+    username: str
     password: str
-    full_name: str
 
 
-class UserUpdateIn(BaseModel):
-    email: Optional[str]
+class AccountUpdateIn(BaseModel):
+    username: Optional[str]
     password: Optional[str]
-    full_name: Optional[str]
 
 
-class User(UserIn):
+class Account(AccountIn):
     id: PydanticObjectId
 
 
-class UserOut(BaseModel):
+class AccountOut(BaseModel):
     id: str
-    email: str
-    full_name: str
+    username: str
+    password: str
+
+
+class AccountRepo(BaseModel):
+    games: List[AccountOut]
+
+
+class GameIn(BaseModel):
+    name: str
+    game_modes: List[str]
+    genres: List[str]
+    cover: List[str]
+    similar_games: List[str]
+    category: List[str]
+    collection: List[str]
+    involved_companies: List[str]
+    platforms: List[str]
+    player_perspectives: List[str]
+    themes: List[str]
+    summary: List[str]
+    storyline: List[str]
+    first_release_date: List[str]
+    Account_id: str
+    errors: List[str]
+
+
+
+class GameOut(BaseModel):
+    name: str
+    game_modes: List[str]
+    genres: List[str]
+    cover: List[str]
+    similar_games: List[str]
+    category: List[str]
+    collection: List[str]
+    involved_companies: List[str]
+    platforms: List[str]
+    player_perspectives: List[str]
+    themes: List[str]
+    summary: List[str]
+    storyline: List[str]
+    first_release_date: List[str]
+    Account_id: str
+    errors: List[str]
+
+
+
+class GameSearchOut(BaseModel):
+    game: GameOut
+
+class GameList(BaseModel):
+    games: List[GameOut]
+
+class MyGameListIn(BaseModel):
+    Account_id: str
+    name: str
+    description: str
+    game_ids: list
+
+class MyGameList(MyGameListIn):
+    id: PydanticObjectId
+
+class MyGameListOut(MyGameListIn):
+    id: int
+    Account_id: str
+    name: str
+    description: str
+    game_ids: list
+
+class MyGameListList(BaseModel):
+    MyGameLists: List[MyGameListOut]
