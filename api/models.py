@@ -85,7 +85,24 @@ class GameOut(BaseModel):
 class GameSearchOut(BaseModel):
     game: GameOut
 
-
-
 class GameList(BaseModel):
     games: List[GameOut]
+
+class MyGameListIn(BaseModel):
+    user_id: str
+    name: str
+    description: str
+    game_ids: list
+
+class MyGameList(MyGameListIn):
+    id: PydanticObjectId
+
+class MyGameListOut(MyGameListIn):
+    id: int
+    user_id: str
+    name: str
+    description: str
+    game_ids: list
+
+class MyGameListList(BaseModel):
+    MyGameLists: List[MyGameListOut]
