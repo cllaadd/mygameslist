@@ -62,11 +62,10 @@ class AccountQueries(Queries):
         return Account(**props, id=id)
 
     def create(
-        self, info: AccountIn, hashed_password: str, roles=["patron"]
+        self, info: AccountIn, hashed_password: str
     ) -> Account:
         props = info.dict()
         props["password"] = hashed_password
-        props["roles"] = roles
         try:
             self.collection.insert_one(props)
         except DuplicateKeyError:
