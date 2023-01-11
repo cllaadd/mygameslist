@@ -99,7 +99,7 @@ class MyGameList(MyGameListIn):
 
 
 class MyGameListOut(MyGameListIn):
-    id: int
+    id: str
     account_id: str
     name: str
     description: str
@@ -107,7 +107,7 @@ class MyGameListOut(MyGameListIn):
 
 
 class MyGameListRepo(BaseModel):
-    MyGameLists: List[MyGameListOut]
+    mgls: List[MyGameListOut]
 
 
 class MyGameListDetailIn(BaseModel):

@@ -27,15 +27,22 @@ async def create_mgl(
     return user_mgl
 
 
+# # Get All My mgls
+# @router.get("/mgls/", response_model=MyGameListRepo)
+# async def get_all_my_mgls(
+#     repo: MGLQueries = Depends(),
+#     account_data: dict = Depends(authenticator.get_current_account_data),
+# ):
+#     account = AccountOut(**account_data)
+#     account_id = account.id
+#     return MyGameListRepo(mgls=repo.get_all(account_id))
+
 # Get All My mgls
 @router.get("/mgls/", response_model=MyGameListRepo)
-async def get_all_my_mgls(
+async def get_all_mgls(
     repo: MGLQueries = Depends(),
-    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
-    account = AccountOut(**account_data)
-    account_id = account.id
-    return MyGameListRepo(mgls=repo.get_all(account_id))
+    return MyGameListRepo(mgls=repo.get_all())
 
 
 # Get One mgl
