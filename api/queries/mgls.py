@@ -1,7 +1,7 @@
 from bson.objectid import ObjectId
 from typing import List
 from .client import Queries
-from models import MyGameListIn, MyGameListOut
+from models import MyGameListIn, MyGameListOut, GameOut
 from pymongo import ReturnDocument
 
 
@@ -39,8 +39,23 @@ class MGLQueries(Queries):
     def delete_mgl(self, mgl_id: str) -> bool:
         self.collection.delete_one({"_id": ObjectId(f"{mgl_id}")})
 
-    def update_mgl(self, mgl_id: str, mgl: MyGameListIn) -> MyGameListOut:
+    # def update_mgl(self, mgl_id: str, mgl: MyGameListIn) -> MyGameListOut:
+    #     mgl_dict = mgl.dict()
+    #     self.collection.find_one_and_update(
+    #         {"_id": ObjectId(mgl_id)},
+    #         {"$set": mgl_dict},
+    #         return_document=ReturnDocument.AFTER,
+    #     )
+    #     return MyGameListOut(**mgl_dict, id=mgl_id)
+
+    def add_game(self, mgl_id: str, mgl: MyGameListIn, game_id:str, game: GameOut) -> MyGameListOut:
+        mgl = self.collection.find_one({"_id": ObjectId(f"{mgl_id}")})
+        db = [DB_NAME]
+        game = db.games.find_one({"_id": ObjectId(f"{game_id}")})
         mgl_dict = mgl.dict()
+        game_dict = game.dict()
+        games_list = mgl_dict["games"]
+        games_list.append(game_dict)
         self.collection.find_one_and_update(
             {"_id": ObjectId(mgl_id)},
             {"$set": mgl_dict},
