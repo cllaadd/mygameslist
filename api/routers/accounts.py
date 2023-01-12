@@ -52,7 +52,7 @@ async def get_token(
 
 
 @router.put(
-    "/account/{account_id}",
+    "/accounts/{account_id}",
     response_model=AccountToken | HttpError,
 )
 async def update_account(
@@ -112,7 +112,7 @@ async def get_accounts(repo: AccountQueries = Depends()):
     return repo.get_all()
 
 
-@router.delete("/account/{account_id}", response_model=bool)
+@router.delete("/accounts/{account_id}", response_model=bool)
 async def delete_account(
     account_id: str,
     repo: AccountQueries = Depends(),

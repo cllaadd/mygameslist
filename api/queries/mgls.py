@@ -39,11 +39,11 @@ class MGLQueries(Queries):
     def delete_mgl(self, mgl_id: str) -> bool:
         self.collection.delete_one({"_id": ObjectId(f"{mgl_id}")})
 
-    # def update_list(self, mgl_id: str, mgl: MyGameListIn) -> MyGameListOut:
-    #     mgl_dict = mgl.dict()
-    #     self.collection.find_one_and_update(
-    #         {"_id": ObjectId(mgl_id)},
-    #         {"$set": mgl_dict},
-    #         return_document=ReturnDocument.AFTER,
-    #     )
-    #     return MyGameListOut(**mgl_dict, id=mgl_id)
+    def update_mgl(self, mgl_id: str, mgl: MyGameListIn) -> MyGameListOut:
+        mgl_dict = mgl.dict()
+        self.collection.find_one_and_update(
+            {"_id": ObjectId(mgl_id)},
+            {"$set": mgl_dict},
+            return_document=ReturnDocument.AFTER,
+        )
+        return MyGameListOut(**mgl_dict, id=mgl_id)
