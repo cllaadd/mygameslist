@@ -37,6 +37,7 @@ async def create_game(
 async def get_all_games(repo: GameQueries = Depends()):
     return GameList(games=repo.get_all())
 
+
 @router.get(f"/games/search/")
 async def search_games(name: str, repo: GameQueries = Depends()):
     search_game = repo.get_game(name)

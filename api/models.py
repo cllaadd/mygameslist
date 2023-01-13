@@ -44,40 +44,13 @@ class AccountRepo(BaseModel):
 
 class GameIn(BaseModel):
     name: str
-    game_modes: List[str]
-    genres: List[str]
-    cover: List[str]
-    similar_games: List[str]
-    category: List[str]
-    collection: List[str]
-    involved_companies: List[str]
-    platforms: List[str]
-    player_perspectives: List[str]
-    themes: List[str]
-    summary: List[str]
-    storyline: List[str]
-    first_release_date: List[str]
-    account_id: str
-    errors: List[str]
+    cover_url: str
 
 
 class GameOut(BaseModel):
+    id: str
     name: str
-    game_modes: List[str]
-    genres: List[str]
-    cover: List[str]
-    similar_games: List[str]
-    category: List[str]
-    collection: List[str]
-    involved_companies: List[str]
-    platforms: List[str]
-    player_perspectives: List[str]
-    themes: List[str]
-    summary: List[str]
-    storyline: List[str]
-    first_release_date: List[str]
-    account_id: str
-    errors: List[str]
+    cover_url: str
 
 
 class GameSearchOut(BaseModel):
@@ -113,3 +86,8 @@ class MyGameListRepo(BaseModel):
 class MyGameListDetailIn(BaseModel):
     name: str
     description: str
+
+
+class MyGameListUpdateIn(BaseModel):
+    name: Optional[str]
+    description: Optional[str]
