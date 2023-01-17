@@ -6,8 +6,8 @@ from search_game_name import search_game
 
 
 class GameQueries(Queries):
-    DB_NAME = "mygamelist"
-    COLLECTION = "games"
+    DB_NAME = "games"
+    COLLECTION = "games_db"
 
     def create(
         self, game: GameIn

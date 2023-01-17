@@ -635,7 +635,9 @@ def find_game_data(game_offset: int):
                 elif field == 'game_modes':
                     try:
                         game_mode_list = []
-                        game_mode_list.append(games[game_number][field])
+                        game_modes = games[game_number][field]
+                        for game_mode in game_modes:
+                            game_mode_list.append(game_mode['id'])
                         full_game_data['game_modes_id'] = game_mode_list
                     except Exception as e:
                         full_game_data[f"{field}_id"] = f'{field} not found'
