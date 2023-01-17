@@ -6,8 +6,8 @@ from search_game_name import search_game
 
 
 class GameQueries(Queries):
-    DB_NAME = "mygamelist"
-    COLLECTION = "games"
+    DB_NAME = "games"
+    COLLECTION = "games_db"
 
     def create(
         self, game: GameIn
@@ -25,10 +25,10 @@ class GameQueries(Queries):
             games.append(GameOut(**document))
         return games
 
-    search_game = search_game
-    def get_game(self) -> List[GameOut]:
+    def get_game(self, name: str) -> List[GameOut]:
         single_game = []
-        db = self.collection.find(search_game)
+        db = self.collection.find({"name": name})
         for document in db:
             document["id"] = str(document["_id"])
             single_game.append(GameOut(**document))
+        return single_game

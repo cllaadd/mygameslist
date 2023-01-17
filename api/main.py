@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import users, games
-# from routers.authenticators import authenticator
+from routers.authenticator import authenticator
+from routers import games, accounts, mgls
 import os
 
 
@@ -18,6 +18,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(users.router)
-# app.include_router(authenticators.router)
+app.include_router(accounts.router)
+app.include_router(authenticator.router)
 app.include_router(games.router)
+app.include_router(mgls.router)

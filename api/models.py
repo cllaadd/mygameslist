@@ -18,74 +18,76 @@ class PydanticObjectId(ObjectId):
         return value
 
 
-class UserIn(BaseModel):
-    email: str
+class AccountIn(BaseModel):
+    username: str
     password: str
-    full_name: str
 
 
-class UserUpdateIn(BaseModel):
-    email: Optional[str]
+class AccountUpdateIn(BaseModel):
+    username: Optional[str]
     password: Optional[str]
-    full_name: Optional[str]
 
 
-class User(UserIn):
+class Account(AccountIn):
     id: PydanticObjectId
 
 
-class UserOut(BaseModel):
+class AccountOut(BaseModel):
     id: str
-    email: str
-    full_name: str
+    username: str
+    password: str
+
+
+class AccountRepo(BaseModel):
+    games: List[AccountOut]
 
 
 class GameIn(BaseModel):
-    id: str
     name: str
-    game_modes: str
-    genres: str
-    cover: str
-    similar_games: str
-    category: str
-    collection: str
-    involved_companies: str
-    platforms: str
-    player_perspectives: str
-    themes: str
-    summary: str
-    storyline: str
-    first_release_date: str
-    user_id: str
-    errors: str
-
+    cover_url: str
 
 
 class GameOut(BaseModel):
     id: str
     name: str
-    game_modes: str
-    genres: str
-    cover: str
-    similar_games: str
-    category: str
-    collection: str
-    involved_companies: str
-    platforms: str
-    player_perspectives: str
-    themes: str
-    summary: str
-    storyline: str
-    first_release_date: str
-    user_id: str
-    errors: str
-
+    cover_url: str
 
 
 class GameSearchOut(BaseModel):
     game: GameOut
 
 
-
 class GameList(BaseModel):
     games: List[GameOut]
+
+
+class MyGameListIn(BaseModel):
+    account_id: str
+    name: str
+    description: str
+
+
+class MyGameList(MyGameListIn):
+    id: PydanticObjectId
+
+
+class MyGameListOut(MyGameListIn):
+    id: str
+    account_id: str
+    name: str
+    description: str
+    games: list
+
+
+class MyGameListRepo(BaseModel):
+    mgls: List[MyGameListOut]
+
+
+class MyGameListDetailIn(BaseModel):
+    name: str
+    description: str
+
+
+class MyGameListUpdateIn(BaseModel):
+    name: Optional[str]
+    description: Optional[str]
