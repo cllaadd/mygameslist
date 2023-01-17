@@ -1,11 +1,13 @@
 import time
 import requests
+import os
 from pymongo import MongoClient
 from datetime import datetime, timedelta
 from keys import igdb_access_key, igdb_client_id
 
 try:
-    conn = MongoClient(username='root',password='password')
+    DATABASE_URL = os.environ["DATABASE_URL"]
+    conn = MongoClient(DATABASE_URL)
     print("Connected successfully!!!")
 except:
     print("Could not connect to MongoDB")
