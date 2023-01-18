@@ -81,7 +81,7 @@ async def delete_mgl(
 @router.put("/mgls/{mgl_id}/add/{game_id}/", response_model=MyGameListOut)
 async def add_game_to_mgl(
     mgl_id: str,
-    game_id: str,
+    game_id: int,
     mgl: MyGameListUpdateIn,
     list_repo: MGLQueries = Depends(),
     game_repo: GameQueries = Depends(),
@@ -102,7 +102,7 @@ async def add_game_to_mgl(
 @router.put("/mgls/{mgl_id}/remove/{game_id}/", response_model=MyGameListOut)
 async def remove_game_from_mgl(
     mgl_id: str,
-    game_id: str,
+    game_id: int,
     mgl: MyGameListUpdateIn,
     list_repo: MGLQueries = Depends(),
     game_repo: GameQueries = Depends(),

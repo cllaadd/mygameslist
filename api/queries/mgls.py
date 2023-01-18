@@ -2,7 +2,7 @@ from bson.objectid import ObjectId
 from typing import List
 from .client import Queries
 from models import MyGameListIn, MyGameListOut, GameOut
-from pymongo import ReturnDocument
+from pymongo import ReturnDocument, MongoClient
 
 
 class MGLQueries(Queries):
@@ -48,17 +48,23 @@ class MGLQueries(Queries):
     #     )
     #     return MyGameListOut(**mgl_dict, id=mgl_id)
 
-    def add_game(self, mgl_id: str, mgl: MyGameListIn, game_id:str, game: GameOut) -> MyGameListOut:
-        mgl = self.collection.find_one({"_id": ObjectId(f"{mgl_id}")})
-        db = [DB_NAME]
-        game = db.games.find_one({"_id": ObjectId(f"{game_id}")})
-        mgl_dict = mgl.dict()
-        game_dict = game.dict()
-        games_list = mgl_dict["games"]
-        games_list.append(game_dict)
-        self.collection.find_one_and_update(
-            {"_id": ObjectId(mgl_id)},
-            {"$set": mgl_dict},
-            return_document=ReturnDocument.AFTER,
-        )
-        return MyGameListOut(**mgl_dict, id=mgl_id)
+    def add_game(self, mgl_id: str, mgl: MyGameListIn, game_id:int, game: GameOut) -> MyGameListOut:
+        try:
+            db = MongoClient('mongodb://localhost:27017/')
+            games_collection = db["games"]["games_db"]
+            game = games_collection.find_one({"_id": game_id})
+            if game is None:
+                return {"message": "Game not found"}
+            game_dict = game.copy()
+            game_dict.pop("_id", None)
+            self.collection.find_one_and_update(
+                {"_id": ObjectId(mgl_id)},
+                {"$push": {"games": game_dict}},
+                return_document=ReturnDocument.AFTER,
+            )
+            mgl = self.collection.find_one({"_id": ObjectId(f"{mgl_id}")})
+            mgl["account_id"] = str(mgl["account_id"])
+            mgl["id"] = str(mgl["_id"])
+            return MyGameListOut(**mgl)
+        except Exception as e:
+            print(e)

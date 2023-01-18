@@ -94,7 +94,8 @@ def find_collections_data(collection_offset: int):
                         collection_list = collections[collections_found]['games']
                         full_collections_data['games'] = collection_list
                     except:
-                        full_collections_data['games'] = "no games found"
+                        collection_list = ["no games found"]
+                        full_collections_data['games'] = collection_list
             collections_found += 1
             try:
                 collection_data = full_collections_data
@@ -147,7 +148,8 @@ def find_franchises_data(franchise_offset: int):
                         franchise_list = franchises[franchises_found]['games']
                         full_franchises_data['games'] = franchise_list
                     except:
-                        full_franchises_data['games'] = "no games found"
+                        franchise_list = ["no games found"]
+                        full_franchises_data['games'] = franchise_list
             franchises_found += 1
             try:
                 franchise_data = full_franchises_data
@@ -411,14 +413,16 @@ def find_companies_data(company_offset: int):
                         published_list = companies[company_number][field]
                         full_company_data['published_id'] = published_list
                     except Exception as e:
-                        full_company_data['published_id'] = f'{field} not found'
+                        published_list = [f'{field} not found']
+                        full_company_data['published_id'] = published_list
 
                 elif field == 'developed':
                     try:
                         developed_list = companies[company_number][field]
                         full_company_data['developed_id'] = developed_list
                     except Exception as e:
-                        full_company_data['developed_id'] = f'{field} not found'
+                        developed_list = [f'{field} not found']
+                        full_company_data['developed_id'] = developed_list
 
                 elif field == 'parent':
                     try:
@@ -570,7 +574,8 @@ def find_game_data(game_offset: int):
                             alternative_names_list.append(alternative_name['name'])
                         full_game_data['alternative_names'] = alternative_names_list
                     except Exception as e:
-                        full_game_data[field] = f'{field} not found'
+                        alternative_names_list = [f'{field} not found']
+                        full_game_data[field] = alternative_names_list
 
                 elif field == 'cover':
                     try:
@@ -589,7 +594,8 @@ def find_game_data(game_offset: int):
                             screenshots_list.append(screenshot_url)
                         full_game_data[field] = screenshots_list
                     except Exception as e:
-                        full_game_data[field] = f'{field} not found'
+                        screenshots_list = [f'{field} not found']
+                        full_game_data[field] = screenshots_list
 
                 elif field == 'category':
                     try:
@@ -611,7 +617,8 @@ def find_game_data(game_offset: int):
                             dlcs_list.append(dlc['id'])
                         full_game_data['dlcs_id'] = dlcs_list
                     except Exception as e:
-                        full_game_data[f"{field}_id"] = f'{field} not found'
+                        dlcs_list = [f'{field} not found']
+                        full_game_data[f"{field}_id"] = dlcs_list
 
                 elif field == 'franchises':
                     try:
@@ -621,7 +628,8 @@ def find_game_data(game_offset: int):
                             franchises_list.append(franchise['id'])
                         full_game_data['franchises_id'] = franchises_list
                     except Exception as e:
-                        full_game_data[f"{field}_id"] = f'{field} not found'
+                        franchises_list = [f'{field} not found']
+                        full_game_data[f"{field}_id"] = franchises_list
 
                 elif field == 'first_release_date':
                     try:
@@ -640,7 +648,8 @@ def find_game_data(game_offset: int):
                             game_mode_list.append(game_mode['id'])
                         full_game_data['game_modes_id'] = game_mode_list
                     except Exception as e:
-                        full_game_data[f"{field}_id"] = f'{field} not found'
+                        game_mode_list = [f'{field} not found']
+                        full_game_data[f"{field}_id"] = game_mode_list
 
                 elif field == 'genres':
                     try:
@@ -650,7 +659,8 @@ def find_game_data(game_offset: int):
                             genres_list.append(genre['id'])
                         full_game_data['genres_id'] = genres_list
                     except Exception as e:
-                        full_game_data[f"{field}_id"] = f'{field} not found'
+                        genres_list = [f'{field} not found']
+                        full_game_data[f"{field}_id"] = genres_list
 
                 elif field == 'game_engines':
                     try:
@@ -660,7 +670,8 @@ def find_game_data(game_offset: int):
                             game_engines_list.append(game_engine['id'])
                         full_game_data['game_engines_id'] = game_engines_list
                     except Exception as e:
-                        full_game_data[f"{field}_id"] = f'{field} not found'
+                        game_engines_list = [f'{field} not found']
+                        full_game_data[f"{field}_id"] = game_engines_list
 
                 elif field == 'involved_companies':
                     try:
@@ -670,7 +681,8 @@ def find_game_data(game_offset: int):
                             involved_companies_list.append(involved_company['company']['id'])
                         full_game_data['involved_companies_id'] = involved_companies_list
                     except Exception as e:
-                        full_game_data[f"{field}_id"] = f'{field} not found'
+                        involved_companies_list = [f'{field} not found']
+                        full_game_data[f"{field}_id"] = involved_companies_list
 
                 elif field == 'keywords':
                     try:
@@ -680,7 +692,8 @@ def find_game_data(game_offset: int):
                             keywords_list.append(keyword['id'])
                         full_game_data['keywords_id'] = keywords_list
                     except Exception as e:
-                        full_game_data[f"{field}_id"] = f'{field} not found'
+                        keywords_list = [f'{field} not found']
+                        full_game_data[f"{field}_id"] = keywords_list
 
                 elif field == 'platforms':
                     try:
@@ -690,7 +703,8 @@ def find_game_data(game_offset: int):
                             platforms_list.append(platform['id'])
                         full_game_data['platforms_id'] = platforms_list
                     except Exception as e:
-                        full_game_data[f"{field}_id"] = f'{field} not found'
+                        platforms_list = [f'{field} not found']
+                        full_game_data[f"{field}_id"] = platforms_list
 
                 elif field == 'player_perspectives':
                     try:
@@ -700,7 +714,8 @@ def find_game_data(game_offset: int):
                             player_perspectives_list.append(player_perspective['id'])
                         full_game_data['player_perspectives_id'] = player_perspectives_list
                     except Exception as e:
-                        full_game_data[f"{field}_id"] = f'{field} not found'
+                        player_perspectives_list = [f'{field} not found']
+                        full_game_data[f"{field}_id"] = player_perspectives_list
 
                 elif field == 'ports':
                     try:
@@ -710,7 +725,8 @@ def find_game_data(game_offset: int):
                             ports_list.append(port['id'])
                         full_game_data['ports_id'] = ports_list
                     except Exception as e:
-                        full_game_data[f"{field}_id"] = f'{field} not found'
+                        ports_list = [f'{field} not found']
+                        full_game_data[f"{field}_id"] = ports_list
 
                 elif field == 'remakes':
                     try:
@@ -720,7 +736,8 @@ def find_game_data(game_offset: int):
                             remakes_list.append(remake['id'])
                         full_game_data['remakes_id'] = remakes_list
                     except Exception as e:
-                        full_game_data[f"{field}_id"] = f'{field} not found'
+                        remakes_list = [f'{field} not found']
+                        full_game_data[f"{field}_id"] = remakes_list
 
                 elif field == 'remasters':
                     try:
@@ -730,7 +747,8 @@ def find_game_data(game_offset: int):
                             remasters_list.append(remaster['id'])
                         full_game_data['remasters_id'] = remasters_list
                     except Exception as e:
-                        full_game_data[f"{field}_id"] = f'{field} not found'
+                        remasters_list = [f'{field} not found']
+                        full_game_data[f"{field}_id"] = remasters_list
 
                 elif field == 'similar_games':
                     try:
@@ -746,7 +764,8 @@ def find_game_data(game_offset: int):
                                 similar_games_list.append(similar_game['id'])
                             full_game_data['similar_games_id'] = similar_games_list
                     except Exception as e:
-                        full_game_data[f"{field}_id"] = f'{field} not found'
+                        similar_games_list = [f'{field} not found']
+                        full_game_data[f"{field}_id"] = similar_games_list
 
 
                 elif field == 'summary':
@@ -775,7 +794,8 @@ def find_game_data(game_offset: int):
                             themes_list.append(theme['id'])
                         full_game_data['themes_id'] = themes_list
                     except Exception as e:
-                        full_game_data[f"{field}_id"] = f'{field} not found'
+                        themes_list = [f'{field} not found']
+                        full_game_data[f"{field}_id"] = themes_list
 
                 elif field == 'total_rating':
                     try:
