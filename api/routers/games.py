@@ -33,10 +33,14 @@ async def create_game(
     return repo.create(game)
 
 
-@router.get("/games/", response_model=GameList)
-async def get_all_games(repo: GameQueries = Depends()):
-    return GameList(games=repo.get_all())
+@router.get("/games/{game_limit}/{game_offset}", response_model=GameList)
+async def get_all_games(game_limit: int, game_offset: int, repo: GameQueries = Depends(), ):
+    return GameList(games=repo.get_all(game_limit, game_offset))
 
+@router.get("/games/{game_id}/")
+async def game_details(game_id: int, repo: GameQueries = Depends()):
+    game_detail = repo.get_game_detail(game_id)
+    return game_detail
 
 @router.get(f"/games/search/")
 async def search_games(name: str, repo: GameQueries = Depends()):
@@ -44,36 +48,37 @@ async def search_games(name: str, repo: GameQueries = Depends()):
     if search_game:
         return {"game": search_game}
     else:
-        game_data = find_game_data(name)
-        second_name_search = game_data[name]['name']
-        search_game_again = repo.get_game(second_name_search)
-        if search_game_again:
-            return {"game": search_game_again}
-        else:
-            url = 'http://localhost:8000/games'
-            game_data = game_data[name]
-            payload = {
-                "name": game_data['name'],
-                "game_modes": game_data['game_modes'],
-                "genres": game_data['genres'],
-                "cover": game_data['cover'],
-                "similar_games": game_data['similar_games'],
-                "category": game_data['category'],
-                "collection": game_data['collection'],
-                "involved_companies": game_data['involved_companies'],
-                "platforms": game_data['platforms'],
-                "player_perspectives": game_data['player_perspectives'],
-                "themes": game_data['themes'],
-                "summary": game_data['summary'],
-                "first_release_date": game_data['first_release_date'],
-                "field_errors": game_data['field_errors'],
+        # game_data = find_game_data(name)
+        # second_name_search = game_data[name]['name']
+        # search_game_again = repo.get_game(second_name_search)
+        # if search_game_again:
+        #     return {"game": search_game_again}
+        # else:
+        #     url = 'http://localhost:8000/games'
+        #     game_data = game_data[name]
+        #     payload = {
+        #         "name": game_data['name'],
+        #         "game_modes": game_data['game_modes'],
+        #         "genres": game_data['genres'],
+        #         "cover": game_data['cover'],
+        #         "similar_games": game_data['similar_games'],
+        #         "category": game_data['category'],
+        #         "collection": game_data['collection'],
+        #         "involved_companies": game_data['involved_companies'],
+        #         "platforms": game_data['platforms'],
+        #         "player_perspectives": game_data['player_perspectives'],
+        #         "themes": game_data['themes'],
+        #         "summary": game_data['summary'],
+        #         "first_release_date": game_data['first_release_date'],
+        #         "field_errors": game_data['field_errors'],
 
-            }
-            print(payload)
-            return(payload)
-            response = requests.request("POST", url, data=payload)
+        #     }
+        #     print(payload)
+        #     return(payload)
+        #     response = requests.request("POST", url, data=payload)
 
-            return("your game has been created" + response)
+        #     return("your game has been created" + response)
+        pass
 
 def find_game_data(name: str):
     search_game = name

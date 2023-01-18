@@ -2,7 +2,7 @@ from bson.objectid import ObjectId
 from typing import List
 from .client import Queries
 from models import MyGameListIn, MyGameListOut, GameOut
-from pymongo import ReturnDocument
+from pymongo import ReturnDocument, MongoClient
 
 
 class MGLQueries(Queries):
@@ -48,42 +48,23 @@ class MGLQueries(Queries):
     #     )
     #     return MyGameListOut(**mgl_dict, id=mgl_id)
 
-    def add_game(self, mgl_id: str, game: GameOut) -> MyGameListOut:
-        mgl = self.collection.find_one({"_id": ObjectId(f"{mgl_id}")})
-        game_list = mgl.get("games")
-        # self.db[self.games].insert(dict(game))
-        # "mygamelist".games.find({"name" : game_name })
-        for game in mgl.games:
-            game = game_list.get_one(game)
-            mgl["games"].append(game)
-        # for game_item in game_list:
-        #     if game_item.get("id") == game.get("_id"):
-        #         pass
-        #     else:
-        #         game_list.append(game)
-        mgl["games"] = game_list
-        self.collection.find_one_and_update(
-            {"_id": ObjectId(mgl_id)},
-            {"$push": {"games": game}},
-            return_document=ReturnDocument.AFTER,
-        )
-        return MyGameListOut(**mgl, id=mgl_id)
-
-
-# mgl = { "_id": "dhfsdjfhs"
-#         "name": "wishlist",
-#         "description": "what i want",
-#         "games": []
-#         }
-
-# game_list = [{"_id":"489342378fhd",
-#                 "name":"spiritfarer",
-#                 "description":"a sad game"},
-#                 {"_id":"54jhjh78fhd",
-#                 "name":"pokemon",
-#                 "description":"a neutral game"},
-#                 {"_id":"5sfsh78fhd",
-#                 "name":"minecraft",
-#                 "description":"a happy game"},
-
-#                 ]
+    def add_game(self, mgl_id: str, mgl: MyGameListIn, game_id:int, game: GameOut) -> MyGameListOut:
+        try:
+            db = MongoClient('mongodb://localhost:27017/')
+            games_collection = db["games"]["games_db"]
+            game = games_collection.find_one({"_id": game_id})
+            if game is None:
+                return {"message": "Game not found"}
+            game_dict = game.copy()
+            game_dict.pop("_id", None)
+            self.collection.find_one_and_update(
+                {"_id": ObjectId(mgl_id)},
+                {"$push": {"games": game_dict}},
+                return_document=ReturnDocument.AFTER,
+            )
+            mgl = self.collection.find_one({"_id": ObjectId(f"{mgl_id}")})
+            mgl["account_id"] = str(mgl["account_id"])
+            mgl["id"] = str(mgl["_id"])
+            return MyGameListOut(**mgl)
+        except Exception as e:
+            print(e)
