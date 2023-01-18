@@ -112,7 +112,7 @@ async def get_accounts(repo: AccountQueries = Depends()):
     return repo.get_all()
 
 
-@router.delete("api/accounts/{account_id}", response_model=bool)
+@router.delete("/api/accounts/{account_id}", response_model=bool)
 async def delete_account(
     account_id: str,
     repo: AccountQueries = Depends(),

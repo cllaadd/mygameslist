@@ -84,12 +84,12 @@ export function useToken() {
   }
 
   async function login(username, password) {
-    const url = `${process.env.REACT_APP_API_HOST}/api/token/`;
+    const url = `${process.env.REACT_APP_API_HOST}/token/`;
     const form = new FormData();
     form.append("username", username);
     form.append("password", password);
     const response = await fetch(url,
-    {headers: { Authorization: `Bearer ${token}` }},
+    // {headers: { Authorization: `Bearer ${token}` }},
     {
       method: "post",
       credentials: "include",
