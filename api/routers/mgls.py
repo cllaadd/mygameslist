@@ -77,43 +77,37 @@ async def delete_mgl(
 #     updated_mgl = repo.update_mgl(mgl=updated_mgl, mgl_id=mgl_id)
 #     return updated_mgl
 
+
+
 # add game to list
-@router.put("/mgls/{mgl_id}/add/{game_id}/", response_model=MyGameListOut)
+@router.post("/mgls/{mgl_id}/add/{game_name}/", response_model=MyGameListOut)
 async def add_game_to_mgl(
     mgl_id: str,
-    game_id: str,
+    game_name: str,
     mgl: MyGameListUpdateIn,
     list_repo: MGLQueries = Depends(),
     game_repo: GameQueries = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
 ):
-    account = AccountOut(**account_data)
-    account_id = account.id
-    updated_mgl = MyGameListUpdateIn(
-        name=mgl.name,
-        description=mgl.description,
-        account_id=account_id,
-        games=mgl.games
-    )
-    updated_mgl = list_repo.add_game(mgl=updated_mgl, mgl_id=mgl_id, game_id=game_id)
-    return updated_mgl
+    mgl = list_repo.add_game(mgl_id=mgl_id, game=game_repo.get_game(game_name))
+    return mgl
 
 # remove game from list
-@router.put("/mgls/{mgl_id}/remove/{game_id}/", response_model=MyGameListOut)
-async def remove_game_from_mgl(
-    mgl_id: str,
-    game_id: str,
-    mgl: MyGameListUpdateIn,
-    list_repo: MGLQueries = Depends(),
-    game_repo: GameQueries = Depends(),
-    account_data: dict = Depends(authenticator.get_current_account_data),
-):
-    account = AccountOut(**account_data)
-    account_id = account.id
-    updated_mgl = MyGameListUpdateIn(
-        name=mgl.name,
-        description=mgl.description,
-        account_id=account_id,
-        games=mgl.games
-    )
-    updated_mgl = list_repo.remove_game(mgl=updated_mgl, mgl_id=mgl_id)
+# @router.put("/mgls/{mgl_id}/remove/{game_id}/", response_model=MyGameListOut)
+# async def remove_game_from_mgl(
+#     mgl_id: str,
+#     game_id: str,
+#     mgl: MyGameListUpdateIn,
+#     list_repo: MGLQueries = Depends(),
+#     game_repo: GameQueries = Depends(),
+#     account_data: dict = Depends(authenticator.get_current_account_data),
+# ):
+#     account = AccountOut(**account_data)
+#     account_id = account.id
+#     updated_mgl = MyGameListUpdateIn(
+#         name=mgl.name,
+#         description=mgl.description,
+#         account_id=account_id,
+#         games=mgl.games
+#     )
+#     updated_mgl = list_repo.remove_game(mgl=updated_mgl, mgl_id=mgl_id)

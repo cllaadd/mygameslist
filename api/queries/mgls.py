@@ -48,17 +48,42 @@ class MGLQueries(Queries):
     #     )
     #     return MyGameListOut(**mgl_dict, id=mgl_id)
 
-    def add_game(self, mgl_id: str, mgl: MyGameListIn, game_id:str, game: GameOut) -> MyGameListOut:
+    def add_game(self, mgl_id: str, game: GameOut) -> MyGameListOut:
         mgl = self.collection.find_one({"_id": ObjectId(f"{mgl_id}")})
-        db = [DB_NAME]
-        game = db.games.find_one({"_id": ObjectId(f"{game_id}")})
-        mgl_dict = mgl.dict()
-        game_dict = game.dict()
-        games_list = mgl_dict["games"]
-        games_list.append(game_dict)
+        game_list = mgl.get("games")
+        # self.db[self.games].insert(dict(game))
+        # "mygamelist".games.find({"name" : game_name })
+        for game in mgl.games:
+            game = game_list.get_one(game)
+            mgl["games"].append(game)
+        # for game_item in game_list:
+        #     if game_item.get("id") == game.get("_id"):
+        #         pass
+        #     else:
+        #         game_list.append(game)
+        mgl["games"] = game_list
         self.collection.find_one_and_update(
             {"_id": ObjectId(mgl_id)},
-            {"$set": mgl_dict},
+            {"$push": {"games": game}},
             return_document=ReturnDocument.AFTER,
         )
-        return MyGameListOut(**mgl_dict, id=mgl_id)
+        return MyGameListOut(**mgl, id=mgl_id)
+
+
+# mgl = { "_id": "dhfsdjfhs"
+#         "name": "wishlist",
+#         "description": "what i want",
+#         "games": []
+#         }
+
+# game_list = [{"_id":"489342378fhd",
+#                 "name":"spiritfarer",
+#                 "description":"a sad game"},
+#                 {"_id":"54jhjh78fhd",
+#                 "name":"pokemon",
+#                 "description":"a neutral game"},
+#                 {"_id":"5sfsh78fhd",
+#                 "name":"minecraft",
+#                 "description":"a happy game"},
+
+#                 ]
