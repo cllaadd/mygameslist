@@ -10,10 +10,10 @@ function Login() {
     <>
       <div className="d-flex justify-content-center">
         <div className="shadow-none p-3 mb-5 bg-secondary rounded p-4 mt-4">
-          <h2 style={{ color: "white" }}>Login Please</h2>
+          <h2 style={{ color: "white" }}>Login</h2>
           <form>
             <div className="mb-3">
-              <label htmlFor="username">User Name</label>
+              <label htmlFor="username">Username </label>
               <input
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
@@ -25,7 +25,7 @@ function Login() {
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password">Password </label>
               <input
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
