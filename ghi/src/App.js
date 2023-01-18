@@ -1,23 +1,23 @@
 import './App.css';
-import {BrowserRouter, Routes, Route} from "./react-router-dom";
-// import { AuthProvider, useToken } from "./useToken";
-// import LoginComponent from './Login';
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+import { AuthProvider, useToken } from "./utils";
+import LoginForm from './Login';
 
-// function GetToken() {
-//     // Get token from JWT cookie (if already logged in)
-//     useToken();
-//     return null
-// }
+function GetToken() {
+    // Get token from JWT cookie (if already logged in)
+    useToken();
+    return null
+}
 
 function App() {
   return (
     <BrowserRouter>
-        {/* <AuthProvider>
-            <GetToken /> */}
+        <AuthProvider>
+            <GetToken />
                 <Routes>
-                  {/* <Route path = "/login" element={LoginComponent}></Route> */}
+                  <Route path = "/login" element={<LoginForm />} ></Route>
                 </Routes>
-        {/* </AuthProvider> */}
+        </AuthProvider>
     </BrowserRouter>
   );
 }
