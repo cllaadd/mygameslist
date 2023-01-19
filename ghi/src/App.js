@@ -4,6 +4,7 @@ import { AuthProvider, useToken } from "./Auth";
 import LoginComponent from './Login';
 import LogoutComponent from './Logout';
 import SignupComponent from './Signup';
+import UsersList from './UsersList';
 
 function GetToken() {
     // Get token from JWT cookie (if already logged in)
@@ -20,6 +21,7 @@ function App() {
                   <Route path = "/login" element={<LoginComponent />} ></Route>
                   <Route path = "/logout" element={<LogoutComponent />} ></Route>
                   <Route path = "/signup" element={<SignupComponent />} ></Route>
+                  <Route path = "/users" element={<UsersList />} ></Route>
                 </Routes>
         </AuthProvider>
     </BrowserRouter>
