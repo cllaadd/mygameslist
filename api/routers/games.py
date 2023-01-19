@@ -33,9 +33,9 @@ async def create_game(
     return repo.create(game)
 
 
-@router.get("/games/{game_limit}/{game_offset}", response_model=GameList)
-async def get_all_games(game_limit: int, game_offset: int, repo: GameQueries = Depends(), ):
-    return GameList(games=repo.get_all(game_limit, game_offset))
+@router.get("/games/", response_model=GameList)
+async def get_all_games(limit: int = 20, offset: int = 0, repo: GameQueries = Depends(), ):
+    return GameList(games=repo.get_all(limit, offset))
 
 @router.get("/games/{game_id}/")
 async def game_details(game_id: int, repo: GameQueries = Depends()):

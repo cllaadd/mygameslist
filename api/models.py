@@ -95,7 +95,7 @@ class MyGameListIn(BaseModel):
     account_id: str
     name: str
     description: str
-    games: list
+    games: Optional[list]
 
 
 class MyGameList(MyGameListIn):

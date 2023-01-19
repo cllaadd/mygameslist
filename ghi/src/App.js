@@ -6,6 +6,8 @@ import LogoutComponent from './Logout';
 import SignupComponent from './Signup';
 import MainPageComponent from './MainPage';
 import Nav from './Nav';
+import UsersList from './UsersList';
+import AllGamesList from './AllGamesList';
 
 function GetToken() {
     // Get token from JWT cookie (if already logged in)
@@ -24,6 +26,8 @@ function App() {
                   <Route path = "/logout" element={<LogoutComponent />} ></Route>
                   <Route path = "/signup" element={<SignupComponent />} ></Route>
                   <Route path = "/MainPage" element={<MainPageComponent />} ></Route>
+                  <Route path = "/users" element={<UsersList />} ></Route>
+                  <Route path = "/games" element={<AllGamesList />} ></Route>
                 </Routes>
         </AuthProvider>
     </BrowserRouter>
