@@ -16,14 +16,11 @@ class AccountQueries(Queries):
         "games"
     )
     COLLECTION = (
-        # specifies which collection we're querying or inserting data into
         "accounts"
     )
 
     def get(self, username: str) -> Account:
         props = self.collection.find_one({"username": username})
-        # Query the collection in the database
-        # and look for an username that matches the username passed into the function
         if not props:
             return None
         props["id"] = str(props["_id"])
