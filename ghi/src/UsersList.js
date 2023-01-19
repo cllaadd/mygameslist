@@ -3,16 +3,24 @@ import { NavLink } from "react-router-dom";
 
 function UsersList() {
     const [users, setUsers] = useState([])
+    // const [mgls, setMgls] = useState([])
 
-    const getData = async () => {
+    const getUserData = async () => {
         const response = await fetch('http://localhost:8000/api/accounts/')
-        const user_data = await response.json()
-        console.log(user_data)
-        setUsers(user_data)
+        const userData = await response.json()
+        console.log(userData)
+        setUsers(userData)
     }
 
+    // const getMglData = async () => {
+    //     const response = await fetch('http://localhost:8000/api/mgls/')
+    //     const mglData = await response.json()
+    //     console.log(mglData)
+    //     setUsers(mglData)
+    // }
+
     useEffect(() => {
-        getData();
+        getUserData();
     }, []
     )
 
@@ -23,17 +31,19 @@ function UsersList() {
                 <thead>
                     <tr>
                         <th>username</th>
+                        <th>number of lists</th>
                     </tr>
                 </thead>
-                {/* <tbody>
-                    {data?.map(account => {
+                <tbody>
+                    {users?.map(user => {
                         return (
-                            <tr key={account.id}>
-                                <td>{account.username}</td>
+                            <tr key={user.id}>
+                                <td>{user.username}</td>
+                                <td></td>
                             </tr>
                         );
                     })}
-                </tbody> */}
+                </tbody>
             </table>
         </div>
     )
