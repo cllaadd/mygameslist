@@ -120,7 +120,7 @@ class GameQueries(Queries):
                             'name': '$$game.name',
                             'cover': '$$game.cover',
                             'id': '$$game._id',
-                        }
+                        },
                     }
                 },
                 'franchises_id': {
@@ -130,8 +130,7 @@ class GameQueries(Queries):
                         'in': {
                             'name': '$$franchise.name',
                             'id': '$$franchise._id',
-
-                        }
+                        },
                     }
                 },
                 'collection_id': {
@@ -141,8 +140,7 @@ class GameQueries(Queries):
                         'in': {
                             'name': '$$collection.name',
                             'id': '$$collection._id',
-
-                        }
+                        },
                     }
                 },
                 'keywords_id': {
@@ -153,10 +151,25 @@ class GameQueries(Queries):
                             'in': {
                                 'k': {'$convert': {'input': '$$keywords._id', 'to': 'string'}},
                                 'v': '$$keywords.name'
-                            }
+                            },
                         }
-                    }
-                }
+                    },
+
+                },
+                # 'total_rating': {
+                #     '$toDouble': {
+                #         'input': '$total_rating',
+                #         'onError': 0,
+                #         'onNull': 0
+                #     }
+                # },
+                # 'total_rating_count': {
+                #     '$toDouble': {
+                #         'input': '$total_rating_count',
+                #         'onError': 0,
+                #         'onNull': 0
+                #     }
+                # }
             }},
             ]
         db = self.collection.aggregate(pipeline)
