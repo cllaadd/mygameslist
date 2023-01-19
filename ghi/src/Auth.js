@@ -75,7 +75,7 @@ export function useToken() {
 
   async function logout() {
     if (token) {
-      const url = `${process.env.REACT_APP_API_HOST}/api/token/`;
+      const url = `${process.env.REACT_APP_API_HOST}/token/`;
       await fetch(url, { method: "delete", credentials: "include" });
       internalToken = null;
       setToken(null);
@@ -89,7 +89,6 @@ export function useToken() {
     form.append("username", username);
     form.append("password", password);
     const response = await fetch(url,
-    // {headers: { Authorization: `Bearer ${token}` }},
     {
       method: "post",
       credentials: "include",
@@ -106,7 +105,9 @@ export function useToken() {
 
   async function signup(username, password) {
     const url = `${process.env.REACT_APP_API_HOST}/api/accounts/`;
-    const response = await fetch(url, {
+    const response = await fetch(url,
+      // {headers: { Authorization: `Bearer ${token}` }},
+      {
       method: "post",
       body: JSON.stringify({
         username,

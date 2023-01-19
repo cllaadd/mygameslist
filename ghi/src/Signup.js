@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { useToken } from "./Auth";
 import { useNavigate } from "react-router-dom";
 
-function LoginComponent() {
+function SignupComponent() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [token, login] = useToken();
+  const [token, signup] = useToken();
   const navigate = useNavigate();
 
   const handleUsernameChange = (event) => {
@@ -17,7 +17,7 @@ function LoginComponent() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    await login(username, password);
+    await signup(username, password);
     // navigate("/")
   }
 
@@ -25,8 +25,8 @@ function LoginComponent() {
     <div className="row">
       <div className="offset-3 col-6">
         <div className="shadow p-4 mt-4">
-          <h1>Login</h1>
-          <form onSubmit={handleSubmit} id="login-form">
+          <h1>Sign Up</h1>
+          <form onSubmit={handleSubmit} id="signup-form">
             <div className="form-floating mb-3">
               <input
                 onChange={handleUsernameChange}
@@ -53,7 +53,7 @@ function LoginComponent() {
               />
               <label htmlFor="password">Password</label>
             </div>
-            <button className="btn btn-primary">Login</button>
+            <button className="btn btn-primary">Sign up</button>
           </form>
         </div>
       </div>
@@ -61,4 +61,4 @@ function LoginComponent() {
   );
 }
 
-export default LoginComponent;
+export default SignupComponent;

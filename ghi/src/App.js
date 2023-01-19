@@ -2,6 +2,8 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider, useToken } from "./Auth";
 import LoginComponent from './Login';
+import LogoutComponent from './Logout';
+import SignupComponent from './Signup';
 
 function GetToken() {
     // Get token from JWT cookie (if already logged in)
@@ -16,6 +18,8 @@ function App() {
             <GetToken />
                 <Routes>
                   <Route path = "/login" element={<LoginComponent />} ></Route>
+                  <Route path = "/logout" element={<LogoutComponent />} ></Route>
+                  <Route path = "/signup" element={<SignupComponent />} ></Route>
                 </Routes>
         </AuthProvider>
     </BrowserRouter>
