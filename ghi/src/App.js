@@ -8,6 +8,7 @@ import MainPageComponent from "./MainPage";
 import Nav from "./Nav";
 import UsersList from "./UsersList";
 import AllGamesList from "./AllGamesList";
+import Account from "./Account";
 
 function GetToken() {
   // Get token from JWT cookie (if already logged in)
@@ -28,6 +29,7 @@ function App() {
           <Route path="/MainPage" element={<MainPageComponent />}></Route>
           <Route path="/users" element={<UsersList />}></Route>
           <Route path="/games" element={<AllGamesList />}></Route>
+          <Route path="/account" element={<Account />}></Route>
         </Routes>
       </AuthProvider>
     </BrowserRouter>

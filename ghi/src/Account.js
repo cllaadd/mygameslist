@@ -1,8 +1,17 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 function UserComponent() {
   const [username, setUsername] = useState("");
+
+  const getUserData = async () => {
+    const response = await fetch("http://localhost:8000/api/accounts/");
+    const userData = await response.json();
+    setUsername(userData.username);
+  };
+
+  useEffect(() => {
+    getUserData();
+  }, []);
 
   return (
     <div className="container d-flex justify-content-center align-items-center">
@@ -14,9 +23,9 @@ function UserComponent() {
           />
         </div>
         <div className="mt-5 text-center">
-          <h4 className="mb-0">${username}</h4>
+          <h4 className="mb-0">Example User</h4>
           <button className="btn btn-primary btn-sm view list">
-            username's games list
+            View User's Lists
           </button>
           <div className="games">
             <h6 className="mb-0">Games</h6>
