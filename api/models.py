@@ -26,6 +26,8 @@ class AccountIn(BaseModel):
 class AccountUpdateIn(BaseModel):
     username: Optional[str]
     password: Optional[str]
+    profile_url: Optional[str]
+    bio: Optional[str]
 
 
 class Account(AccountIn):
@@ -36,6 +38,14 @@ class AccountOut(BaseModel):
     id: str
     username: str
     password: str
+
+
+class AccountDetailOut(BaseModel):
+    id: str
+    username: str
+    password: str
+    profile_url: str
+    bio: str
 
 
 class AccountRepo(BaseModel):
@@ -51,6 +61,7 @@ class GameOut(BaseModel):
     id: str
     name: str
     cover: str
+
 
 class GameDetailOut(BaseModel):
     id: str
@@ -82,6 +93,7 @@ class GameDetailOut(BaseModel):
     total_rating_count: int
     version_parent_id: str
     version_title: str
+
 
 class GameSearchOut(BaseModel):
     game: GameOut

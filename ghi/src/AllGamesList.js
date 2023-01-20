@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import { Pagination } from 'react-bootstrap';
 
 function AllGamesList() {
     const [games, setgames] = useState([])
