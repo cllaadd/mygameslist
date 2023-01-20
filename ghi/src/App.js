@@ -4,7 +4,7 @@ import { AuthProvider, useToken } from "./Auth";
 import LoginComponent from "./Login";
 import LogoutComponent from "./Logout";
 import SignupComponent from "./Signup";
-import MainPageComponent from "./MainPage";
+import HomePageComponent from "./HomePage";
 import Nav from "./Nav";
 import UsersList from "./UsersList";
 import AllGamesList from "./AllGamesList";
@@ -26,10 +26,11 @@ function App() {
           <Route path="/login" element={<LoginComponent />}></Route>
           <Route path="/logout" element={<LogoutComponent />}></Route>
           <Route path="/signup" element={<SignupComponent />}></Route>
-          <Route path="/MainPage" element={<MainPageComponent />}></Route>
+          <Route path="/" element={<HomePageComponent />}></Route>
           <Route path="/users" element={<UsersList />}></Route>
           <Route path="/games" element={<AllGamesList />}></Route>
           <Route path="/account" element={<Account />}></Route>
+          {/* <Route path="/account/{account_id}" element={<Account />}></Route> */}
         </Routes>
       </AuthProvider>
     </BrowserRouter>

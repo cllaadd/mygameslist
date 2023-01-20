@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 
 function UserComponent() {
-  const [username, setUsername] = useState("");
+  const [user, setUser] = useState([]);
 
   const getUserData = async () => {
     const response = await fetch("http://localhost:8000/api/accounts/");
     const userData = await response.json();
-    setUsername(userData.username);
+    setUser(userData);
   };
 
   useEffect(() => {
@@ -23,13 +23,19 @@ function UserComponent() {
           />
         </div>
         <div className="mt-5 text-center">
-          <h4 className="mb-0">Example User</h4>
-          <button className="btn btn-primary btn-sm view list">
-            View User's Lists
-          </button>
+          {user.map((username) => {
+            return <h4 className="mb-0">{username.username}</h4>;
+          })}
+          {user.map((username) => {
+            return (
+              <button className="btn btn-primary btn-sm view list">
+                {username.username}'s lists
+              </button>
+            );
+          })}
           <div className="games">
             <h6 className="mb-0">Games</h6>
-            <span>50</span>
+            <span>50 (ex)</span>
           </div>
         </div>
       </div>
