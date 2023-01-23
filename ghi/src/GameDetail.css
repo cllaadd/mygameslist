@@ -95,3 +95,8 @@
     text-align: center;
     font-size: .5em;
 }
+
+.similar-game-carousel{
+    border: solid green;
+    text-align: center;
+}
