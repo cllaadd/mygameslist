@@ -1,15 +1,15 @@
-import "./App.css";
+import "./styling/App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider, useToken } from "./Auth";
-import LoginComponent from "./Login";
-import LogoutComponent from "./Logout";
-import SignupComponent from "./Signup";
-import MainPageComponent from "./MainPage";
-import Nav from "./Nav";
-import UsersList from "./UsersList";
-import AllGamesList from "./AllGamesList";
-import Account from "./Account";
-import GameDetail from "./GameDetail";
+import LoginComponent from "./pages/Login";
+import LogoutComponent from "./pages/Logout";
+import SignupComponent from "./pages/Signup";
+import MainPageComponent from "./pages/MainPage";
+import Nav from "./components/Nav";
+import UsersList from "./pages/UsersList";
+import AllGamesList from "./pages/AllGamesList";
+import Account from "./pages/Account";
+import GameDetail from "./pages/GameDetail";
 
 function GetToken() {
   // Get token from JWT cookie (if already logged in)

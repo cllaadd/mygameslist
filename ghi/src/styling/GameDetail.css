@@ -1,0 +1,138 @@
+.circle-background,
+.circle-progress {
+  fill: none;
+}
+
+.circle-background {
+  stroke: #ddd;
+}
+
+.circle-progress {
+  stroke: green;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.circle-text {
+  height: 70px;
+  width: 70px;
+  font-size: .75em;
+  font-weight: bold;
+  fill: green;
+}
+
+.main-body {
+    margin: 1%;
+}
+.right-side-sidebar-info{
+    border: solid green;
+    width: fit-content;
+    height: fit-content;
+    float: right;
+}
+.game-header-container{
+    height: auto;
+    width: 75%;
+    border: solid green;
+    padding: 1%;
+    display: flex;
+    flex-wrap: wrap;
+    border: solid green;
+    align-items: center;
+    flex-direction: column;
+}
+.game-cover-name-container{
+    float: left;
+    width: fit-content;
+    height: fit-content;
+    border: solid green;
+    padding: 1%;
+    order: 3;
+    display: flex;
+}
+.game-cover-container{
+    border: solid green;
+    width: auto;
+    order: 1;
+    float: left;
+}
+.game-cover{
+    max-width: 100%;
+    height: auto;
+    border: solid green;
+    float: left;
+}
+.game-name-container{
+    float: left;
+    margin: auto;
+    width: auto;
+    border: solid green;
+    padding: 1%;
+    order:2;
+}
+.game-name{
+    width: auto;
+
+}
+.game-important-details{
+    float: left;
+    height: auto;
+    margin-left: 0%;
+    width: auto;
+    border: solid green;
+    padding: 1%;
+    order: 3;
+
+}
+.game-about-container{
+    float: left;
+    height: auto;
+    margin-left: 0%;
+    width: 75%;
+    border: solid green;
+    padding: 1%;
+    font-size: .75em;
+
+}
+.game-rating-container{
+    height: 175px;
+    width: 110px;
+    border: solid green;
+    float: left;
+
+
+}
+.game-rating{
+    width: 100px;
+    position: absolute;
+    text-align: center;
+}
+.game-rating-count{
+    width: 100px;
+    position: absolute;
+    text-align: center;
+    font-size: .5em;
+}
+
+.similar-game-carousel{
+    border: solid green;
+    text-align: center;
+}
+
+.similar-game-container{
+    border: solid green;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    max-width: fit-content;
+    float: left;
+}
+
+.screenshots-container{
+    border: solid green;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    max-width: fit-content;
+    float: left;
+}
