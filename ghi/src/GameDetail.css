@@ -16,7 +16,7 @@
 .circle-text {
   height: 70px;
   width: 70px;
-  font-size: 1.5em;
+  font-size: .75em;
   font-weight: bold;
   fill: green;
 }
@@ -73,6 +73,7 @@
     width: 75%;
     border: solid green;
     padding: 1%;
+    font-size: .75em;
 
 }
 .game-rating-container{
@@ -81,19 +82,16 @@
     border: solid green;
     float: left;
 
+
 }
 .game-rating{
     width: 100px;
     position: absolute;
     text-align: center;
-
 }
 .game-rating-count{
     width: 100px;
     position: absolute;
     text-align: center;
-}
-
-text{
-    font: .75em sans-serif;
+    font-size: .5em;
 }

@@ -103,7 +103,7 @@ const GameDetail = () => {
                                     sqSize="100"
                                     percentage={rating}/>
                                     <div className="game-rating-count">
-                                        <text>
+                                        <text classname="game-rating-text">
                                             Based on {game.total_rating_count} user ratings
                                         </text>
                                     </div>
