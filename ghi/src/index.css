@@ -4,12 +4,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #fdadda !important;
+  font-size: 2.1rem !important;
 }
 
 code {
   font-family:'Andale Mono' !important;
-}
-
-.color-nav{
-  background-color:#7950f2 ;
 }

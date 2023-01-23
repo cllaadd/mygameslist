@@ -9,6 +9,7 @@ import Nav from "./Nav";
 import UsersList from "./UsersList";
 import AllGamesList from "./AllGamesList";
 import Account from "./Account";
+import GameDetail from "./GameDetail";
 
 function GetToken() {
   // Get token from JWT cookie (if already logged in)
@@ -19,6 +20,10 @@ function GetToken() {
 function App() {
   return (
     <BrowserRouter>
+    {/* <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>
+    <div id="stars4"></div> */}
       <Nav />
       <AuthProvider>
         <GetToken />
@@ -30,9 +35,11 @@ function App() {
           <Route path="/users" element={<UsersList />}></Route>
           <Route path="/games" element={<AllGamesList />}></Route>
           <Route path="/account" element={<Account />}></Route>
+          <Route path="/games/:id" element={<GameDetail />}></Route>
         </Routes>
       </AuthProvider>
     </BrowserRouter>
+
   );
 }
 
