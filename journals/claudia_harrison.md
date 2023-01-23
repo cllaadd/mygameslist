@@ -43,3 +43,8 @@ Garrett was able to get over 2000 games into our database by scraping them with 
 
 1/13/2023
 Finished up backend and started thinking about how we want our fornt end to look, using the wireframes for reference. We are thinking of ammending our account model to include a boolean field for public vs private accounts so that if a user doesn't want their lists or profile to be seen by others, they can set it as private. We're also considering making a company detail page that the game detail page links to. The first thing we need to get working is the search bar for the games database.
+
+1/18/2023
+Worked on front end authentication and completed login/logout pages. Still having issues iwht sign up. Figured out how to check whether a user was logged in or not by looking at the storage and checking whether a token was cached.
+
+1/19

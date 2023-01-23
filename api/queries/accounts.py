@@ -1,6 +1,6 @@
 from bson.objectid import ObjectId
 from .client import Queries
-from models import Account, AccountIn, AccountUpdateIn, AccountOut
+from models import Account, AccountIn, AccountUpdateIn, AccountOut, AccountDetailOut
 from pymongo import ReturnDocument
 from pymongo.errors import DuplicateKeyError
 from typing import Union
@@ -13,17 +13,14 @@ class DuplicateAccountError(ValueError):
 class AccountQueries(Queries):
     DB_NAME = (
         # Specifies which database we're querying or inserting data into
-        "mygamelist"
+        "games"
     )
     COLLECTION = (
-        # specifies which collection we're querying or inserting data into
         "accounts"
     )
 
     def get(self, username: str) -> Account:
         props = self.collection.find_one({"username": username})
-        # Query the collection in the database
-        # and look for an username that matches the username passed into the function
         if not props:
             return None
         props["id"] = str(props["_id"])
@@ -59,7 +56,7 @@ class AccountQueries(Queries):
         except DuplicateKeyError:
             raise DuplicateAccountError()
 
-        return Account(**props, id=id)
+        return AccountDetailOut(**props, id=id)
 
     def create(
         self, info: AccountIn, hashed_password: str
@@ -70,5 +67,7 @@ class AccountQueries(Queries):
             self.collection.insert_one(props)
         except DuplicateKeyError:
             raise DuplicateAccountError()
+        props["profile_url"] = ""
+        props["bio"] = ""
         props["id"] = str(props["_id"])
-        return Account(**props)
+        return AccountDetailOut(**props)
