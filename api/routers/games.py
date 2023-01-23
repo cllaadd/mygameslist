@@ -33,9 +33,9 @@ async def create_game(
     return repo.create(game)
 
 
-@router.get("/games/{game_limit}/{game_offset}", response_model=GameList)
-async def get_all_games(game_limit: int, game_offset: int, repo: GameQueries = Depends(), ):
-    return GameList(games=repo.get_all(game_limit, game_offset))
+@router.get("/games/", response_model=GameList)
+async def get_all_games(limit: int = 20, offset: int = 0, repo: GameQueries = Depends(), ):
+    return GameList(games=repo.get_all(limit, offset))
 
 @router.get("/games/{game_id}/")
 async def game_details(game_id: int, repo: GameQueries = Depends()):
@@ -117,21 +117,21 @@ def find_game_data(name: str):
     response = requests.request("POST", url, headers=header, data=payload)
 
     category_dict = {
-        0: 'main_game',
-        1: 'dlc_addon',
-        2: 'expansion',
-        3: 'bundle',
-        4: 'standalone_expansion',
-        5: 'mod',
-        6: 'episode',
-        7: 'season',
-        8: 'remake',
-        9: 'remaster',
-        10: 'expanded_game',
-        11: 'port',
-        12: 'fork',
-        13: 'pack',
-        14: 'update'
+        0: 'Main Game',
+        1: 'DLC Addon',
+        2: 'Expansion',
+        3: 'Bundle',
+        4: 'Standalone Expansion',
+        5: 'Mod',
+        6: 'Episode',
+        7: 'Season',
+        8: 'Remake',
+        9: 'Remaster',
+        10: 'Expanded_game',
+        11: 'Port',
+        12: 'Fork',
+        13: 'Pack',
+        14: 'Update'
     }
 
     if response.status_code == 200:

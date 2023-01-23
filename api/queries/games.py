@@ -43,7 +43,7 @@ class GameQueries(Queries):
                 'from' : 'genre',
                 'localField': 'genres_id',
                 'foreignField': '_id',
-                'as': 'genre_id'
+                'as': 'genres_id'
             }},
             {
             '$lookup':
@@ -51,7 +51,7 @@ class GameQueries(Queries):
                 'from': 'game_mode',
                 'localField': 'game_modes_id',
                 'foreignField': '_id',
-                'as': 'game_mode_id'
+                'as': 'game_modes_id'
             }},
             {
             '$lookup':
@@ -59,15 +59,15 @@ class GameQueries(Queries):
                 'from': 'perspective',
                 'localField': 'player_perspectives_id',
                 'foreignField': '_id',
-                'as': 'perspective_id'
+                'as': 'player_perspectives_id'
             }},
             {
             '$lookup':
             {
                 'from': 'platform',
-                'localField': 'platform_id',
+                'localField': 'platforms_id',
                 'foreignField': '_id',
-                'as': 'platform_id'
+                'as': 'platforms_id'
             }},
             {
             '$lookup':
@@ -109,6 +109,14 @@ class GameQueries(Queries):
                 'foreignField':'_id',
                 'as': 'similar_games_id'
             }},
+            {
+            '$lookup':
+            {
+                'from' : 'companies',
+                'localField': 'involved_companies_id',
+                'foreignField':'_id',
+                'as': 'involved_companies_id'
+            }},
 
             {
             '$addFields': {
@@ -120,7 +128,18 @@ class GameQueries(Queries):
                             'name': '$$game.name',
                             'cover': '$$game.cover',
                             'id': '$$game._id',
-                        }
+                        },
+                    }
+                },
+                'involved_companies_id': {
+                    '$map': {
+                        'input': '$involved_companies_id',
+                        'as': 'company',
+                        'in': {
+                            'name': '$$company.name',
+                            'logo': '$$company.logo',
+                            'id': '$$company._id',
+                        },
                     }
                 },
                 'franchises_id': {
@@ -130,8 +149,7 @@ class GameQueries(Queries):
                         'in': {
                             'name': '$$franchise.name',
                             'id': '$$franchise._id',
-
-                        }
+                        },
                     }
                 },
                 'collection_id': {
@@ -141,8 +159,7 @@ class GameQueries(Queries):
                         'in': {
                             'name': '$$collection.name',
                             'id': '$$collection._id',
-
-                        }
+                        },
                     }
                 },
                 'keywords_id': {
@@ -153,10 +170,25 @@ class GameQueries(Queries):
                             'in': {
                                 'k': {'$convert': {'input': '$$keywords._id', 'to': 'string'}},
                                 'v': '$$keywords.name'
-                            }
+                            },
                         }
-                    }
-                }
+                    },
+
+                },
+                # 'total_rating': {
+                #     '$toDouble': {
+                #         'input': '$total_rating',
+                #         'onError': 0,
+                #         'onNull': 0
+                #     }
+                # },
+                # 'total_rating_count': {
+                #     '$toDouble': {
+                #         'input': '$total_rating_count',
+                #         'onError': 0,
+                #         'onNull': 0
+                #     }
+                # }
             }},
             ]
         db = self.collection.aggregate(pipeline)
