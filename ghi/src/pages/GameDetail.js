@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { useToken } from "./Auth";
+import { useToken } from "../Auth";
 import { useParams, Link } from "react-router-dom";
-import './GameDetail.css';
+import '../styling/GameDetail.css';
 import $ from 'jquery';
-import Carousel from "./Carousel"
+import Carousel from "../components/Carousel"
 
 
 
@@ -85,75 +85,107 @@ const GameDetail = () => {
                 <div>
 
                      <div className="game-header-container">
-                        <div className="game-cover-container">
-                                <img className="game-cover" src={game.cover}/>
-                        </div>
-                        <div className="game-name-container">
-                            <div className="game-name">
-                                <h1 key={game.id}>{game.name}</h1>
-                                <h4>Released {game.first_release_date}</h4>
+                        <div className="game-cover-name-container">
+                            <div className="game-cover-container">
+                                    <img className="game-cover" src={game.cover}/>
                             </div>
-                        </div>
-                        <div className="game-important-details">
-                            <div className="game-about-container">
-                                <div className="game-about">
-                                    <p>
-                                        <span>Genres: </span>
-                                        {game.genres_id.map((genre, index) => (
-                                        <a>{genre.name}</a>))}
-                                    </p>
-                                    <div>{game.summary}</div>
+                            <div className="game-name-container">
+                                <div className="game-name">
+                                    <h1 key={game.id}>{game.name}</h1>
+                                    <h4>Released {game.first_release_date}</h4>
                                 </div>
                             </div>
-                            <div className="game-rating-container">
-                                <div className="game-rating">
-                                    <CircularProgressBar
-                                    strokeWidth="7"
-                                    sqSize="100"
-                                    percentage={rating}/>
-                                    <div className="game-rating-count">
-                                        <text classname="game-rating-text">
-                                            Based on {game.total_rating_count} user ratings
-                                        </text>
+                        </div>
+                            <div className="game-important-details">
+                                <div className="game-about-container">
+                                    <div className="game-about">
+                                        <p>
+                                            <span>Genres: </span>
+                                            {game.genres_id.map((genre, index) => (
+                                                <a>{genre.name} </a>))}
+                                        </p>
+                                        <div>{game.summary}</div>
+                                    </div>
+                                </div>
+                                <div className="game-rating-container">
+                                    <div className="game-rating">
+                                        <CircularProgressBar
+                                        strokeWidth="7"
+                                        sqSize="100"
+                                        percentage={rating}/>
+                                        <div className="game-rating-count">
+                                            <text classname="game-rating-text">
+                                                Based on {game.total_rating_count} user ratings
+                                            </text>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
+                    </div>
+
+                    <div className="screenshots-container">
+                        <h4>Screenshots</h4>
+                        <div className='screenshots-carousel' style={{maxWidth: 1024}}>
+                            <Carousel>
+                                {game.screenshots.map((screenshot, index) => (
+                                    <img src={screenshot} key={index} style={{height: "576px", width: "1024px"}}/>
+                                ))}
+                            </Carousel>
                         </div>
                     </div>
 
-                    <h4>Screenshots</h4>
-                    <div className='screenshots-carousel' style={{maxWidth: 1024}}>
-                        <Carousel>
-                            {game.screenshots.map((screenshot, index) => (
-                                <img src={screenshot} key={index} style={{height: "576px", width: "1024px"}}/>
-                            ))}
-                        </Carousel>
+                    <div className="similar-game-container">
+                        <h4>Similar Games</h4>
+                        <div className='similar-game-carousel' style={{maxWidth: 420}}>
+                            <Carousel>
+                                {game.similar_games_id.map((similarGame, index) => (
+                                    <div>
+                                        <img src={similarGame.cover} className="cover_art" alt={similarGame.name} />
+                                        <Link to={`/games/${similarGame.id}`} onClick={() => setRefresh(true)}>
+                                            <h3>{similarGame.name}</h3>
+                                        </Link>
+                                    </div>
+                                ))}
+                            </Carousel>
+                        </div>
                     </div>
 
-                    <h4>Similar Games</h4>
-                    <div className='similar-game-carousel' style={{maxWidth: 420}}>
-                        <Carousel>
-                            {game.similar_games_id.map((similarGame, index) => (
-                                <div>
-                                    <img src={similarGame.cover} className="cover_art" alt={similarGame.name} />
-                                    <Link to={`/games/${similarGame.id}`} onClick={() => setRefresh(true)}>
-                                        <h3>{similarGame.name}</h3>
-                                    </Link>
-                                </div>
+                    <div className="right-side-sidebar-info">
+                        <h4>Alternative Names</h4>
+                            {Object.values(game.alternative_names).slice(0, showMore ? undefined : 5).join(', ')}
+                            {Object.values(game.alternative_names).length > 5 && (
+                                <button onClick={() => setShowMore(!showMore)}>
+                                {showMore ? 'Show Less' : 'Show More'}
+                                </button>
+                            )}
+
+                        <h4>Category</h4>
+                        <body>{game.category}</body>
+
+                        <h4>Collection</h4>
+                        {game.collection_id.map((collection, index) => (
+                            <div key={index}>
+                                <body>{collection.name}</body>
+                            </div>
                             ))}
-                        </Carousel>
+
+                        <h4>DLCS</h4>
+                        <body>{game.dlcs_id}</body>
+
+                        <h4>Franchises</h4>
+                        {game.franchises_id.map((franchise, index) => (
+                            <div key={index}>
+                                <body>{franchise.name}</body>
+                            </div>
+                            ))}
+
                     </div>
 
-                    <h4>Alternative Names</h4>
-                    {Object.values(game.alternative_names).slice(0, showMore ? undefined : 5).join(', ')}
-                    {Object.values(game.alternative_names).length > 5 && (
-                        <button onClick={() => setShowMore(!showMore)}>
-                        {showMore ? 'Show Less' : 'Show More'}
-                        </button>
-                    )}
 
-                    <h4>Category</h4>
-                    <body>{game.category}</body>
+
+
+
 
                     <h4>Collection</h4>
                     {game.collection_id.map((collection, index) => (

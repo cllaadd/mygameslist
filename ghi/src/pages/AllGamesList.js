@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { Pagination } from 'react-bootstrap';
-import imagenotavail from "./images/imagenotavail.jpg";
-import controller from "./images/controller.png";
+import imagenotavail from "/app/src/images/imagenotavail.jpg";
+
 function AllGamesList() {
     const [games, setgames] = useState([])
     const [limit, setLimit] = useState([])

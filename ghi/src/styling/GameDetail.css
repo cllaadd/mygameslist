@@ -24,7 +24,12 @@
 .main-body {
     margin: 1%;
 }
-
+.right-side-sidebar-info{
+    border: solid green;
+    width: fit-content;
+    height: fit-content;
+    float: right;
+}
 .game-header-container{
     height: auto;
     width: 75%;
@@ -33,16 +38,29 @@
     display: flex;
     flex-wrap: wrap;
     border: solid green;
+    align-items: center;
+    flex-direction: column;
+}
+.game-cover-name-container{
+    float: left;
+    width: fit-content;
+    height: fit-content;
+    border: solid green;
+    padding: 1%;
+    order: 3;
+    display: flex;
 }
 .game-cover-container{
     border: solid green;
     width: auto;
     order: 1;
+    float: left;
 }
 .game-cover{
     max-width: 100%;
     height: auto;
     border: solid green;
+    float: left;
 }
 .game-name-container{
     float: left;
@@ -99,4 +117,22 @@
 .similar-game-carousel{
     border: solid green;
     text-align: center;
+}
+
+.similar-game-container{
+    border: solid green;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    max-width: fit-content;
+    float: left;
+}
+
+.screenshots-container{
+    border: solid green;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    max-width: fit-content;
+    float: left;
 }

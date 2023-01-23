@@ -1,5 +1,5 @@
 import {Link, NavLink } from "react-router-dom";
-import littlecontroller from "./images/littlecontroller.png";
+import littlecontroller from "/app/src/images/littlecontroller.png";
 
 function Nav() {
   return (

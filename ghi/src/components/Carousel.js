@@ -1,5 +1,5 @@
 import React from 'react'
-import './carousel.css' //will be added later
+import '/app/src/styling/carousel.css' //will be added later
 import { useEffect, useState } from "react";
 
 const Carousel = (props) => {

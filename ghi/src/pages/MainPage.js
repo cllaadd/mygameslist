@@ -1,4 +1,4 @@
-import controller from "./images/controller.png";
+import controller from "../images/controller.png";
 
 function MainPageComponent() {
   return (

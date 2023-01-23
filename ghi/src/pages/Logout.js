@@ -1,4 +1,4 @@
-import { useToken } from "./Auth"
+import { useToken } from "../Auth"
 import { useNavigate } from "react-router-dom";
 
 function LogoutComponent() {
