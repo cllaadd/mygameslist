@@ -8,7 +8,6 @@ function AllGamesList() {
     const [limit, setLimit] = useState([])
     const [offset, setOffset] = useState([])
     const [noimage, setNoImage] = useState([])
-    const [noimage, setNoImage] = useState([])
 
 
     const getGameData = async () => {
