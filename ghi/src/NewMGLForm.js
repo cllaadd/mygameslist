@@ -11,6 +11,7 @@ function MGLForm() {
 
   const [MGLData, setMGLData] = useState(noData)
   const [token, login] = useToken();
+  const navigate = useNavigate();
 
 
   const handleChange = (event) => {

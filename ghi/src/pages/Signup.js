@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
-import { useToken } from "../Auth";
 import { useNavigate } from "react-router-dom";
 import controller from "../images/controller.png";
+import { useToken } from "../Auth";
 
 function SignupComponent() {
+    const [token, login, signup] = useToken();
+    const navigate = useNavigate();
+
     const [account, setAccount] = useState({
         username: "",
         password: "",
@@ -36,6 +39,7 @@ function SignupComponent() {
                     password: "",
                     passwordConfirm: "",
                 });
+                navigate("/login")
             } else {
                 console.error("Error in creating account");
             }
@@ -113,60 +117,3 @@ return(
 }
 
 export default SignupComponent;
-  // return (
-  //   <div className="container h-100">
-  //   <div className="row d-flex justify-content-center align-items-center h-100">
-  //   <div className="card-body p-md-5">
-  //   <div className="row ">
-  //     <div className="offset-3 col-6">
-  //       <div className="shadow p-4 mt-4">
-  //         <h1>Sign Up</h1>
-  //         <form onSubmit={handleSubmit} id="signup-form">
-  //           <div className="form-floating mb-3">
-  //             <input
-  //               onChange={handleChange}
-  //               value={account.username}
-  //               placeholder="Enter your username"
-  //               required
-  //               type="text"
-  //               name="username"
-  //               id="username"
-  //               className="form-control"
-  //             />
-  //             <label htmlFor="username">Username</label>
-  //           </div>
-  //           <div className="form-floating mb-3">
-  //             <input
-  //               onChange={handleChange}
-  //               value={account.password}
-  //               placeholder="Enter your password"
-  //               required
-  //               type="password"
-  //               name="password"
-  //               id="password"
-  //               className="form-control"
-  //             />
-  //             <label htmlFor="password">Password</label>
-  //           </div>
-  //           <div className="form-floating mb-3">
-  //             <input
-  //               onChange={handleChange}
-  //               value={account.passwordConfirm}
-  //               placeholder="Confirm password"
-  //               required
-  //               type="passwordConfirm"
-  //               name="passwordConfirm"
-  //               id="passwordConfirm"
-  //               className="form-control"
-  //             />
-  //             <label htmlFor="passwordConfirm">Confirm Password</label>
-  //           </div>
-  //           <button className="btn btn-primary">Sign up</button>
-  //         </form>
-  //       </div>
-  //     </div>
-  //   </div>
-  //   </div>
-  //   </div>
-  //   </div>
-  // );
