@@ -18,7 +18,7 @@ function UserComponent() {
       <div className="card">
         <div className="image">
           <img
-            src="https://www.w3schools.com/howto/img_avatar.png"
+            src="https://img.freepik.com/free-vector/cute-cat-gaming-cartoon_138676-2969.jpg"
             className="img-fluid"
           />
         </div>
