@@ -55,6 +55,8 @@ const GameDetail = () => {
     const [showMore, setShowMore] = useState(false);
     const [rating, setRating] = useState(false);
     const {id} = useParams()
+    const [keywords, setKeywords] = useState([])
+    const [showLimit, setShowLimit] = useState(10);
 
 
 
@@ -69,13 +71,14 @@ const GameDetail = () => {
             setGame(data);
             setRefresh(false);
             setRating(data[0].total_rating)
+            setKeywords(data[0].keywords_id)
         } else {
             console.log('Error')
         }
     }
     loadData()
 }, [id, refresh, rating])
-
+const visibleKeywords = showMore ? keywords.slice(0, showLimit) : keywords.slice(0, 10);
   return (
     <div>
     <div className="main-body">
@@ -102,7 +105,8 @@ const GameDetail = () => {
                                         <p>
                                             <span>Genres: </span>
                                             {game.genres_id.map((genre, index) => (
-                                                <a>{genre.name} </a>))}
+                                                    <a className="genres"href={`/games/search?search_param=Genres&search_param_name=${genre.name}&query_param=genres_id&param_id=${genre._id}`}>{genre.name}</a>
+                                                ))}
                                         </p>
                                         <div>{game.summary}</div>
                                     </div>
@@ -135,22 +139,6 @@ const GameDetail = () => {
                         </div>
                     </div>
 
-                    <div className="similar-game-container">
-                        <h4>Similar Games</h4>
-                        <div className='similar-game-carousel' style={{maxWidth: 420}}>
-                            <Carousel>
-                                {game.similar_games_id.map((similarGame, index) => (
-                                    <div>
-                                        <img src={similarGame.cover} className="cover_art" alt={similarGame.name} />
-                                        <a href={`/games/${similarGame.id}`} onClick={() => setRefresh(true)}>
-                                            <h3>{similarGame.name}</h3>
-                                        </a>
-                                    </div>
-                                ))}
-                            </Carousel>
-                        </div>
-                    </div>
-
                     <div className="right-side-sidebar-info">
                         <h4>Alternative Names</h4>
                             {Object.values(game.alternative_names).slice(0, showMore ? undefined : 5).join(', ')}
@@ -176,11 +164,45 @@ const GameDetail = () => {
                         <h4>Franchises</h4>
                         {game.franchises_id.map((franchise, index) => (
                             <div key={index}>
-                                <body>{franchise.name}</body>
+                                <a href={`/games/search?search_param=Franchise&search_param_name=${franchise.name}&query_param=franchises_id&param_id=${franchise.id}`}>{franchise.name}</a>
                             </div>
                             ))}
-
+                        <h4>Keywords</h4>
+                        <div className="keyword-container">
+                            {visibleKeywords.map((keyword, index) => (
+                            <div key={index} className='keyword-button-container'>
+                                <a className="keyword-button" href={`/games/search?search_param=Keywords&search_param_name=${keyword.name}&query_param=keywords_id&param_id=${keyword.id}`}>{keyword.name}</a>
+                            </div>
+                            ))}
+                            {keywords.length > 10 && (
+                            <button onClick={() => {
+                                setShowMore(!showMore)
+                                if(!showMore) setShowLimit(100)
+                                else setShowLimit(10)
+                                }}>
+                                {showMore ? "Show Less" : "Show More"}
+                            </button>
+                            )}
+                        </div>
                     </div>
+
+                    <div className="similar-game-container">
+                        <h4>Similar Games</h4>
+                        <div className='similar-game-carousel' style={{maxWidth: 420}}>
+                            <Carousel>
+                                {game.similar_games_id.map((similarGame, index) => (
+                                    <div>
+                                        <img src={similarGame.cover} className="cover_art" alt={similarGame.name} />
+                                        <a href={`/games/${similarGame.id}`} onClick={() => setRefresh(true)}>
+                                            <h3>{similarGame.name}</h3>
+                                        </a>
+                                    </div>
+                                ))}
+                            </Carousel>
+                        </div>
+                    </div>
+
+
 
 
 
@@ -197,13 +219,7 @@ const GameDetail = () => {
                     <h4>DLCS</h4>
                     <body>{game.dlcs_id}</body>
 
-                    <h4>Franchises</h4>
-                    {game.franchises_id.map((franchise, index) => (
-                        <div key={index}>
-                            <body>{console.log(franchise.id)}</body>
-                            <a href={`/games/search?search_param=Franchise&search_param_name=${franchise.name}&query_param=franchises_id&param_id=${franchise.id}`}>{franchise.name}</a>
-                        </div>
-                        ))}
+
 
                     <h4>Game Modes</h4>
                     {game.game_modes_id.map((game_mode, index) => (
@@ -215,7 +231,7 @@ const GameDetail = () => {
                     <h4>Genres</h4>
                     {game.genres_id.map((genre, index) => (
                         <div key={index}>
-                            <body>{genre.name}</body>
+                            <a href={`/games/search?search_param=Genres&search_param_name=${genre.name}&query_param=genres_id&param_id=${genre._id}`}>{genre.name}</a>
                         </div>
                         ))}
 
@@ -227,13 +243,8 @@ const GameDetail = () => {
                         </div>
                         ))}
 
-                    <h4>Keywords</h4>
-                    <body>
-                        {Object.values(game.keywords_id).slice(0, showMore ? undefined : 10).join(', ')}
-                    </body>
-                        <button onClick={() => setShowMore(!showMore)}>
-                    {showMore ? 'Show Less' : 'Show More'}
-                    </button>
+
+
 
                     <h4>Platforms</h4>
                     {game.platforms_id.map((platform, index) => (
@@ -257,9 +268,6 @@ const GameDetail = () => {
 
                     <h4>Remasters</h4>
                     <body>{game.remasters_id}</body>
-
-                    <h4>Summary</h4>
-                    <body>{game.summary}</body>
 
                     <h4>Storyline</h4>
                     <body>{game.storyline}</body>
