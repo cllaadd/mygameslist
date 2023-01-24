@@ -55,6 +55,7 @@
     width: auto;
     order: 1;
     float: left;
+    z-index: 100;
 }
 .game-cover{
     max-width: 100%;
