@@ -62,6 +62,15 @@ class GameOut(BaseModel):
     name: str
     cover: str
 
+class SearchGameOut(BaseModel):
+    id: str
+    name: str
+    cover: str
+    number_of_games: Optional[int]
+
+class SearchGameList(BaseModel):
+    games: List[SearchGameOut]
+
 
 class GameDetailOut(BaseModel):
     id: str
