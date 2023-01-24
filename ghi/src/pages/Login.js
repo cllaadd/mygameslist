@@ -18,7 +18,7 @@ function LoginComponent() {
   async function handleSubmit(event) {
     event.preventDefault();
     await login(username, password);
-    // navigate("/")
+    navigate("/mgls")
   }
 
   return (

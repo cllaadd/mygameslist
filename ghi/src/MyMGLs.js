@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useToken } from "./Auth";
 
-function MyLists() {
+function MyMGLs() {
     const [mgls, setMGLs] = useState([])
     const [token] = useToken();
 
@@ -57,7 +57,7 @@ function MyLists() {
     )
 
 
-
+    if (token && mgls) {
     return (
         <div>
             <h1>My Game Lists</h1>
@@ -87,7 +87,22 @@ function MyLists() {
             </table>
             <NavLink className="btn btn-primary" id="add-mgl-link" aria-current="page" to="/mgls/new">Add new list</NavLink>
         </div>
-    )
+    ) }
+    else if (token && (!mgls)) {
+        return (
+            <div><h2>You do not have any lists yet</h2>
+            <div><NavLink className="btn btn-primary" id="add-mgl-link" aria-current="page" to="/mgls/new">Add new list</NavLink></div>
+            </div>
+        )
+
+    } else if ((!token) && (!mgls)) {
+                return (
+            <div><h2>You must create an account or login to create a list</h2>
+            <div><NavLink className="btn btn-primary" id="add-mgl-link" aria-current="page" to="/login">Login</NavLink></div>
+            <div><NavLink className="btn btn-primary" id="add-mgl-link" aria-current="page" to="/signup">Sign up</NavLink></div>
+            </div>
+        )
+    }
 }
 
-export default MyLists;
+export default MyMGLs;
