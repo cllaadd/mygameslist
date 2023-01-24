@@ -45,6 +45,13 @@ Garrett was able to get over 2000 games into our database by scraping them with 
 Finished up backend and started thinking about how we want our fornt end to look, using the wireframes for reference. We are thinking of ammending our account model to include a boolean field for public vs private accounts so that if a user doesn't want their lists or profile to be seen by others, they can set it as private. We're also considering making a company detail page that the game detail page links to. The first thing we need to get working is the search bar for the games database.
 
 1/18/2023
-Worked on front end authentication and completed login/logout pages. Still having issues iwht sign up. Figured out how to check whether a user was logged in or not by looking at the storage and checking whether a token was cached.
+Worked on front end authentication and completed login/logout pages. Still having issues with sign up. Figured out how to check whether a user was logged in or not by looking at the storage and checking whether a token was cached in the storage tab of the devtools for firefox.
 
 1/19
+Finally got sign up working. Chris has started on some of the syling of the website and the navbar. He incorporated the logo in and it looks great. Trying to get all the functional components done first now that front-end authorization is done. We split it up so that Chris is doing the homepage and CSS, I am working on the games and users list pages, Garrett is doing the game detail page and Brian is doing the user detail page.
+
+1/20
+I'm deciding whether to do the game list view as cards or a regular list. I think cards would be cooler but I'm less confident with them. Getting the objects on the pages positioned where I want them always feels like the hardest part.
+
+1/23
+I got a functioning my game list list page, using the template from the appoinment list page i made for project beta. Hopefully I can make this one look a little better and incorporate some modals or something. The hardest page will definitly be the MGL detail page where the actual lists are managed so maybe I shouldn't have saved it for last. React feels better the second time around but there's still a lot I'm not grasping.
