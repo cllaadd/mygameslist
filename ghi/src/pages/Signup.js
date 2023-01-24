@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { useToken } from "./Auth";
+import { useToken } from "../Auth";
 import { useNavigate } from "react-router-dom";
-import controller from "./images/controller.png";
+import controller from "../images/controller.png";
 
 function SignupComponent() {
   const [account, setAccount] = useState({

@@ -1,12 +1,12 @@
 import { Link, NavLink } from "react-router-dom";
-import littlecontroller from "./images/littlecontroller.png";
+import littlecontroller from "/app/src/images/littlecontroller.png";
 
 function Nav() {
   return (
     <nav class="navbar navbar-expand-lg navbar-light background-color:#7950f2">
       <a class="navbar-brand" href="#"></a>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <NavLink className="navbar-brand" to="/">
+        <NavLink className="navbar-brand" to="/mainpage">
           <img
             class="img-fluid width=50% height=50%"
             src={littlecontroller}
@@ -35,6 +35,7 @@ function Nav() {
               Login
             </a>
           </li>
+
           <li class="nav-item active">
             <a class="nav-link" href="/logout">
               Logout

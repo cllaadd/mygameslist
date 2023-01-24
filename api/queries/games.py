@@ -1,7 +1,7 @@
 from bson.objectid import ObjectId
 from typing import List
 from .client import Queries
-from models import GameIn, GameOut, GameDetailOut
+from models import GameIn, GameOut, GameDetailOut, SearchGameOut
 from search_game_name import search_game
 
 
@@ -33,6 +33,22 @@ class GameQueries(Queries):
             single_game.append(GameOut(**document))
         return single_game
 
+    def get_search(self, query_param: str, param_id: int, game_limit: int, game_offset: int) -> List[SearchGameOut]:
+        games = []
+        number_of_games = self.collection.count_documents({f'{query_param}' : param_id})
+        pipeline = [
+            {'$match': {f'{query_param}' : param_id}},
+            {'$limit': game_limit},
+            {'$skip': game_offset},
+        ]
+        db = self.collection.aggregate(pipeline)
+        for document in db:
+            document["id"] = str(document["_id"])
+            document["number_of_games"] = number_of_games
+            games.append(SearchGameOut(**document))
+        return games
+
+
     def get_game_detail(self, id: int) -> List[GameDetailOut]:
         single_game = []
         pipeline = [
@@ -43,7 +59,7 @@ class GameQueries(Queries):
                 'from' : 'genre',
                 'localField': 'genres_id',
                 'foreignField': '_id',
-                'as': 'genre_id'
+                'as': 'genres_id'
             }},
             {
             '$lookup':
@@ -51,7 +67,7 @@ class GameQueries(Queries):
                 'from': 'game_mode',
                 'localField': 'game_modes_id',
                 'foreignField': '_id',
-                'as': 'game_mode_id'
+                'as': 'game_modes_id'
             }},
             {
             '$lookup':
@@ -59,15 +75,15 @@ class GameQueries(Queries):
                 'from': 'perspective',
                 'localField': 'player_perspectives_id',
                 'foreignField': '_id',
-                'as': 'perspective_id'
+                'as': 'player_perspectives_id'
             }},
             {
             '$lookup':
             {
                 'from': 'platform',
-                'localField': 'platform_id',
+                'localField': 'platforms_id',
                 'foreignField': '_id',
-                'as': 'platform_id'
+                'as': 'platforms_id'
             }},
             {
             '$lookup':
@@ -109,6 +125,14 @@ class GameQueries(Queries):
                 'foreignField':'_id',
                 'as': 'similar_games_id'
             }},
+            {
+            '$lookup':
+            {
+                'from' : 'companies',
+                'localField': 'involved_companies_id',
+                'foreignField':'_id',
+                'as': 'involved_companies_id'
+            }},
 
             {
             '$addFields': {
@@ -120,6 +144,17 @@ class GameQueries(Queries):
                             'name': '$$game.name',
                             'cover': '$$game.cover',
                             'id': '$$game._id',
+                        },
+                    }
+                },
+                'involved_companies_id': {
+                    '$map': {
+                        'input': '$involved_companies_id',
+                        'as': 'company',
+                        'in': {
+                            'name': '$$company.name',
+                            'logo': '$$company.logo',
+                            'id': '$$company._id',
                         },
                     }
                 },
@@ -144,18 +179,16 @@ class GameQueries(Queries):
                     }
                 },
                 'keywords_id': {
-                    '$arrayToObject': {
-                        '$map': {
-                            'input': '$keywords_id',
-                            'as': 'keywords',
-                            'in': {
-                                'k': {'$convert': {'input': '$$keywords._id', 'to': 'string'}},
-                                'v': '$$keywords.name'
-                            },
-                        }
+                    '$map': {
+                        'input': '$keywords_id',
+                        'as': 'keywords',
+                        'in': {
+                            'name': '$$keywords.name',
+                            'id': '$$keywords._id',
+                        },
                     },
-
                 },
+                # },
                 # 'total_rating': {
                 #     '$toDouble': {
                 #         'input': '$total_rating',

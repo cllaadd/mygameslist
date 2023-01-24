@@ -397,7 +397,7 @@ def find_companies_data(company_offset: int):
 
                 elif field == 'logo':
                     try:
-                        logo_url = ('https://images.igdb.com/igdb/image/upload/logo_med/'+ companies[company_number][field]['image_id'] + '.jpg')
+                        logo_url = ('https://images.igdb.com/igdb/image/upload/t_logo_med/'+ companies[company_number][field]['image_id'] + '.png')
                         full_company_data['logo'] = logo_url
                     except Exception as e:
                         full_company_data['logo'] = f'{field} not found'
@@ -529,21 +529,21 @@ def find_game_data(game_offset: int):
     )
 
     category_dict = {
-        0: 'main_game',
-        1: 'dlc_addon',
-        2: 'expansion',
-        3: 'bundle',
-        4: 'standalone_expansion',
-        5: 'mod',
-        6: 'episode',
-        7: 'season',
-        8: 'remake',
-        9: 'remaster',
-        10: 'expanded_game',
-        11: 'port',
-        12: 'fork',
-        13: 'pack',
-        14: 'update'
+        0: 'Main Game',
+        1: 'DLC Addon',
+        2: 'Expansion',
+        3: 'Bundle',
+        4: 'Standalone Expansion',
+        5: 'Mod',
+        6: 'Episode',
+        7: 'Season',
+        8: 'Remake',
+        9: 'Remaster',
+        10: 'Expanded_game',
+        11: 'Port',
+        12: 'Fork',
+        13: 'Pack',
+        14: 'Update'
     }
 
     response = requests.request("POST", url, headers=header, data=payload)
@@ -801,13 +801,13 @@ def find_game_data(game_offset: int):
                     try:
                         full_game_data['total_rating'] = games[game_number][field]
                     except Exception as e:
-                        full_game_data[field] = f'{field} not found'
+                        full_game_data[field] = 0
 
                 elif field == 'total_rating_count':
                     try:
                         full_game_data['total_rating_count'] = games[game_number][field]
                     except Exception as e:
-                        full_game_data[field] = f'{field} not found'
+                        full_game_data[field] = 0
 
                 elif field == 'version_parent':
                     try:

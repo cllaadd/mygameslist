@@ -7,7 +7,7 @@ from fastapi import (
     Request
 )
 from pydantic import BaseModel
-from models import GameIn, GameOut, GameList
+from models import GameIn, GameOut, GameList, SearchGameList
 from datetime import datetime, timedelta
 from queries.games import (
     GameQueries
@@ -37,48 +37,15 @@ async def create_game(
 async def get_all_games(limit: int = 20, offset: int = 0, repo: GameQueries = Depends(), ):
     return GameList(games=repo.get_all(limit, offset))
 
+@router.get("/games/search/", response_model=SearchGameList)
+async def get_search_games(query_param: str = '_id', param_id: int = 0, limit: int = 20, offset: int = 0, repo: GameQueries = Depends(), ):
+    return SearchGameList(games=repo.get_search(query_param, param_id, limit, offset ))
+
 @router.get("/games/{game_id}/")
 async def game_details(game_id: int, repo: GameQueries = Depends()):
     game_detail = repo.get_game_detail(game_id)
     return game_detail
 
-@router.get(f"/games/search/")
-async def search_games(name: str, repo: GameQueries = Depends()):
-    search_game = repo.get_game(name)
-    if search_game:
-        return {"game": search_game}
-    else:
-        # game_data = find_game_data(name)
-        # second_name_search = game_data[name]['name']
-        # search_game_again = repo.get_game(second_name_search)
-        # if search_game_again:
-        #     return {"game": search_game_again}
-        # else:
-        #     url = 'http://localhost:8000/games'
-        #     game_data = game_data[name]
-        #     payload = {
-        #         "name": game_data['name'],
-        #         "game_modes": game_data['game_modes'],
-        #         "genres": game_data['genres'],
-        #         "cover": game_data['cover'],
-        #         "similar_games": game_data['similar_games'],
-        #         "category": game_data['category'],
-        #         "collection": game_data['collection'],
-        #         "involved_companies": game_data['involved_companies'],
-        #         "platforms": game_data['platforms'],
-        #         "player_perspectives": game_data['player_perspectives'],
-        #         "themes": game_data['themes'],
-        #         "summary": game_data['summary'],
-        #         "first_release_date": game_data['first_release_date'],
-        #         "field_errors": game_data['field_errors'],
-
-        #     }
-        #     print(payload)
-        #     return(payload)
-        #     response = requests.request("POST", url, data=payload)
-
-        #     return("your game has been created" + response)
-        pass
 
 def find_game_data(name: str):
     search_game = name
@@ -117,21 +84,21 @@ def find_game_data(name: str):
     response = requests.request("POST", url, headers=header, data=payload)
 
     category_dict = {
-        0: 'main_game',
-        1: 'dlc_addon',
-        2: 'expansion',
-        3: 'bundle',
-        4: 'standalone_expansion',
-        5: 'mod',
-        6: 'episode',
-        7: 'season',
-        8: 'remake',
-        9: 'remaster',
-        10: 'expanded_game',
-        11: 'port',
-        12: 'fork',
-        13: 'pack',
-        14: 'update'
+        0: 'Main Game',
+        1: 'DLC Addon',
+        2: 'Expansion',
+        3: 'Bundle',
+        4: 'Standalone Expansion',
+        5: 'Mod',
+        6: 'Episode',
+        7: 'Season',
+        8: 'Remake',
+        9: 'Remaster',
+        10: 'Expanded_game',
+        11: 'Port',
+        12: 'Fork',
+        13: 'Pack',
+        14: 'Update'
     }
 
     if response.status_code == 200:

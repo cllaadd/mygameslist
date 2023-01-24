@@ -70,6 +70,15 @@ class GameOut(BaseModel):
     name: str
     cover: str
 
+class SearchGameOut(BaseModel):
+    id: str
+    name: str
+    cover: str
+    number_of_games: Optional[int]
+
+class SearchGameList(BaseModel):
+    games: List[SearchGameOut]
+
 
 class GameDetailOut(BaseModel):
     id: str
@@ -85,7 +94,7 @@ class GameDetailOut(BaseModel):
     genres_id: list
     game_engines_id: list
     involved_companies_id: list
-    keywords_id: dict
+    keywords_id: list
     platforms_id: list
     player_perspectives_id: list
     ports_id: list

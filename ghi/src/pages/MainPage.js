@@ -1,6 +1,6 @@
-import controller from "./images/controller.png";
+import controller from "../images/controller.png";
 
-function HomePageComponent() {
+function MainPageComponent() {
   return (
     <div className="px-4 py-5 my-5 text-center">
       <h1 className="display-5 fw-bold">MyGamesList</h1>
@@ -17,4 +17,4 @@ function HomePageComponent() {
   );
 }
 
-export default HomePageComponent;
+export default MainPageComponent;
