@@ -1,6 +1,5 @@
 import { useState, useEffect, } from "react";
 import { NavLink, Link, useLocation, useNavigate, useParams} from "react-router-dom";
-import { Pagination } from 'react-bootstrap';
 import imagenotavail from "/app/src/images/imagenotavail.jpg";
 
 function GameSearch() {
@@ -47,7 +46,7 @@ function GameSearch() {
             <h1>{searchparam}</h1>
             <h2>{searchparamname}</h2>
             <h3>{numberofgames} games were found</h3>
-            <table className="table table-striped">
+            <table className="search-table">
                 <thead>
                     <tr>
                         <th></th>
