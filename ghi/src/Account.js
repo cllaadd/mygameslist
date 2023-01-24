@@ -29,7 +29,7 @@ function UserComponent() {
           {user.map((username) => {
             return (
               <button className="btn btn-primary btn-sm view list">
-                {username.username}'s lists
+                See {username.username}'s lists
               </button>
             );
           })}
