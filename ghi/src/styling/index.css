@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: 'Andale Mono' !important;
+  font-family: Helvetica !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #fdadda !important;
@@ -8,5 +8,5 @@ body {
 }
 
 code {
-  font-family:'Andale Mono' !important;
+  font-family:Helvetica !important;
 }

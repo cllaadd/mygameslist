@@ -26,13 +26,13 @@
 }
 .right-side-sidebar-info{
     border: solid green;
-    width: fit-content;
+    width: 15%;
     height: fit-content;
     float: right;
 }
 .game-header-container{
     height: auto;
-    width: 75%;
+    width: 100%;
     border: solid green;
     padding: 1%;
     display: flex;
@@ -94,6 +94,14 @@
     font-size: .75em;
 
 }
+
+.genres:link, .genres:visited{
+    color: black;
+}
+.genres:hover, .genres:active{
+    background-color: green;
+    color: white;
+}
 .game-rating-container{
     height: 175px;
     width: 110px;
@@ -102,6 +110,7 @@
 
 
 }
+
 .game-rating{
     width: 100px;
     position: absolute;
@@ -133,6 +142,38 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    max-width: fit-content;
+    width: 85%;
     float: left;
+}
+
+.keyword-container{
+    border: solid green;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    float: right;
+}
+.keyword-button-container{
+  padding: .3%;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  margin: .3%;
+
+}
+.keyword-button{
+    font-size: 13px;
+    border-radius: 10%;
+    border: solid rgb(255, 253, 253);
+    background-color: #ddd;
+}
+
+.keyword-button:link, .keyword-button:visited{
+    color: black;
+
+}
+.keyword-button:hover, .keyword-button:active{
+    background-color: green;
+    color: white;
 }

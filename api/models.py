@@ -86,7 +86,7 @@ class GameDetailOut(BaseModel):
     genres_id: list
     game_engines_id: list
     involved_companies_id: list
-    keywords_id: dict
+    keywords_id: list
     platforms_id: list
     player_perspectives_id: list
     ports_id: list

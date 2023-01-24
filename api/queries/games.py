@@ -179,18 +179,16 @@ class GameQueries(Queries):
                     }
                 },
                 'keywords_id': {
-                    '$arrayToObject': {
-                        '$map': {
-                            'input': '$keywords_id',
-                            'as': 'keywords',
-                            'in': {
-                                'k': {'$convert': {'input': '$$keywords._id', 'to': 'string'}},
-                                'v': '$$keywords.name'
-                            },
-                        }
+                    '$map': {
+                        'input': '$keywords_id',
+                        'as': 'keywords',
+                        'in': {
+                            'name': '$$keywords.name',
+                            'id': '$$keywords._id',
+                        },
                     },
-
                 },
+                # },
                 # 'total_rating': {
                 #     '$toDouble': {
                 #         'input': '$total_rating',
