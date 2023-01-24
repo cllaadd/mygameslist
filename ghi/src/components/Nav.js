@@ -1,6 +1,8 @@
 import {Link, NavLink } from "react-router-dom";
 import littlecontroller from "/app/src/images/littlecontroller.png";
 import "../styling/nav.css"
+import { useToken } from "../Auth";
+
 
 function Nav() {
   return (
@@ -33,16 +35,18 @@ function Nav() {
         <li class="nav-item active">
           <a class="nav-link" href="/logout">Logout</a>
         </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="/account">My Account</a>
-        </li>
         <li class="nav-item">
           <a class="nav-link" href="/users">Users List</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/games">All Games</a>
         </li>
-
+        <li class="nav-item active">
+          <a class="nav-link" href="/account">My Account</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/mgls">My lists</a>
+        </li>
         </ul>
         {/* <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>

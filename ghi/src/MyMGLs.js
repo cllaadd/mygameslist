@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useToken } from "./Auth";
+import { useNavigate } from "react-router-dom";
 
 function MyMGLs() {
     const [mgls, setMGLs] = useState([])
     const [token] = useToken();
+    const navigate = useNavigate();
+
 
     const getData = async () => {
         const fetchConfig = {
@@ -24,15 +27,7 @@ function MyMGLs() {
     }
 
     const goToList = async (mgl_id) => {
-        const fetchConfig = {
-            method: 'get',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-        };
-        const response = await fetch(`http://localhost:8000/mgls/${mgl_id}`, fetchConfig)
-        const data = await response.json();
+        navigate(`${mgl_id}`)
     }
 
 
@@ -76,7 +71,9 @@ function MyMGLs() {
                             <tr key={mgl.id}>
                                 <td>{mgl.name}</td>
                                 <td>{mgl.description}</td>
-                                <td><NavLink className="btn btn-primary" id="mgl-link" aria-current="page" to={"/mgls/:id"}>See list</NavLink></td>
+                                <td>
+                                    <button className="btn btn-success m-2" onClick={() => {goToList(mgl.id)}}>See list</button>
+                                </td>
                                 <td>
                                     <button className="btn btn-danger m-2" onClick={() => {handleDelete(mgl.id)}}>Delete</button>
                                 </td>
