@@ -801,13 +801,13 @@ def find_game_data(game_offset: int):
                     try:
                         full_game_data['total_rating'] = games[game_number][field]
                     except Exception as e:
-                        full_game_data[field] = f'{field} not found'
+                        full_game_data[field] = 0
 
                 elif field == 'total_rating_count':
                     try:
                         full_game_data['total_rating_count'] = games[game_number][field]
                     except Exception as e:
-                        full_game_data[field] = f'{field} not found'
+                        full_game_data[field] = 0
 
                 elif field == 'version_parent':
                     try:

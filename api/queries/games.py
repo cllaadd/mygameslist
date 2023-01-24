@@ -1,7 +1,7 @@
 from bson.objectid import ObjectId
 from typing import List
 from .client import Queries
-from models import GameIn, GameOut, GameDetailOut
+from models import GameIn, GameOut, GameDetailOut, SearchGameOut
 from search_game_name import search_game
 
 
@@ -32,6 +32,22 @@ class GameQueries(Queries):
             document["id"] = str(document["_id"])
             single_game.append(GameOut(**document))
         return single_game
+
+    def get_search(self, query_param: str, param_id: int, game_limit: int, game_offset: int) -> List[SearchGameOut]:
+        games = []
+        number_of_games = self.collection.count_documents({f'{query_param}' : param_id})
+        pipeline = [
+            {'$match': {f'{query_param}' : param_id}},
+            {'$limit': game_limit},
+            {'$skip': game_offset},
+        ]
+        db = self.collection.aggregate(pipeline)
+        for document in db:
+            document["id"] = str(document["_id"])
+            document["number_of_games"] = number_of_games
+            games.append(SearchGameOut(**document))
+        return games
+
 
     def get_game_detail(self, id: int) -> List[GameDetailOut]:
         single_game = []

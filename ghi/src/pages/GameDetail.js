@@ -142,9 +142,9 @@ const GameDetail = () => {
                                 {game.similar_games_id.map((similarGame, index) => (
                                     <div>
                                         <img src={similarGame.cover} className="cover_art" alt={similarGame.name} />
-                                        <Link to={`/games/${similarGame.id}`} onClick={() => setRefresh(true)}>
+                                        <a href={`/games/${similarGame.id}`} onClick={() => setRefresh(true)}>
                                             <h3>{similarGame.name}</h3>
-                                        </Link>
+                                        </a>
                                     </div>
                                 ))}
                             </Carousel>
@@ -200,14 +200,15 @@ const GameDetail = () => {
                     <h4>Franchises</h4>
                     {game.franchises_id.map((franchise, index) => (
                         <div key={index}>
-                            <body>{franchise.name}</body>
+                            <body>{console.log(franchise.id)}</body>
+                            <a href={`/games/search?search_param=Franchise&search_param_name=${franchise.name}&query_param=franchises_id&param_id=${franchise.id}`}>{franchise.name}</a>
                         </div>
                         ))}
 
                     <h4>Game Modes</h4>
                     {game.game_modes_id.map((game_mode, index) => (
                         <div key={index}>
-                            <body>{game_mode.name}</body>
+                            <a href={`/games/search?search_param=Game Mode&search_param_name=${game_mode.name}&query_param=game_modes_id&param_id=${game_mode._id}`}>{game_mode.name}</a>
                         </div>
                         ))}
 
