@@ -20,9 +20,11 @@
   font-weight: bold;
   fill: green;
 }
-
+.alternative-names{
+    font-size: 13px;
+}
 .main-body {
-    margin: 1%;
+    margin: 0%;
 }
 .right-side-sidebar-info{
     border: solid green;
@@ -51,7 +53,6 @@
     display: flex;
 }
 .game-cover-container{
-    border: solid green;
     width: auto;
     order: 1;
     float: left;
@@ -60,8 +61,8 @@
 .game-cover{
     max-width: 100%;
     height: auto;
-    border: solid green;
     float: left;
+    border-radius: 15px;
 }
 .game-name-container{
     float: left;
@@ -147,6 +148,7 @@
     float: left;
 }
 
+
 .keyword-container{
     border: solid green;
     display: flex;
@@ -165,8 +167,8 @@
 }
 .keyword-button{
     font-size: 13px;
-    border-radius: 10%;
-    border: solid rgb(255, 253, 253);
+    border-radius: 5px;
+    border: solid white;
     background-color: #ddd;
 }
 

@@ -133,7 +133,9 @@ const visibleKeywords = showMore ? keywords.slice(0, showLimit) : keywords.slice
                         <div className='screenshots-carousel' style={{maxWidth: 1024}}>
                             <Carousel>
                                 {game.screenshots.map((screenshot, index) => (
-                                    <img src={screenshot} key={index} style={{height: "576px", width: "1024px"}}/>
+                                    <div >
+                                        <img className="screenshots_image" src={screenshot} key={index} style={{height: "576px", width: "1024px"}}/>
+                                    </div>
                                 ))}
                             </Carousel>
                         </div>
@@ -141,7 +143,7 @@ const visibleKeywords = showMore ? keywords.slice(0, showLimit) : keywords.slice
 
                     <div className="right-side-sidebar-info">
                         <h4>Alternative Names</h4>
-                            {Object.values(game.alternative_names).slice(0, showMore ? undefined : 5).join(', ')}
+                            <text className="alternative-names">{Object.values(game.alternative_names).slice(0, showMore ? undefined : 5).join(', ')}</text>
                             {Object.values(game.alternative_names).length > 5 && (
                                 <button onClick={() => setShowMore(!showMore)}>
                                 {showMore ? 'Show Less' : 'Show More'}
