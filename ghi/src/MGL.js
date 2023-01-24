@@ -24,7 +24,6 @@ function MGL() {
         setRefresh(false);
     }
 
-
     const handleRemove = async (mgl_id, game_id) => {
         const fetchConfig = {
             method: 'put',
@@ -42,7 +41,7 @@ function MGL() {
 
     useEffect(() => {
         getData();
-    }, [id, refresh]
+    }, [id, refresh, token]
     )
 
     let filteredGames = [];
@@ -50,9 +49,10 @@ function MGL() {
         filteredGames = games;
     } else {
         filteredGames = games.filter((game) =>
-            game.name === filterValue
+            (game.name).includes(filterValue)
         );
     }
+
 
     return (
         <div>
