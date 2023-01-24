@@ -18,6 +18,7 @@ from models import (
     AccountIn,
     AccountUpdateIn,
     AccountOut,
+    AccountDetailOut
 )
 
 
@@ -49,6 +50,19 @@ async def get_token(
             "account": account,
         }
         return AccountToken(**token_data)
+
+@router.get("/api/accounts/", response_model=AccountDetailOut | None)
+async def get_myaccount(
+    request: Request,
+    account: Account = Depends(authenticator.try_get_current_account_data),
+) -> AccountDetailOut | None:
+    if authenticator.cookie_name in request.cookies:
+        token_data = {
+            "access_token": request.cookies[authenticator.cookie_name],
+            "type": "Bearer",
+            "account": account,
+        }
+        return AccountDetailOut(**token_data)
 
 
 @router.put(

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 function UserComponent() {
-  const [username, setUsername] = useState("");
+  const [user, setUser] = useState("");
 
   const getUserData = async () => {
     const response = await fetch("http://localhost:8000/api/accounts/");
@@ -23,14 +23,21 @@ function UserComponent() {
           />
         </div>
         <div className="mt-5 text-center">
-          <h4 className="mb-0">Example User</h4>
+          <h4 className="mb-0">{user.username}</h4>
+
           <button className="btn btn-primary btn-sm view list">
-            View User's Lists
+            View My Game Lists
           </button>
           <div className="games">
             <h6 className="mb-0">Games</h6>
             <span>50</span>
           </div>
+          <button className="btn btn-secondar btn-sm view list">
+            Update Account
+          </button>
+          <button className="btn btn-secondar btn-sm view list">
+            Delete Account
+          </button>
         </div>
       </div>
     </div>
