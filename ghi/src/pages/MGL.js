@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useParams, Link } from "react-router-dom";
 import { useToken } from "../Auth";
 
 function MGL() {
@@ -8,12 +8,6 @@ function MGL() {
     const [refresh, setRefresh] = useState(false)
     const {id} = useParams()
     const [token] = useToken();
-    const [filterValue, setFilter] = useState("");
-
-
-    const handleChange = (event) => {
-        setFilter(event.target.value);
-    };
 
 
     const getData = async () => {
@@ -27,6 +21,13 @@ function MGL() {
     const handleRemove = async (mgl_id, game_id) => {
         const fetchConfig = {
             method: 'put',
+            body: JSON.stringify({
+                "name": "string",
+                "description": "string",
+                "games": [
+                    "string"
+                ]
+                }),
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
@@ -44,40 +45,33 @@ function MGL() {
     }, [id, refresh, token]
     )
 
-    let filteredGames = [];
-    if (filterValue === "") {
-        filteredGames = games;
-    } else {
-        filteredGames = games.filter((game) =>
-            (game.name).includes(filterValue)
-        );
-    }
 
 
     return (
         <div>
             <div>
-                <input className="form-control" value={filterValue} onChange={handleChange} placeholder="Search" />
-            </div>
             <h1>{mgl.name}</h1>
+            </div>
             <h2>{mgl.description}</h2>
             <table className="table">
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Cover</th>
+                        <th></th>
                         <th></th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    {filteredGames.map(game => {
+                    {games.map(game => {
                         return (
                             <tr key={game.id}>
-                                <td>{game.name}</td>
-                                <td><image src={game.cover}></image></td>
+                                <td><Link class="link" to={`/games/${game.id}`} onClick={() => setRefresh(true)}>
+                                    {game.name}
+                                </Link></td>
+                                <td></td>
                                 <td>
-                                    <button className="btn btn-danger m-2" onClick={() => {handleRemove(game.id)}}>Remove</button>
+                                    <button className="btn btn-danger m-2" onClick={() => {handleRemove(id, game.id)}}>Remove</button>
                                 </td>
                             </tr>
                         );

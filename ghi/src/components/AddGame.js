@@ -1,19 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useToken } from "../Auth";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
+import '../styling/forms.css';
 
 
-function AddGame() {
-    const location = useLocation();
-    const game_id = location.state["id"]
-    const game_name = location.state["name"]
-    const game_cover = location.state["cover"]
-    const [mglData, setMGLData] = useState({
-        mgl: '',
-    })
+
+function AddGameForm({game_id, game_name, game_cover}) {
+    const noData = {
+        mgl_id: '',
+    }
+    const [mglData, setMGLData] = useState(noData)
     const [mgls, setMGLs] = useState([])
+    // const mgl_id = mglData.id
     const [token] = useToken();
     const navigate = useNavigate();
+    const [isOpen, setIsOpen] = useState(true);
+
+
 
 
     const getMGLs = async () => {
@@ -33,11 +36,6 @@ function AddGame() {
     }
     }
 
-
-    useEffect(() => {
-        getMGLs()
-      }, [token])
-
     const handleChange = (event) => {
     setMGLData({...mglData, [event.target.name]: event.target.value})
     }
@@ -45,13 +43,21 @@ function AddGame() {
 
     const handleSubmit = async (event) => {
     event.preventDefault();
-
-    const mglUrl = `http://localhost:8000/mgls/${mgl_id}/add/${game_id}`;
+    console.log(mglData.mgl_id)
+    console.log(mglData)
+    const mglUrl = `http://localhost:8000/mgls/${mglData.mgl_id}/add/${game_id}`;
     const fetchConfig = {
         method: 'put',
-        body: JSON.stringify({...mglData}),
+        body: JSON.stringify({
+                "name": "string",
+                "description": "string",
+                "games": [
+                    "string"
+                ]
+                }),
         headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
         },
     };
     const response = await fetch(mglUrl, fetchConfig);
@@ -62,21 +68,27 @@ function AddGame() {
     } else {
         alert("Could not add game")
     }
+
     }
 
+    useEffect(() => {
+    if (isOpen) {
+        getMGLs()
+    } else {
+      handleSubmit()
+    //   navigate(`mgls/${mgl_id}`)
+    }
+    }, [isOpen, token, mglData]);
 
-
-
-    render() {
         return (
-            <div className="row">
-                <div className="offset-3 col-6">
+            <div className="form">
+                <div className="form-content">
                     <div className="shadow p-4 mt-4">
                         <h1>Which list would you like to add {game_name} to?</h1>
                         <img src={game_cover}></img>
                         <form onSubmit={handleSubmit} id="add-game-form">
                             <div className="mb-3">
-                                <select onChange={handleChange} required id="mgl" name="mgl" className="form-select">
+                                <select onChange={handleChange} required id="mgl_id" name="mgl_id" className="form-select">
                                     <option value="">Choose a list</option>
                                     {mgls.map(mgl => {
                                         return (
@@ -87,13 +99,13 @@ function AddGame() {
                                     })};
                                 </select>
                             </div>
-                            <button className="btn btn-primary">Add game</button>
+                            <button onClick={() => setIsOpen(false)} className="btn btn-primary">Add game</button>
                         </form>
                     </div>
                 </div>
             </div>
         );
-    };
+
 };
 
 export default AddGameForm;

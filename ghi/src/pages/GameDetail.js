@@ -4,6 +4,8 @@ import { useParams, Link } from "react-router-dom";
 import '../styling/GameDetail.css';
 import $ from 'jquery';
 import Carousel from "../components/Carousel"
+import AddGameForm from "../components/AddGame"
+import {Modal} from "react-bootstrap";
 
 
 
@@ -56,10 +58,17 @@ const GameDetail = () => {
     const [showMoreKeywords, setShowMoreKeywords] = useState(false);
     const [rating, setRating] = useState(false);
     const {id} = useParams()
+    const { handleSubmit } = useState();
     const [keywords, setKeywords] = useState([])
     const [altnames, setAltNames] = useState([])
     const [showLimitAlternativeNames, setShowLimitAlternativeNames] = useState(10);
     const [showLimitKeywords, setShowLimitKeywords] = useState(10);
+    const [isOpen, setIsOpen] = useState(false);
+
+    const handleOpenModal = () => setIsOpen(true);
+    const handleCloseModal = () => setIsOpen(false);
+
+    const game_id = id
 
 
 
@@ -101,6 +110,12 @@ const visibleAlternativeNames = showMoreAlternativeNames ? altnames.slice(0, sho
                                 <div className="game-name">
                                     <h1 key={game.id}>{game.name}</h1>
                                     <h4>Released {game.first_release_date}</h4>
+                                    <button onClick={handleOpenModal} className="btn btn-green m-1">Add Game</button>
+                                    <Modal show={isOpen} onHide={handleCloseModal}>
+                                        <Modal.Body>
+                                            <AddGameForm game_id={game.id} game_name={game.name} game_cover={game.cover}/>
+                                        </Modal.Body>
+                                    </Modal>
                                 </div>
                             </div>
                         </div>

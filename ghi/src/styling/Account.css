@@ -1,0 +1,31 @@
+.image-container {
+}
+
+.card-title {
+  color: black;
+}
+
+.card-subtitle {
+  color: black;
+}
+
+.card-text {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-text > div {
+  flex-basis: 45%;
+}
+
+.lists-container,
+.games-container {
+  flex: 1;
+}
+
+.games-title,
+.lists-title,
+.games-count,
+.lists-count {
+  color: black;
+}

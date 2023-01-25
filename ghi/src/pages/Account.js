@@ -1,35 +1,69 @@
+import "../styling/Account.css";
+
 import { useEffect, useState } from "react";
 
 function UserComponent() {
-  const [username, setUsername] = useState("");
+  const [users, setUsers] = useState([]);
+  const [currentUser, setCurrentUser] = useState([]);
 
   const getUserData = async () => {
     const response = await fetch("http://localhost:8000/api/accounts/");
     const userData = await response.json();
-    setUsername(userData.username);
+    setUsers(userData);
   };
 
   useEffect(() => {
     getUserData();
   }, []);
 
+  // const getCurrentUserData = async () => {
+  //   const response = await fetch("http://localhost:8000/api/myaccount");
+  //   const currentUserData = await response.json();
+  //   setCurrentUser(currentUserData);
+  // };
+
+  // useEffect(() => {
+  //   getCurrentUserData();
+  // }, []);
+
   return (
     <div className="container d-flex justify-content-center align-items-center">
-      <div className="card">
-        <div className="image">
+      <div className="card profile-card">
+        <div className="image-container d-flex justify-content-center align-items-center">
           <img
-            src="https://www.w3schools.com/howto/img_avatar.png"
-            className="img-fluid"
+            src="https://img.freepik.com/free-vector/cute-cat-gaming-cartoon_138676-2969.jpg"
+            className="img-fluid profile-image"
+            alt="Profile"
           />
         </div>
-        <div className="mt-5 text-center">
-          <h4 className="mb-0">Example User</h4>
-          <button className="btn btn-primary btn-sm view list">
-            View User's Lists
-          </button>
-          <div className="games">
-            <h6 className="mb-0">Games</h6>
-            <span>50</span>
+        <div className="card-body">
+          {users.map((username) => {
+            return (
+              <h2 className="card-title text-center">{username.username}</h2>
+            );
+          })}
+          <div className="card-subtitle text-center">
+            {users.map((username) => {
+              return (
+                <button className="btn btn-primary btn-sm view list">
+                  {username.username}'s lists
+                </button>
+              );
+            })}
+          </div>
+          <div className="d-flex justify-content-center align-items-center">
+            <div className="card-text">
+              <div className="lists">
+                <h4 className="lists-title">Lists</h4>
+                <span className="lists-count">count</span>
+              </div>
+            </div>
+            <div className="card-text">
+              <div className="games">
+                <h4 className="games-title">Games</h4>
+                <span className="games-count">count</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

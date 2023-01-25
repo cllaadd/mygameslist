@@ -21,6 +21,8 @@ class PydanticObjectId(ObjectId):
 class AccountIn(BaseModel):
     username: str
     password: str
+    profile_url: Optional[str]
+    bio: Optional[str]
 
 
 class AccountUpdateIn(BaseModel):
@@ -38,6 +40,8 @@ class AccountOut(BaseModel):
     id: str
     username: str
     password: str
+    profile_url: Optional[str]
+    bio: Optional[str]
 
 
 class AccountDetailOut(BaseModel):
