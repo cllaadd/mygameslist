@@ -48,6 +48,21 @@ class GameQueries(Queries):
             games.append(SearchGameOut(**document))
         return games
 
+    def get_name_search(self, game_param: str, param_name: str, game_limit: int, game_offset: int) -> List[SearchGameOut]:
+        games = []
+        number_of_games = self.collection.count_documents({f'{game_param}' : param_name})
+        pipeline = [
+            {'$match': {f'{game_param}' : param_name}},
+            {'$limit': game_limit},
+            {'$skip': game_offset},
+        ]
+        db = self.collection.aggregate(pipeline)
+        for document in db:
+            document["id"] = str(document["_id"])
+            document["number_of_games"] = number_of_games
+            games.append(SearchGameOut(**document))
+        return games
+
 
     def get_game_detail(self, id: int) -> List[GameDetailOut]:
         single_game = []
