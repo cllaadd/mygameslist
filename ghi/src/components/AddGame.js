@@ -1,20 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useToken } from "../Auth";
 import { useNavigate} from "react-router-dom";
+import '../styling/forms.css';
 
 
-function AddGame(props) {
-    const game_id = props["id"]
-    const game_name = props["name"]
-    const game_cover = props["cover"]
-    const [isOpen, setIsOpen] = useState(false);
-    // const [game, setGame] = useState(props)
-    const [mglData, setMGLData] = useState({
-        mgl: '',
-    })
+
+function AddGameForm({game_id, game_name, game_cover}) {
+    const noData = {
+        mgl_id: '',
+    }
+    const [mglData, setMGLData] = useState(noData)
     const [mgls, setMGLs] = useState([])
+    // const mgl_id = mglData.id
     const [token] = useToken();
     const navigate = useNavigate();
+    const [isOpen, setIsOpen] = useState(true);
+
+
 
 
     const getMGLs = async () => {
@@ -34,20 +36,6 @@ function AddGame(props) {
     }
     }
 
-
-    useEffect(() => {
-    if (isOpen) {
-        getMGLs()
-        // setGame()
-    } else {
-      handleSubmit()
-    }
-    }, [isOpen, token, data]);
-
-    // useEffect(() => {
-    //     getMGLs()
-    //   }, [token])
-
     const handleChange = (event) => {
     setMGLData({...mglData, [event.target.name]: event.target.value})
     }
@@ -55,8 +43,8 @@ function AddGame(props) {
 
     const handleSubmit = async (event) => {
     event.preventDefault();
-
-    const mglUrl = `http://localhost:8000/mgls/${mgl_id}/add/${game_id}`;
+    console.log(mglData.mgl_id)
+    const mglUrl = `http://localhost:8000/mgls/${mglData.mgl_id}/add/${game_id}`;
     const fetchConfig = {
         method: 'put',
         body: JSON.stringify({...mglData}),
@@ -73,21 +61,27 @@ function AddGame(props) {
     } else {
         alert("Could not add game")
     }
+
     }
 
+    useEffect(() => {
+    if (isOpen) {
+        getMGLs()
+    } else {
+      handleSubmit()
+    //   navigate(`mgls/${mgl_id}`)
+    }
+    }, [isOpen, token, mglData]);
 
-
-
-    render() {
         return (
-            <div className="modal">
-                <div className="modal-content">
+            <div className="form">
+                <div className="form-content">
                     <div className="shadow p-4 mt-4">
                         <h1>Which list would you like to add {game_name} to?</h1>
                         <img src={game_cover}></img>
                         <form onSubmit={handleSubmit} id="add-game-form">
                             <div className="mb-3">
-                                <select onChange={handleChange} required id="mgl" name="mgl" className="form-select">
+                                <select onChange={handleChange} required id="mgl_id" name="mgl_id" className="form-select">
                                     <option value="">Choose a list</option>
                                     {mgls.map(mgl => {
                                         return (
@@ -104,7 +98,7 @@ function AddGame(props) {
                 </div>
             </div>
         );
-    };
+
 };
 
-export default AddGame;
+export default AddGameForm;
