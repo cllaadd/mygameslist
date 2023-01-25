@@ -10,5 +10,23 @@ input::placeholder {
 }
 
 * {
-  color:black;
+  color: black;
+}
+
+
+
+
+
+
+
+
+.form-select{
+  color:black !important;
+}
+.mgl-add-game-container{
+  color:black !important;
+}
+
+.mgl-add-game-title{
+  color:black !important;
 }
