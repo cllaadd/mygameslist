@@ -27,11 +27,11 @@ function UsersList() {
     return (
         <div>
             <h1>Users</h1>
-            <table className="table table-striped">
+            <table className="table">
                 <thead>
                     <tr>
                         <th>username</th>
-                        <th>number of lists</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
