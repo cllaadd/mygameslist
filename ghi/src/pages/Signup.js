@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
-import { useToken } from "../Auth";
 import { useNavigate } from "react-router-dom";
 import controller from "../images/controller.png";
+import { useToken } from "../Auth";
 
 function SignupComponent() {
+  const [token, login, signup] = useToken();
+  const navigate = useNavigate();
+
   const [account, setAccount] = useState({
     username: "",
     password: "",
@@ -36,6 +39,7 @@ function SignupComponent() {
           password: "",
           passwordConfirm: "",
         });
+        navigate("/login");
       } else {
         console.error("Error in creating account");
       }

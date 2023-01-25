@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useToken } from "./Auth";
+import { useToken } from "../Auth";
+import { useNavigate } from "react-router-dom";
 
 
 function MGLForm() {
@@ -10,6 +11,7 @@ function MGLForm() {
 
   const [MGLData, setMGLData] = useState(noData)
   const [token, login] = useToken();
+  const navigate = useNavigate();
 
 
   const handleChange = (event) => {
@@ -32,8 +34,8 @@ function MGLForm() {
     const response = await fetch(MGLUrl, fetchConfig);
     if (response.ok) {
       const newMGL = await response.json();
-      console.log(newMGL)
       setMGLData(noData)
+      navigate("/mgls")
     } else {
       alert("Could not submit form")
     }

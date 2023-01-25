@@ -1,16 +1,13 @@
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { useToken } from "./Auth";
+import { useToken } from "../Auth";
+import { useNavigate } from "react-router-dom";
+import '../styling/mgl.css';
 
-function MyLists() {
+function MyMGLs() {
     const [mgls, setMGLs] = useState([])
     const [token] = useToken();
-    const [filterValue, setFilter] = useState("");
-
-
-    const handleChange = (event) => {
-        setFilter(event.target.value);
-    };
+    const navigate = useNavigate();
 
 
     const getData = async () => {
@@ -28,6 +25,10 @@ function MyLists() {
               } else {
                 alert("Could not find lists")
     }
+    }
+
+    const goToList = async (mgl_id) => {
+        navigate(`${mgl_id}`)
     }
 
 
@@ -51,27 +52,17 @@ function MyLists() {
     }, [token]
     )
 
-    // let filteredMGLs = [];
-    // if (filterValue === "") {
-    //     filteredMGLs = mgls;
-    // } else {
-    //     filteredMGLs = mgls.filter((mgl) =>
-    //         mgl.name === filterValue
-    //     );
-    // }
 
+    if (token && mgls) {
     return (
         <div>
-            {/* <div>
-                <input className="form-control" value={filterValue} onChange={handleChange} placeholder="Search" />
-            </div> */}
             <h1>My Game Lists</h1>
-            <table className="table table-striped">
+            <table className="table">
                 <thead>
                     <tr>
                         <th>Name</th>
                         <th>Description</th>
-                        {/* <th>Games</th> */}
+                        <th></th>
                         <th></th>
                     </tr>
                 </thead>
@@ -79,9 +70,11 @@ function MyLists() {
                     {mgls.map(mgl => {
                         return (
                             <tr key={mgl.id}>
-                                <td><a href={`http://localhost:8000/mgls/${mgl.id}`}>{mgl.name}</a></td>
+                                <td>{mgl.name}</td>
                                 <td>{mgl.description}</td>
-                                {/* <td>{mgl.games}</td> */}
+                                <td>
+                                    <button className="btn btn-success m-2" onClick={() => {goToList(mgl.id)}}>See list</button>
+                                </td>
                                 <td>
                                     <button className="btn btn-danger m-2" onClick={() => {handleDelete(mgl.id)}}>Delete</button>
                                 </td>
@@ -92,7 +85,22 @@ function MyLists() {
             </table>
             <NavLink className="btn btn-primary" id="add-mgl-link" aria-current="page" to="/mgls/new">Add new list</NavLink>
         </div>
-    )
+    ) }
+    else if (token && (!mgls)) {
+        return (
+            <div><h2>You do not have any lists yet</h2>
+            <div><NavLink className="btn btn-primary" id="add-mgl-link" aria-current="page" to="/mgls/new">Add new list</NavLink></div>
+            </div>
+        )
+
+    } else if ((!token) && (!mgls)) {
+                return (
+            <div><h2>You must create an account or login to create a list</h2>
+            <div><NavLink className="btn btn-primary" id="add-mgl-link" aria-current="page" to="/login">Login</NavLink></div>
+            <div><NavLink className="btn btn-primary" id="add-mgl-link" aria-current="page" to="/signup">Sign up</NavLink></div>
+            </div>
+        )
+    }
 }
 
-export default MyLists;
+export default MyMGLs;

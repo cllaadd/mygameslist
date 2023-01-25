@@ -52,11 +52,14 @@ const CircularProgressBar = (props) => {
 const GameDetail = () => {
     const [games, setGame] = useState([])
     const [refresh, setRefresh] = useState(false)
-    const [showMore, setShowMore] = useState(false);
+    const [showMoreAlternativeNames, setShowMoreAlternativeNames] = useState(false);
+    const [showMoreKeywords, setShowMoreKeywords] = useState(false);
     const [rating, setRating] = useState(false);
     const {id} = useParams()
     const [keywords, setKeywords] = useState([])
-    const [showLimit, setShowLimit] = useState(10);
+    const [altnames, setAltNames] = useState([])
+    const [showLimitAlternativeNames, setShowLimitAlternativeNames] = useState(10);
+    const [showLimitKeywords, setShowLimitKeywords] = useState(10);
 
 
 
@@ -72,13 +75,15 @@ const GameDetail = () => {
             setRefresh(false);
             setRating(data[0].total_rating)
             setKeywords(data[0].keywords_id)
+            setAltNames(data[0].alternative_names)
         } else {
             console.log('Error')
         }
     }
     loadData()
 }, [id, refresh, rating])
-const visibleKeywords = showMore ? keywords.slice(0, showLimit) : keywords.slice(0, 10);
+const visibleKeywords = showMoreKeywords ? keywords.slice(0, showLimitKeywords) : keywords.slice(0, 10);
+const visibleAlternativeNames = showMoreAlternativeNames ? altnames.slice(0, showLimitAlternativeNames) : altnames.slice(0, 5);
   return (
     <div>
     <div className="main-body">
@@ -105,8 +110,14 @@ const visibleKeywords = showMore ? keywords.slice(0, showLimit) : keywords.slice
                                         <p>
                                             <span>Genres: </span>
                                             {game.genres_id.map((genre, index) => (
-                                                    <a className="genres"href={`/games/search?search_param=Genres&search_param_name=${genre.name}&query_param=genres_id&param_id=${genre._id}`}>{genre.name}</a>
-                                                ))}
+                                                <a className="genres"href={`/games/search?search_param=Genres&search_param_name=${genre.name}&query_param=genres_id&param_id=${genre._id}`}>{genre.name}</a>
+                                            ))}
+                                        </p>
+                                        <p>
+                                            <span>Platforms: </span>
+                                            {game.platforms_id.map((platform, index) => (
+                                                <a className="platforms"href={`/games/search?search_param=Platform&search_param_name=${platform.name}&query_param=platforms_id&param_id=${platform._id}`}>{platform.name}</a>
+                                            ))}
                                         </p>
                                         <div>{game.summary}</div>
                                     </div>
@@ -133,20 +144,15 @@ const visibleKeywords = showMore ? keywords.slice(0, showLimit) : keywords.slice
                         <div className='screenshots-carousel' style={{maxWidth: 1024}}>
                             <Carousel>
                                 {game.screenshots.map((screenshot, index) => (
-                                    <img src={screenshot} key={index} style={{height: "576px", width: "1024px"}}/>
+                                    <div >
+                                        <img className="screenshots_image" src={screenshot} key={index} style={{height: "576px", width: "1024px"}}/>
+                                    </div>
                                 ))}
                             </Carousel>
                         </div>
                     </div>
 
                     <div className="right-side-sidebar-info">
-                        <h4>Alternative Names</h4>
-                            {Object.values(game.alternative_names).slice(0, showMore ? undefined : 5).join(', ')}
-                            {Object.values(game.alternative_names).length > 5 && (
-                                <button onClick={() => setShowMore(!showMore)}>
-                                {showMore ? 'Show Less' : 'Show More'}
-                                </button>
-                            )}
 
                         <h4>Category</h4>
                         <body>{game.category}</body>
@@ -167,6 +173,23 @@ const visibleKeywords = showMore ? keywords.slice(0, showLimit) : keywords.slice
                                 <a href={`/games/search?search_param=Franchise&search_param_name=${franchise.name}&query_param=franchises_id&param_id=${franchise.id}`}>{franchise.name}</a>
                             </div>
                             ))}
+                        <h4>Alternative Names</h4>
+                        <div>
+                            {visibleAlternativeNames.map((altname, index) => (
+                                <div key={index} className='keyword-button-container'>
+                                    <text className="alternative-names">{altname}</text>
+                                </div>
+                            ))}
+                             {keywords.length > 10 && (
+                            <button className="show-more-button" onClick={() => {
+                                setShowMoreAlternativeNames(!showMoreAlternativeNames)
+                                if(!showMoreAlternativeNames) setShowLimitAlternativeNames(100)
+                                else setShowLimitAlternativeNames(10)
+                                }}>
+                                {showMoreAlternativeNames ? "Show Less" : "Show More"}
+                            </button>
+                             )}
+                        </div>
                         <h4>Keywords</h4>
                         <div className="keyword-container">
                             {visibleKeywords.map((keyword, index) => (
@@ -175,12 +198,12 @@ const visibleKeywords = showMore ? keywords.slice(0, showLimit) : keywords.slice
                             </div>
                             ))}
                             {keywords.length > 10 && (
-                            <button onClick={() => {
-                                setShowMore(!showMore)
-                                if(!showMore) setShowLimit(100)
-                                else setShowLimit(10)
+                            <button className="show-more-button" onClick={() => {
+                                setShowMoreKeywords(!showMoreKeywords)
+                                if(!showMoreKeywords) setShowLimitKeywords(100)
+                                else setShowLimitKeywords(10)
                                 }}>
-                                {showMore ? "Show Less" : "Show More"}
+                                {showMoreKeywords ? "Show Less" : "Show More"}
                             </button>
                             )}
                         </div>
@@ -239,7 +262,7 @@ const visibleKeywords = showMore ? keywords.slice(0, showLimit) : keywords.slice
                     {game.involved_companies_id.map((company, index) => (
                         <div key={index}>
                             <h5>{company.name}</h5>
-                            <img src={company.logo} className="img-responsive logo_med logo_med" />
+                            <img  src={company.logo} className="company-logo" />
                         </div>
                         ))}
 

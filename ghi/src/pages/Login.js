@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useToken } from "../Auth";
 import { useNavigate } from "react-router-dom";
+import "../styling/forms.css";
 
 function LoginComponent() {
   const [username, setUsername] = useState("");
@@ -25,7 +26,7 @@ function LoginComponent() {
   async function handleSubmit(event) {
     event.preventDefault();
     await login(username, password);
-    // navigate("/")
+    navigate("/mgls");
   }
 
   const handleKeypress = (event) => {

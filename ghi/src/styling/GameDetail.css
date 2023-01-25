@@ -20,9 +20,11 @@
   font-weight: bold;
   fill: green;
 }
-
+.alternative-names{
+    font-size: 13px;
+}
 .main-body {
-    margin: 1%;
+    margin: 0%;
 }
 .right-side-sidebar-info{
     border: solid green;
@@ -51,7 +53,6 @@
     display: flex;
 }
 .game-cover-container{
-    border: solid green;
     width: auto;
     order: 1;
     float: left;
@@ -60,8 +61,8 @@
 .game-cover{
     max-width: 100%;
     height: auto;
-    border: solid green;
     float: left;
+    border-radius: 15px;
 }
 .game-name-container{
     float: left;
@@ -95,21 +96,36 @@
     font-size: .75em;
 
 }
-
-.genres:link, .genres:visited{
+.platforms{
+    padding: .5%;
+    text-decoration: none;
+}
+.platforms:link, .platforms:visited{
+    color: white;
+}
+.platforms:hover, .platforms:active{
+    background-color: white;
     color: black;
+    border-radius: 10px;
+}
+
+.genres{
+    padding: .5%;
+    text-decoration: none;
+}
+.genres:link, .genres:visited{
+    color: white;
 }
 .genres:hover, .genres:active{
-    background-color: green;
-    color: white;
+    background-color: white;
+    color: black;
+    border-radius: 10px;
 }
 .game-rating-container{
     height: 175px;
     width: 110px;
     border: solid green;
     float: left;
-
-
 }
 
 .game-rating{
@@ -147,6 +163,11 @@
     float: left;
 }
 
+.company-logo{
+    position: relative;
+    border-radius: 10px;
+}
+
 .keyword-container{
     border: solid green;
     display: flex;
@@ -156,7 +177,7 @@
     float: right;
 }
 .keyword-button-container{
-  padding: .3%;
+  padding: .5%;
   width: fit-content;
   display: flex;
   align-items: center;
@@ -165,16 +186,29 @@
 }
 .keyword-button{
     font-size: 13px;
-    border-radius: 10%;
-    border: solid rgb(255, 253, 253);
-    background-color: #ddd;
+    text-decoration: none;
 }
 
 .keyword-button:link, .keyword-button:visited{
-    color: black;
+    color: white;
 
 }
 .keyword-button:hover, .keyword-button:active{
-    background-color: green;
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+}
+
+.show-more-button{
+    border-radius: 10px;
+    background-color: transparent;
+    font-size: 13px;
     color: white;
+    border-color: white;
+}
+
+.show-more-button:hover{
+    color: black;
+    border-color: white;
+    background-color: white;
 }
