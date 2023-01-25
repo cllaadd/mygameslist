@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useToken } from "../Auth";
 import { useNavigate } from "react-router-dom";
+import '../styling/forms.css';
 
 function LoginComponent() {
   const [username, setUsername] = useState("");
@@ -31,7 +32,7 @@ function LoginComponent() {
               <input
                 onChange={handleUsernameChange}
                 value={username}
-                placeholder="Enter your username"
+                placeholder="username"
                 required
                 type="text"
                 name="username"
@@ -44,7 +45,7 @@ function LoginComponent() {
               <input
                 onChange={handlePasswordChange}
                 value={password}
-                placeholder="Enter your password"
+                placeholder="password"
                 required
                 type="password"
                 name="password"

@@ -11,9 +11,9 @@ import AllGamesList from "./pages/AllGamesList";
 import Account from "./pages/Account";
 import GameDetail from "./pages/GameDetail";
 import GameSearch from "./pages/GameSearch";
-import MGL from "./MGL";
-import MGLForm from "./NewMGLForm";
-import MyMGLs from "./MyMGLs";
+import MGL from "./pages/MGL";
+import MGLForm from "./pages/NewMGLForm";
+import MyMGLs from "./pages/MyMGLs";
 
 function GetToken() {
   // Get token from JWT cookie (if already logged in)

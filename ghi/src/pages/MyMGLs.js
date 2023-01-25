@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { useToken } from "./Auth";
+import { useToken } from "../Auth";
 import { useNavigate } from "react-router-dom";
+import '../styling/mgl.css';
 
 function MyMGLs() {
     const [mgls, setMGLs] = useState([])
@@ -56,7 +57,7 @@ function MyMGLs() {
     return (
         <div>
             <h1>My Game Lists</h1>
-            <table className="table table-striped">
+            <table className="table">
                 <thead>
                     <tr>
                         <th>Name</th>
