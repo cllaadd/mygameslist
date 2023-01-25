@@ -7,7 +7,6 @@ import "../styling/mgl.css";
 function MyMGLs() {
   const [mgls, setMGLs] = useState([]);
   const [token] = useToken();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
   const getData = async () => {
@@ -49,11 +48,11 @@ function MyMGLs() {
 
   useEffect(() => {
     if (token) {
-      setIsLoggedIn(true);
+      getData();
     }
   }, [token]);
 
-  if (isLoggedIn && mgls.length > 0) {
+  if (token && mgls.length > 0) {
     return (
       <div>
         <h1>My Game Lists</h1>
@@ -107,7 +106,7 @@ function MyMGLs() {
         </NavLink>
       </div>
     );
-  } else if (isLoggedIn && mgls.length == 0) {
+  } else if (token && mgls.length == 0) {
     return (
       <div>
         <h2>You do not have any lists yet</h2>
@@ -123,7 +122,7 @@ function MyMGLs() {
         </div>
       </div>
     );
-  } else if (!isLoggedIn && mgls.length == 0) {
+  } else if (!token && mgls.length == 0) {
     return (
       <div>
         <h2>You must create an account or login to create a list</h2>
