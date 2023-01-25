@@ -3,7 +3,7 @@ import { useToken } from "../Auth";
 import { useNavigate, useLocation } from "react-router-dom";
 
 
-function AddGameForm() {
+function AddGame() {
     const location = useLocation();
     const game_id = location.state["id"]
     const game_name = location.state["name"]
