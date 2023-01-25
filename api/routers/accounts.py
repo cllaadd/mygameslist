@@ -51,8 +51,9 @@ async def get_token(
         }
         return AccountToken(**token_data)
 
-@router.get("/api/accounts/", response_model=AccountDetailOut | None)
+@router.get("/api/myaccount/", response_model=AccountDetailOut | None)
 async def get_myaccount(
+    info: AccountDetailOut,
     request: Request,
     account: Account = Depends(authenticator.try_get_current_account_data),
 ) -> AccountDetailOut | None:
@@ -62,7 +63,7 @@ async def get_myaccount(
             "type": "Bearer",
             "account": account,
         }
-        return AccountDetailOut(**token_data)
+        return AccountDetailOut(username=info.username, **token_data)
 
 
 @router.put(
