@@ -95,7 +95,7 @@ function SignupComponent() {
                     value={account.passwordConfirm}
                     placeholder="Confirm password"
                     required
-                    type="passwordConfirm"
+                    type="password"
                     name="passwordConfirm"
                     id="passwordConfirm"
                     className="form-control"
