@@ -59,12 +59,14 @@ function AddGameForm({game_id, game_name, game_cover}) {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
         },
+
     };
     const response = await fetch(mglUrl, fetchConfig);
     if (response.ok) {
         const addedGame = await response.json();
         console.log(addedGame)
         setMGLData(noData)
+        navigate(`/mgls/${mglData.mgl_id}`)
     } else {
         alert("Could not add game")
     }
@@ -84,23 +86,26 @@ function AddGameForm({game_id, game_name, game_cover}) {
             <div className="form">
                 <div className="form-content">
                     <div className="shadow p-4 mt-4">
-                        <h1>Which list would you like to add {game_name} to?</h1>
-                        <img src={game_cover}></img>
-                        <form onSubmit={handleSubmit} id="add-game-form">
-                            <div className="mb-3">
-                                <select onChange={handleChange} required id="mgl_id" name="mgl_id" className="form-select">
-                                    <option value="">Choose a list</option>
-                                    {mgls.map(mgl => {
-                                        return (
-                                            <option key={mgl.id} value={mgl.id}>
-                                                {mgl.name}
-                                            </option>
-                                        )
-                                    })};
-                                </select>
-                            </div>
-                            <button onClick={() => setIsOpen(false)} className="btn btn-primary">Add game</button>
-                        </form>
+                        <div className="mgl-add-game-container">
+                            <h1 className="mgl-add-game-title">Which list would you like to add {game_name} to?</h1>
+                            <img src={game_cover}></img>
+                            <form onSubmit={handleSubmit} id="add-game-form">
+                                <div className="mb-3">
+                                    <select onChange={handleChange} required id="mgl_id" name="mgl_id" className="form-select">
+                                        <option className="mgl-add-game-title" value="">Choose a list</option>
+                                        {mgls.map(mgl => {
+                                            return (
+                                                <option className="mgl-add-game-title" key={mgl.id} value={mgl.id}>
+                                                    {mgl.name}
+                                                </option>
+                                            )
+                                        })};
+                                    </select>
+                                </div>
+
+                                <button onClick={() => setIsOpen(false)} className="btn btn-info">Add game</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

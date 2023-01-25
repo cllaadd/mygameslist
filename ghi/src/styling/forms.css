@@ -9,13 +9,21 @@ input::placeholder {
   opacity: 1;
 }
 
-/* * {
+* {
   color: black;
-} */
+}
 
-input:focus + label {
-  color: black;
-  top: -15px;
-  left: 10px;
-  opacity: 0;
+.input-form::placeholder {
+  color: black !important;
+}
+
+.form-select {
+  color: black !important;
+}
+.mgl-add-game-container {
+  color: black !important;
+}
+
+.mgl-add-game-title {
+  color: black !important;
 }

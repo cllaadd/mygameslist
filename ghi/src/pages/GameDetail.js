@@ -110,7 +110,7 @@ const visibleAlternativeNames = showMoreAlternativeNames ? altnames.slice(0, sho
                                 <div className="game-name">
                                     <h1 key={game.id}>{game.name}</h1>
                                     <h4>Released {game.first_release_date}</h4>
-                                    <button onClick={handleOpenModal} className="btn btn-green m-1">Add Game</button>
+                                    <button onClick={handleOpenModal} className="btn btn-info m-1">Add Game</button>
                                     <Modal show={isOpen} onHide={handleCloseModal}>
                                         <Modal.Body>
                                             <AddGameForm game_id={game.id} game_name={game.name} game_cover={game.cover}/>
