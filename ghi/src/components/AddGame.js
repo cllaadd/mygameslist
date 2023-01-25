@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { useToken } from "../Auth";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 
 
-function AddGame() {
-    const location = useLocation();
-    const game_id = location.state["id"]
-    const game_name = location.state["name"]
-    const game_cover = location.state["cover"]
+function AddGame(props) {
+    const game_id = props["id"]
+    const game_name = props["name"]
+    const game_cover = props["cover"]
+    const [isOpen, setIsOpen] = useState(false);
+    // const [game, setGame] = useState(props)
     const [mglData, setMGLData] = useState({
         mgl: '',
     })
@@ -35,8 +36,17 @@ function AddGame() {
 
 
     useEffect(() => {
+    if (isOpen) {
         getMGLs()
-      }, [token])
+        // setGame()
+    } else {
+      handleSubmit()
+    }
+    }, [isOpen, token, data]);
+
+    // useEffect(() => {
+    //     getMGLs()
+    //   }, [token])
 
     const handleChange = (event) => {
     setMGLData({...mglData, [event.target.name]: event.target.value})
@@ -52,6 +62,7 @@ function AddGame() {
         body: JSON.stringify({...mglData}),
         headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
         },
     };
     const response = await fetch(mglUrl, fetchConfig);
@@ -69,8 +80,8 @@ function AddGame() {
 
     render() {
         return (
-            <div className="row">
-                <div className="offset-3 col-6">
+            <div className="modal">
+                <div className="modal-content">
                     <div className="shadow p-4 mt-4">
                         <h1>Which list would you like to add {game_name} to?</h1>
                         <img src={game_cover}></img>
@@ -87,7 +98,7 @@ function AddGame() {
                                     })};
                                 </select>
                             </div>
-                            <button className="btn btn-primary">Add game</button>
+                            <button onClick={() => setIsOpen(false)} className="btn btn-primary">Add game</button>
                         </form>
                     </div>
                 </div>
@@ -96,4 +107,4 @@ function AddGame() {
     };
 };
 
-export default AddGameForm;
+export default AddGame;
