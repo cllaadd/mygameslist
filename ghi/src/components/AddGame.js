@@ -44,10 +44,17 @@ function AddGameForm({game_id, game_name, game_cover}) {
     const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(mglData.mgl_id)
+    console.log(mglData)
     const mglUrl = `http://localhost:8000/mgls/${mglData.mgl_id}/add/${game_id}`;
     const fetchConfig = {
         method: 'put',
-        body: JSON.stringify({...mglData}),
+        body: JSON.stringify({
+                "name": "string",
+                "description": "string",
+                "games": [
+                    "string"
+                ]
+                }),
         headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`

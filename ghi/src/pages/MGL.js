@@ -21,6 +21,13 @@ function MGL() {
     const handleRemove = async (mgl_id, game_id) => {
         const fetchConfig = {
             method: 'put',
+            body: JSON.stringify({
+                "name": "string",
+                "description": "string",
+                "games": [
+                    "string"
+                ]
+                }),
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
