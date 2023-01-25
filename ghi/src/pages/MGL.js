@@ -8,12 +8,6 @@ function MGL() {
     const [refresh, setRefresh] = useState(false)
     const {id} = useParams()
     const [token] = useToken();
-    const [filterValue, setFilter] = useState("");
-
-
-    const handleChange = (event) => {
-        setFilter(event.target.value);
-    };
 
 
     const getData = async () => {
@@ -70,7 +64,7 @@ function MGL() {
                                 </Link></td>
                                 <td></td>
                                 <td>
-                                    <button className="btn btn-danger m-2" onClick={() => {handleRemove(mgl.id, game.id)}}>Remove</button>
+                                    <button className="btn btn-danger m-2" onClick={() => {handleRemove(id, game.id)}}>Remove</button>
                                 </td>
                             </tr>
                         );
