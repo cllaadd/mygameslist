@@ -110,13 +110,13 @@ const visibleAlternativeNames = showMoreAlternativeNames ? altnames.slice(0, sho
                                         <p>
                                             <span>Genres: </span>
                                             {game.genres_id.map((genre, index) => (
-                                                <a className="genres"href={`/games/search?search_param=Genres&search_param_name=${genre.name}&query_param=genres_id&param_id=${genre._id}`}>{genre.name}</a>
+                                                <a className="genres"href={`/games/idsearch?search_param=Genres&search_param_name=${genre.name}&query_param=genres_id&param_id=${genre._id}`}>{genre.name}</a>
                                             ))}
                                         </p>
                                         <p>
                                             <span>Platforms: </span>
                                             {game.platforms_id.map((platform, index) => (
-                                                <a className="platforms"href={`/games/search?search_param=Platform&search_param_name=${platform.name}&query_param=platforms_id&param_id=${platform._id}`}>{platform.name}</a>
+                                                <a className="platforms"href={`/games/idsearch?search_param=Platform&search_param_name=${platform.name}&query_param=platforms_id&param_id=${platform._id}`}>{platform.name}</a>
                                             ))}
                                         </p>
                                         <div>{game.summary}</div>
@@ -170,7 +170,7 @@ const visibleAlternativeNames = showMoreAlternativeNames ? altnames.slice(0, sho
                         <h4>Franchises</h4>
                         {game.franchises_id.map((franchise, index) => (
                             <div key={index}>
-                                <a href={`/games/search?search_param=Franchise&search_param_name=${franchise.name}&query_param=franchises_id&param_id=${franchise.id}`}>{franchise.name}</a>
+                                <a href={`/games/idsearch?search_param=Franchise&search_param_name=${franchise.name}&query_param=franchises_id&param_id=${franchise.id}`}>{franchise.name}</a>
                             </div>
                             ))}
                         <h4>Alternative Names</h4>
@@ -194,7 +194,7 @@ const visibleAlternativeNames = showMoreAlternativeNames ? altnames.slice(0, sho
                         <div className="keyword-container">
                             {visibleKeywords.map((keyword, index) => (
                             <div key={index} className='keyword-button-container'>
-                                <a className="keyword-button" href={`/games/search?search_param=Keywords&search_param_name=${keyword.name}&query_param=keywords_id&param_id=${keyword.id}`}>{keyword.name}</a>
+                                <a className="keyword-button" href={`/games/idsearch?search_param=Keywords&search_param_name=${keyword.name}&query_param=keywords_id&param_id=${keyword.id}`}>{keyword.name}</a>
                             </div>
                             ))}
                             {keywords.length > 10 && (
@@ -247,14 +247,14 @@ const visibleAlternativeNames = showMoreAlternativeNames ? altnames.slice(0, sho
                     <h4>Game Modes</h4>
                     {game.game_modes_id.map((game_mode, index) => (
                         <div key={index}>
-                            <a href={`/games/search?search_param=Game Mode&search_param_name=${game_mode.name}&query_param=game_modes_id&param_id=${game_mode._id}`}>{game_mode.name}</a>
+                            <a href={`/games/idsearch?search_param=Game Mode&search_param_name=${game_mode.name}&query_param=game_modes_id&param_id=${game_mode._id}`}>{game_mode.name}</a>
                         </div>
                         ))}
 
                     <h4>Genres</h4>
                     {game.genres_id.map((genre, index) => (
                         <div key={index}>
-                            <a href={`/games/search?search_param=Genres&search_param_name=${genre.name}&query_param=genres_id&param_id=${genre._id}`}>{genre.name}</a>
+                            <a href={`/games/idsearch?search_param=Genres&search_param_name=${genre.name}&query_param=genres_id&param_id=${genre._id}`}>{genre.name}</a>
                         </div>
                         ))}
 

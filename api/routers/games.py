@@ -42,8 +42,8 @@ async def get_search_games(query_param: str = '_id', param_id: int = 0, limit: i
     return SearchGameList(games=repo.get_search(query_param, param_id, limit, offset ))
 
 @router.get("/games/name/search/", response_model=SearchGameList)
-async def get_search_games(game_param: str = 'name', param_name: str = "", limit: int = 1000, offset: int = 0, repo: GameQueries = Depends(), ):
-    return SearchGameList(games=repo.get_search(game_param, param_name, limit, offset ))
+async def get_search_games_name(param_name: str = "", limit: int = 100, offset: int = 0, repo: GameQueries = Depends(), ):
+    return SearchGameList(games=repo.get_name_search( param_name, limit, offset ))
 
 @router.get("/games/{game_id}/")
 async def game_details(game_id: int, repo: GameQueries = Depends()):

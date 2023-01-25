@@ -2,7 +2,7 @@ import { useState, useEffect, } from "react";
 import { NavLink, Link, useLocation, useNavigate, useParams} from "react-router-dom";
 import imagenotavail from "/app/src/images/imagenotavail.jpg";
 
-function GameSearch() {
+function GameSearchID() {
     const [games, setgames] = useState([])
     const [noimage, setNoImage] = useState([])
     const [refresh, setRefresh] = useState(false)
@@ -70,4 +70,4 @@ function GameSearch() {
     )
 }
 
-export default GameSearch;
+export default GameSearchID;

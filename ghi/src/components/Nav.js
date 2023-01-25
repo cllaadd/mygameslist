@@ -2,6 +2,7 @@ import {Link, NavLink } from "react-router-dom";
 import littlecontroller from "/app/src/images/littlecontroller.png";
 import "../styling/nav.css"
 import { useToken } from "../Auth";
+import NavSearch from "./nav_name_search";
 
 
 function Nav() {
@@ -46,6 +47,9 @@ function Nav() {
         </li>
         <li class="nav-item active">
           <a class="nav-link" href="/mgls">My lists</a>
+        </li>
+        <li>
+          <NavSearch></NavSearch>
         </li>
         </ul>
         {/* <form class="form-inline my-2 my-lg-0">

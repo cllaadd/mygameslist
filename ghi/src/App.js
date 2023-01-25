@@ -10,10 +10,11 @@ import UsersList from "./pages/UsersList";
 import AllGamesList from "./pages/AllGamesList";
 import Account from "./pages/Account";
 import GameDetail from "./pages/GameDetail";
-import GameSearch from "./pages/GameSearch";
+import GameSearchID from "./pages/GameSearchID";
 import MGL from "./pages/MGL";
 import MGLForm from "./pages/NewMGLForm";
 import MyMGLs from "./pages/MyMGLs";
+import SearchResults from "./pages/name_search_results";
 
 function GetToken() {
   // Get token from JWT cookie (if already logged in)
@@ -39,7 +40,8 @@ function App() {
           <Route path="/games" element={<AllGamesList />}></Route>
           <Route path="/account" element={<Account />}></Route>
           <Route path="/games/:id" element={<GameDetail />}></Route>
-          <Route path="/games/search/" element={<GameSearch />}></Route>
+          <Route path="/games/idsearch/" element={<GameSearchID />}></Route>
+          <Route path="/searchresults" element={<SearchResults/>}></Route>
           <Route path="/mgls" element={<MyMGLs />}></Route>
           <Route path="/mgls/:id" element={<MGL />}></Route>
           <Route path="/mgls/new" element={<MGLForm />}></Route>

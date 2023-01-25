@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { Pagination } from 'react-bootstrap';
 import imagenotavail from "/app/src/images/imagenotavail.jpg";
+import NavSearch from "../components/nav_name_search"
 
 function AllGamesList() {
     const [games, setgames] = useState([])
