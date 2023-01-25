@@ -71,14 +71,14 @@ function MGL() {
                                 </Link></td>
                                 <td></td>
                                 <td>
-                                    <button className="btn btn-danger m-2" onClick={() => {handleRemove(id, game.id)}}>Remove</button>
+                                    <button className="btn btn-warning m-2" onClick={() => {handleRemove(id, game.id)}}>Remove</button>
                                 </td>
                             </tr>
                         );
                     })}
                 </tbody>
             </table>
-            <NavLink className="btn btn-primary" id="add-game-link" aria-current="page" to="/games">Add games</NavLink>
+            <NavLink className="btn btn-info" id="add-game-link" aria-current="page" to="/games">Add games</NavLink>
         </div>
     )
 }

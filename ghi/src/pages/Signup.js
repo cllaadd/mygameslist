@@ -102,7 +102,7 @@ function SignupComponent() {
                   />
                   <label htmlFor="passwordConfirm">Confirm Password</label>
                 </div>
-                <button className="btn btn-primary">Sign up</button>
+                <button className="btn btn-info">Sign up</button>
               </form>
             </div>
             <div class="col-md-10 col-lg-6 col-xl-7  align-items-center order-1 order-lg-2">

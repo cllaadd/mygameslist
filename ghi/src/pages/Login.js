@@ -73,7 +73,7 @@ function LoginComponent() {
                     className="form-control input-form"
                   />
                 </div>
-                <button className="btn btn-primary">Login</button>
+                <button className="btn btn-info">Login</button>
               </form>
             </div>
           </div>
