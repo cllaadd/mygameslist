@@ -57,9 +57,8 @@ function LoginComponent() {
                     type="text"
                     name="username"
                     id="username"
-                    className="form-control"
+                    className="form-control input-form"
                   />
-                  <label htmlFor="username">Username</label>
                 </div>
                 <div className="form-floating mb-3">
                   <input
@@ -71,9 +70,8 @@ function LoginComponent() {
                     type="password"
                     name="password"
                     id="password"
-                    className="form-control"
+                    className="form-control input-form"
                   />
-                  <label htmlFor="password">Password</label>
                 </div>
                 <button className="btn btn-primary">Login</button>
               </form>
