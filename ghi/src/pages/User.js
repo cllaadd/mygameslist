@@ -42,13 +42,15 @@ function User() {
           <div className="card-subtitle text-center">
                   <h3 className="lists-title">{user.username}'s lists</h3>
           </div>
-          <div className="d-flex justify-content-center align-items-center">
             <div className="card-text">
               <div className="list">
                 {mgls.map((mgl) => {
                   return (
                     <ul key={mgl.id}>
-                      <li className="list-item">{mgl.name}</li>
+                      <li className="list-item">
+                        <Link class="link" to={`/mgls/${mgl.id}`}>
+                                    {mgl.name}
+                         </Link></li>
                     </ul>
                   );
                 })}
@@ -59,7 +61,6 @@ function User() {
           </div>
         </div>
       </div>
-    </div>
   );
 }
 
