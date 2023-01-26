@@ -36,6 +36,7 @@ function App() {
           <Route path="/logout" element={<LogoutComponent />}></Route>
           <Route path="/signup" element={<SignupComponent />}></Route>
           <Route path="/MainPage" element={<MainPageComponent />}></Route>
+          <Route path="/" element={<MainPageComponent />}></Route>
           <Route path="/users" element={<UsersList />}></Route>
           <Route path="/games" element={<AllGamesList />}></Route>
           <Route path="/account" element={<Account />}></Route>
