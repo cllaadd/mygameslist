@@ -11,7 +11,6 @@ function Nav() {
   <div className="navbar-container">
     <nav class="navbar navbar-expand-lg navbar-light background-color:#7950f2">
     <a class="navbar-brand" href="#"></a>
-    <Hamburger></Hamburger>
     <div className="center-bootstrap" class="collapse navbar-collapse" id="navbarSupportedContent">
       <div className="navbar-container-2">
           <NavLink className="navbar-brand" to="/mainpage">
@@ -44,16 +43,15 @@ function Nav() {
         <li>
           <NavSearch></NavSearch>
         </li>
-        <div className="hamburger">
-
-        </div>
         </ul>
         </div>
+
         {/* <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form> */}
         </div>
+        <Hamburger></Hamburger>
       </nav>
   </div>
   )
