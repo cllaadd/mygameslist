@@ -17,7 +17,7 @@ function MyMGLs() {
         Authorization: `Bearer ${token}`,
       },
     };
-    const response = await fetch("http://localhost:8000/mgls/", fetchConfig);
+    const response = await fetch("http://localhost:8000/api/mgls/", fetchConfig);
     if (response.ok) {
       const data = await response.json();
       setMGLs(data.mgls);
@@ -39,7 +39,7 @@ function MyMGLs() {
       },
     };
     const response = await fetch(
-      `http://localhost:8000/mgls/${mgl_id}`,
+      `http://localhost:8000/api/mgls/${mgl_id}`,
       fetchConfig
     );
     const data = await response.json();
@@ -73,7 +73,7 @@ function MyMGLs() {
                   <td>{mgl.description}</td>
                   <td>
                     <button
-                      className="btn btn-success m-2"
+                      className="btn btn-light m-2"
                       onClick={() => {
                         goToList(mgl.id);
                       }}
@@ -83,7 +83,7 @@ function MyMGLs() {
                   </td>
                   <td>
                     <button
-                      className="btn btn-danger m-2"
+                      className="btn btn-warning m-2"
                       onClick={() => {
                         handleDelete(mgl.id);
                       }}
@@ -97,7 +97,7 @@ function MyMGLs() {
           </tbody>
         </table>
         <NavLink
-          className="btn btn-primary"
+          className="btn btn-info"
           id="add-mgl-link"
           aria-current="page"
           to="/mgls/new"
@@ -112,7 +112,7 @@ function MyMGLs() {
         <h2>You do not have any lists yet</h2>
         <div>
           <NavLink
-            className="btn btn-primary"
+            className="btn btn-info"
             id="add-mgl-link"
             aria-current="page"
             to="/mgls/new"
@@ -128,7 +128,7 @@ function MyMGLs() {
         <h2>You must create an account or login to create a list</h2>
         <div>
           <NavLink
-            className="btn btn-primary"
+            className="btn btn-info"
             id="add-mgl-link"
             aria-current="page"
             to="/login"
@@ -138,7 +138,7 @@ function MyMGLs() {
         </div>
         <div>
           <NavLink
-            className="btn btn-primary"
+            className="btn btn-warning"
             id="add-mgl-link"
             aria-current="page"
             to="/signup"

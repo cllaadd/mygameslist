@@ -2,7 +2,7 @@ import { useState, useEffect, } from "react";
 import { NavLink, Link, useLocation, useNavigate, useParams} from "react-router-dom";
 import imagenotavail from "/app/src/images/imagenotavail.jpg";
 
-function GameSearch() {
+function GameSearchID() {
     const [games, setgames] = useState([])
     const [noimage, setNoImage] = useState([])
     const [refresh, setRefresh] = useState(false)
@@ -20,7 +20,7 @@ function GameSearch() {
 
     const getGameData = async () => {
         window.scrollTo(0,0)
-        const response = await fetch(`http://localhost:8000/games/search/?query_param=${query_param}&param_id=${param_id}`)
+        const response = await fetch(`http://localhost:8000/api/games/search/?query_param=${query_param}&param_id=${param_id}`)
         const gameData = await response.json()
 
         setgames(gameData.games)
@@ -70,4 +70,4 @@ function GameSearch() {
     )
 }
 
-export default GameSearch;
+export default GameSearchID;

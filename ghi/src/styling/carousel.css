@@ -49,8 +49,31 @@
 
 .left-arrow {
     left: 24px;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .right-arrow {
     right: 24px;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.arrow {
+  border: solid black;
+  border-width: 0 7px 7px 0;
+  display: inline-block;
+  padding: 5px;
+}
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
 }

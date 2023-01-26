@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { Pagination } from "react-bootstrap";
 import imagenotavail from "/app/src/images/imagenotavail.jpg";
+import NavSearch from "../components/nav_name_search"
 
 function AllGamesList() {
   const [games, setgames] = useState([]);
@@ -14,7 +15,7 @@ function AllGamesList() {
     // const gamesUrl = 'http://localhost:8000/api/games/'
     // const fetchConfig = {query:{"limit": limit, "offset": offset}}
     window.scrollTo(0, 0);
-    const response = await fetch("http://localhost:8000/games/");
+    const response = await fetch("http://localhost:8000/api/games/");
     const gameData = await response.json();
 
     setgames(gameData.games);

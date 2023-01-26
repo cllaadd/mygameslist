@@ -10,3 +10,7 @@
 .link:hover {
     color: #fdadda;
     text-decoration: none; }
+
+.list-item {
+    color:black
+}

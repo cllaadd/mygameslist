@@ -72,9 +72,8 @@ function SignupComponent() {
                     type="text"
                     name="username"
                     id="username"
-                    className="form-control"
+                    className="form-control input-form"
                   />
-                  <label htmlFor="username">Username</label>
                 </div>
                 <div className="form-floating mb-3">
                   <input
@@ -85,9 +84,8 @@ function SignupComponent() {
                     type="password"
                     name="password"
                     id="password"
-                    className="form-control"
+                    className="form-control input-form"
                   />
-                  <label htmlFor="password">Password</label>
                 </div>
                 <div className="form-floating mb-3">
                   <input
@@ -95,14 +93,13 @@ function SignupComponent() {
                     value={account.passwordConfirm}
                     placeholder="Confirm password"
                     required
-                    type="passwordConfirm"
+                    type="password"
                     name="passwordConfirm"
                     id="passwordConfirm"
-                    className="form-control"
+                    className="form-control input-form"
                   />
-                  <label htmlFor="passwordConfirm">Confirm Password</label>
                 </div>
-                <button className="btn btn-primary">Sign up</button>
+                <button className="btn btn-info">Sign up</button>
               </form>
             </div>
             <div class="col-md-10 col-lg-6 col-xl-7  align-items-center order-1 order-lg-2">

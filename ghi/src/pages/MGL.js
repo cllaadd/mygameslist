@@ -1,21 +1,20 @@
 import { useState, useEffect } from "react";
 import { NavLink, useParams, Link } from "react-router-dom";
 import { useToken } from "../Auth";
+import "../styling/mgl.css";
 
 function MGL() {
     const [games, setGames] = useState([])
     const [mgl, setMGL] = useState([])
-    const [refresh, setRefresh] = useState(false)
     const {id} = useParams()
     const [token] = useToken();
 
 
     const getData = async () => {
-        const response = await fetch(`http://localhost:8000/mgls/${id}/`)
+        const response = await fetch(`http://localhost:8000/api/mgls/${id}/`)
         const data = await response.json()
         setMGL(data)
         setGames(data.games)
-        setRefresh(false);
     }
 
     const handleRemove = async (mgl_id, game_id) => {
@@ -33,16 +32,16 @@ function MGL() {
                 'Authorization': `Bearer ${token}`
             },
         };
-        const response = await fetch(`http://localhost:8000/mgls/${mgl_id}/remove/${game_id}`, fetchConfig)
+        const response = await fetch(`http://localhost:8000/api/mgls/${mgl_id}/remove/${game_id}`, fetchConfig)
         const data = await response.json();
         console.log(data)
         getData();
-        window.location = `/mgls/${mgl_id}`
+
     }
 
     useEffect(() => {
         getData();
-    }, [id, refresh, token]
+    }, [id, token]
     )
 
 
@@ -66,19 +65,19 @@ function MGL() {
                     {games.map(game => {
                         return (
                             <tr key={game.id}>
-                                <td><Link class="link" to={`/games/${game.id}`} onClick={() => setRefresh(true)}>
+                                <td><Link class="link" to={`/games/${game.id}`}>
                                     {game.name}
                                 </Link></td>
                                 <td></td>
                                 <td>
-                                    <button className="btn btn-danger m-2" onClick={() => {handleRemove(id, game.id)}}>Remove</button>
+                                    <button className="btn btn-warning m-2" onClick={() => {handleRemove(id, game.id)}}>Remove</button>
                                 </td>
                             </tr>
                         );
                     })}
                 </tbody>
             </table>
-            <NavLink className="btn btn-primary" id="add-game-link" aria-current="page" to="/games">Add games</NavLink>
+            <NavLink className="btn btn-info" id="add-game-link" aria-current="page" to="/games">Add games</NavLink>
         </div>
     )
 }

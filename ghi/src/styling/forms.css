@@ -1,7 +1,7 @@
 .login-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 input::placeholder {
@@ -10,5 +10,20 @@ input::placeholder {
 }
 
 * {
-  color:black;
+  color: black;
+}
+
+.input-form::placeholder {
+  color:  #7950f2 !important;
+}
+
+.form-select {
+  color: black !important;
+}
+.mgl-add-game-container {
+  color: black !important;
+}
+
+.mgl-add-game-title {
+  color: black !important;
 }

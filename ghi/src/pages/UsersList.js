@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function UsersList() {
     const [users, setUsers] = useState([])
-    // const [mgls, setMgls] = useState([])
 
     const getUserData = async () => {
         const response = await fetch('http://localhost:8000/api/accounts/')
@@ -11,13 +10,6 @@ function UsersList() {
         console.log(userData)
         setUsers(userData)
     }
-
-    // const getMglData = async () => {
-    //     const response = await fetch('http://localhost:8000/api/mgls/')
-    //     const mglData = await response.json()
-    //     console.log(mglData)
-    //     setUsers(mglData)
-    // }
 
     useEffect(() => {
         getUserData();
@@ -38,7 +30,11 @@ function UsersList() {
                     {users?.map(user => {
                         return (
                             <tr key={user.id}>
-                                <td>{user.username}</td>
+                                <td>
+                                    <Link class="link" to={`/users/${user.username}`}>
+                                    {user.username}
+                                </Link>
+                                </td>
                                 <td></td>
                             </tr>
                         );
