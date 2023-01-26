@@ -11,7 +11,7 @@ function NavSearch() {
 
     const handleSearch = async (e) => {
         setSearchValue(e.target.value);
-        const response = await fetch(`http://localhost:8000/games/name/search/?param_name=${e.target.value}`);
+        const response = await fetch(`http://localhost:8000/api/games/name/search/?param_name=${e.target.value}`);
         const searchResults = await response.json();
         setSearchResults(searchResults);
     }

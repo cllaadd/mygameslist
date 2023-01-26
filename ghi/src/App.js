@@ -15,6 +15,7 @@ import MGL from "./pages/MGL";
 import MGLForm from "./pages/NewMGLForm";
 import MyMGLs from "./pages/MyMGLs";
 import SearchResults from "./pages/name_search_results";
+import User from "./pages/User";
 
 function GetToken() {
   // Get token from JWT cookie (if already logged in)
@@ -46,6 +47,7 @@ function App() {
           <Route path="/mgls" element={<MyMGLs />}></Route>
           <Route path="/mgls/:id" element={<MGL />}></Route>
           <Route path="/mgls/new" element={<MGLForm />}></Route>
+          <Route path="/users/:username" element={<User />}></Route>
         </Routes>
       </AuthProvider>
     </BrowserRouter>
