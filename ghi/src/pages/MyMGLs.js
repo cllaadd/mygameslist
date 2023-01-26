@@ -138,7 +138,7 @@ function MyMGLs() {
         </div>
         <div>
           <NavLink
-            className="btn btn-light"
+            className="btn btn-warning"
             id="add-mgl-link"
             aria-current="page"
             to="/signup"

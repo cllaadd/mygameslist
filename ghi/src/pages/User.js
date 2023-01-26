@@ -37,13 +37,9 @@ function User() {
           />
         </div>
         <div className="card-body">
-            return (
               <h2 className="card-title text-center">{user.username}</h2>
-            );
           <div className="card-subtitle text-center">
-                <button className="btn btn-primary btn-sm view list">
-                  {user.username}'s lists
-                </button>
+                  <h3>{user.username}'s lists</h3>
           </div>
           <div className="d-flex justify-content-center align-items-center">
             <div className="card-text">
