@@ -112,7 +112,7 @@ function MyMGLs() {
         <h2>You do not have any lists yet</h2>
         <div>
           <NavLink
-            className="btn btn-light"
+            className="btn btn-info"
             id="add-mgl-link"
             aria-current="page"
             to="/mgls/new"
@@ -128,7 +128,7 @@ function MyMGLs() {
         <h2>You must create an account or login to create a list</h2>
         <div>
           <NavLink
-            className="btn btn-light"
+            className="btn btn-info"
             id="add-mgl-link"
             aria-current="page"
             to="/login"
@@ -138,7 +138,7 @@ function MyMGLs() {
         </div>
         <div>
           <NavLink
-            className="btn btn-secondary"
+            className="btn btn-light"
             id="add-mgl-link"
             aria-current="page"
             to="/signup"

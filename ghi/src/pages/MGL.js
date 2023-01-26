@@ -37,7 +37,7 @@ function MGL() {
         const data = await response.json();
         console.log(data)
         getData();
-        window.location = `/mgls/${mgl_id}`
+
     }
 
     useEffect(() => {
