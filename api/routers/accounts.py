@@ -57,7 +57,7 @@ async def get_user_account(
     account = AccountOut(**account_data)
     return account
 
-@router.get("/api/account/{username}", response_model=AccountOut)
+@router.get("/api/accounts/{username}", response_model=AccountOut)
 async def get_account(
     username: str,
     repo: AccountQueries = Depends(),
