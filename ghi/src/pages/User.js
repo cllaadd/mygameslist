@@ -26,7 +26,7 @@ function User() {
     getMGLData()
   }, []);
 
-
+  if (mgls.length > 0) {
   return (
     <div className="container d-flex justify-content-center align-items-center">
       <div className="card profile-card">
@@ -40,7 +40,7 @@ function User() {
         <div className="card-body">
               <h2 className="card-title text-center">{user.username}</h2>
           <div className="card-subtitle text-center">
-                  <h3 className="lists-title">{user.username}'s lists</h3>
+                <h3 className="lists-title">{user.username}'s lists</h3>
           </div>
             <div className="card-text">
               <div className="list">
@@ -62,6 +62,31 @@ function User() {
         </div>
       </div>
   );
+} else {
+  return (
+    <div className="container d-flex justify-content-center align-items-center">
+      <div className="card profile-card">
+        <div className="image-container d-flex justify-content-center align-items-center">
+          <img
+            src="https://img.freepik.com/free-vector/cute-cat-gaming-cartoon_138676-2969.jpg"
+            className="img-fluid profile-image"
+            alt="Profile"
+          />
+        </div>
+        <div className="card-body">
+              <h2 className="card-title text-center">{user.username}</h2>
+          <div className="card-subtitle text-center">
+                <h3 className="lists-title">This user has no lists.</h3>
+              </div>
+            </div>
+            <div className="card-text">
+            </div>
+          </div>
+        </div>
+  );
+
+}
+
 }
 
 export default User;
