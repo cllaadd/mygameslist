@@ -55,3 +55,11 @@ I'm deciding whether to do the game list view as cards or a regular list. I thin
 
 1/23
 I got a functioning my game list list page, using the template from the appoinment list page i made for project beta. Hopefully I can make this one look a little better and incorporate some modals or something. The hardest page will definitly be the MGL detail page where the actual lists are managed so maybe I shouldn't have saved it for last. React feels better the second time around but there's still a lot I'm not grasping.
+
+1/24
+Doing this list pages as functional components rather than class-based like my last project. Users and games lists haven't been a problem to get up, I'm just struggling with adding and removing items from the lists. Need to go back and look at the models, routers, and queries to see what's missing.
+
+1/25
+I finally figured out how to make a modal and how to add games to the lists. As it turns out, the problem was I hadn't checked to see how the "put" router was written and it requires a strange request body that doesn't change the contents of the lists. I may try to rework the model and router later but for now I'm just glad it works. Making a modal was slightly harder than expected but I got help from Candice and the SEIR Sarah. Now all that's left is unit testing and CSS.
+
+1/26

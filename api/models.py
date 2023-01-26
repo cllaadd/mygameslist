@@ -21,15 +21,11 @@ class PydanticObjectId(ObjectId):
 class AccountIn(BaseModel):
     username: str
     password: str
-    profile_url: Optional[str]
-    bio: Optional[str]
 
 
 class AccountUpdateIn(BaseModel):
     username: Optional[str]
     password: Optional[str]
-    profile_url: Optional[str]
-    bio: Optional[str]
 
 
 class Account(AccountIn):
@@ -40,16 +36,6 @@ class AccountOut(BaseModel):
     id: str
     username: str
     password: str
-    profile_url: Optional[str]
-    bio: Optional[str]
-
-
-class AccountDetailOut(BaseModel):
-    id: str
-    username: str
-    password: str
-    profile_url: str
-    bio: str
 
 
 class AccountRepo(BaseModel):
@@ -110,7 +96,6 @@ class GameDetailOut(BaseModel):
 
 class GameSearchOut(BaseModel):
     game: GameOut
-
 
 class GameList(BaseModel):
     games: List[GameOut]

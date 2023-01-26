@@ -17,8 +17,7 @@ from models import (
     Account,
     AccountIn,
     AccountUpdateIn,
-    AccountOut,
-    AccountDetailOut
+    AccountOut
 )
 
 
@@ -51,25 +50,22 @@ async def get_token(
         }
         return AccountToken(**token_data)
 
-@router.get("/api/myaccount/", response_model=AccountDetailOut | None)
-async def get_myaccount(
-    info: AccountDetailOut,
-    request: Request,
-    account: Account = Depends(authenticator.try_get_current_account_data),
-) -> AccountDetailOut | None:
-    if authenticator.cookie_name in request.cookies:
-        token_data = {
-            "access_token": request.cookies[authenticator.cookie_name],
-            "type": "Bearer",
-            "account": account,
-        }
-        return AccountDetailOut(username=info.username, **token_data)
+@router.get("/api/account/", response_model=AccountOut)
+async def get_user_account(
+    account_data: dict = Depends(authenticator.get_current_account_data)
+    ):
+    account = AccountOut(**account_data)
+    return account
+
+@router.get("/api/account/{username}", response_model=AccountOut)
+async def get_account(
+    username: str,
+    repo: AccountQueries = Depends(),
+    ):
+    account = repo.get(username)
+    return account
 
 
-@router.put(
-    "/api/accounts/{account_id}",
-    response_model=AccountToken | HttpError,
-)
 async def update_account(
     account_id: str,
     info: AccountUpdateIn,
@@ -90,9 +86,18 @@ async def update_account(
             detail="Cannot Create An Account With Those Credentials",
         )
 
-    form = AccountForm(username=info.username, password=info.password)
+    form = AccountForm(username=info.email, password=info.password)
     token = await authenticator.login(response, request, form, repo)
     return AccountToken(account=account, **token.dict())
+
+
+@router.delete("/api/accounts/{account_id}", response_model=bool)
+async def delete_account(
+    account_id: str,
+    repo: AccountQueries = Depends(),
+):
+    repo.delete(account_id)
+    return True
 
 
 @router.post("/api/accounts/", response_model=AccountToken | HttpError)
@@ -125,12 +130,3 @@ async def create_account(
 @router.get("/api/accounts/", response_model=list[AccountOut])
 async def get_accounts(repo: AccountQueries = Depends()):
     return repo.get_all()
-
-
-@router.delete("/api/accounts/{account_id}", response_model=bool)
-async def delete_account(
-    account_id: str,
-    repo: AccountQueries = Depends(),
-):
-    repo.delete(account_id)
-    return True

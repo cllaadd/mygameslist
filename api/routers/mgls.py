@@ -4,12 +4,12 @@ from models import (
     MyGameListIn,
     AccountOut,
     MyGameListRepo,
-    GameList,
     MyGameListDetailIn,
     MyGameListUpdateIn
 )
 from queries.mgls import MGLQueries
 from queries.games import GameQueries
+from queries.accounts import AccountQueries
 from .authenticator import authenticator
 
 
@@ -41,6 +41,16 @@ async def get_all_my_mgls(
     return MyGameListRepo(mgls=repo.get_all(account_id))
 
 
+@router.get("/api/mgls/{username}", response_model=MyGameListRepo)
+async def get__mgls_by_user(
+    username: str,
+    mgl_repo: MGLQueries = Depends(),
+    account_repo: AccountQueries = Depends()
+):
+    account = account_repo.get(username)
+    account_id = account.id
+    return MyGameListRepo(mgls=mgl_repo.get_all(account_id))
+
 
 @router.get("/api/mgls/{mgl_id}/", response_model=MyGameListOut)
 async def get_one_mgl(
@@ -55,7 +65,6 @@ async def get_one_mgl(
 async def delete_mgl(
     mgl_id: str,
     repo: MGLQueries = Depends(),
-    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
     repo.delete_mgl(mgl_id)
     return True
@@ -69,7 +78,7 @@ async def add_game_to_mgl(
     mgl: MyGameListUpdateIn,
     list_repo: MGLQueries = Depends(),
     game_repo: GameQueries = Depends(),
-    account_data: dict = Depends(authenticator.get_current_account_data),
+
 ):
     mgl = list_repo.add_game(mgl_id=mgl_id, game=game_repo.get_game(game_id), game_id=game_id)
     return mgl
@@ -80,8 +89,7 @@ async def remove_game_from_mgl(
     game_id: int,
     mgl: MyGameListUpdateIn,
     list_repo: MGLQueries = Depends(),
-    # game_repo: GameQueries = Depends(),
-    # account_data: dict = Depends(authenticator.get_current_account_data),
+
 ):
     mgl = list_repo.remove_game(mgl_id=mgl_id, game_id=game_id)
     return mgl
