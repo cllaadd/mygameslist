@@ -11,7 +11,7 @@ function MGL() {
 
 
     const getData = async () => {
-        const response = await fetch(`http://localhost:8000/mgls/${id}/`)
+        const response = await fetch(`http://localhost:8000/api/mgls/${id}/`)
         const data = await response.json()
         setMGL(data)
         setGames(data.games)
@@ -33,7 +33,7 @@ function MGL() {
                 'Authorization': `Bearer ${token}`
             },
         };
-        const response = await fetch(`http://localhost:8000/mgls/${mgl_id}/remove/${game_id}`, fetchConfig)
+        const response = await fetch(`http://localhost:8000/api/mgls/${mgl_id}/remove/${game_id}`, fetchConfig)
         const data = await response.json();
         console.log(data)
         getData();

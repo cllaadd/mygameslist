@@ -11,7 +11,6 @@ function AddGameForm({game_id, game_name, game_cover}) {
     }
     const [mglData, setMGLData] = useState(noData)
     const [mgls, setMGLs] = useState([])
-    // const mgl_id = mglData.id
     const [token] = useToken();
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(true);
@@ -27,7 +26,7 @@ function AddGameForm({game_id, game_name, game_cover}) {
             'Authorization': `Bearer ${token}`
             },
         };
-        const response = await fetch('http://localhost:8000/mgls/', fetchConfig)
+        const response = await fetch('http://localhost:8000/api/mgls/', fetchConfig)
         if (response.ok) {
             const data = await response.json()
             setMGLs(data.mgls)
@@ -45,7 +44,7 @@ function AddGameForm({game_id, game_name, game_cover}) {
     event.preventDefault();
     console.log(mglData.mgl_id)
     console.log(mglData)
-    const mglUrl = `http://localhost:8000/mgls/${mglData.mgl_id}/add/${game_id}`;
+    const mglUrl = `http://localhost:8000/api/mgls/${mglData.mgl_id}/add/${game_id}`;
     const fetchConfig = {
         method: 'put',
         body: JSON.stringify({
@@ -78,7 +77,6 @@ function AddGameForm({game_id, game_name, game_cover}) {
         getMGLs()
     } else {
       handleSubmit()
-    //   navigate(`mgls/${mgl_id}`)
     }
     }, [isOpen, token, mglData]);
 

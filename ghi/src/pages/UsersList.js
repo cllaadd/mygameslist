@@ -13,7 +13,7 @@ function UsersList() {
     }
 
     // const getMglData = async () => {
-    //     const response = await fetch('http://localhost:8000/api/mgls/')
+    //     const response = await fetch('http://api/mgls/')
     //     const mglData = await response.json()
     //     console.log(mglData)
     //     setUsers(mglData)

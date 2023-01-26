@@ -12,7 +12,6 @@ class DuplicateAccountError(ValueError):
 
 class AccountQueries(Queries):
     DB_NAME = (
-        # Specifies which database we're querying or inserting data into
         "games"
     )
     COLLECTION = (

@@ -22,7 +22,7 @@ function MGLForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const MGLUrl = `http://localhost:8000/mgls/`;
+    const MGLUrl = `http://localhost:8000/api/mgls/`;
     const fetchConfig = {
       method: 'post',
       body: JSON.stringify({...MGLData}),

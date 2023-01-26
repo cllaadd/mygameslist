@@ -17,7 +17,7 @@ function MyMGLs() {
         Authorization: `Bearer ${token}`,
       },
     };
-    const response = await fetch("http://localhost:8000/mgls/", fetchConfig);
+    const response = await fetch("http://localhost:8000/api/mgls/", fetchConfig);
     if (response.ok) {
       const data = await response.json();
       setMGLs(data.mgls);
@@ -39,7 +39,7 @@ function MyMGLs() {
       },
     };
     const response = await fetch(
-      `http://localhost:8000/mgls/${mgl_id}`,
+      `http://localhost:8000/api/mgls/${mgl_id}`,
       fetchConfig
     );
     const data = await response.json();

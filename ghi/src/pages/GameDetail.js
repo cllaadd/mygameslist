@@ -75,7 +75,7 @@ const GameDetail = () => {
     useEffect(() => {
         window.scrollTo(0,0)
         const loadData = async () => {
-        const url = `http://localhost:8000/games/${id}`
+        const url = `http://localhost:8000/api/games/${id}`
         const response = await fetch(url);
 
         if (response.ok) {
