@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "../styling/mgl.css";
+import { Link } from "react-router-dom";
 
 function UsersList() {
     const [users, setUsers] = useState([])
@@ -31,7 +31,9 @@ function UsersList() {
                         return (
                             <tr key={user.id}>
                                 <td>
+                                    <Link class="link" to={`/users/${user.username}`}>
                                     {user.username}
+                                </Link>
                                 </td>
                                 <td></td>
                             </tr>

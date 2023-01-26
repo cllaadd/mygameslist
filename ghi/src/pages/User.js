@@ -1,6 +1,6 @@
 import { NavLink, useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import "../styling/Account.css";
+import "../styling/mgl.css";
 
 
 
@@ -23,6 +23,7 @@ function User() {
 
   useEffect(() => {
     getUserData();
+    getMGLData()
   }, []);
 
 
@@ -39,20 +40,21 @@ function User() {
         <div className="card-body">
               <h2 className="card-title text-center">{user.username}</h2>
           <div className="card-subtitle text-center">
-                  <h3>{user.username}'s lists</h3>
+                  <h3 className="lists-title">{user.username}'s lists</h3>
           </div>
           <div className="d-flex justify-content-center align-items-center">
             <div className="card-text">
-              <div className="lists">
-                <h4 className="lists-title">Lists</h4>
-                <span className="lists-count">count</span>
+              <div className="list">
+                {mgls.map((mgl) => {
+                  return (
+                    <ul key={mgl.id}>
+                      <li className="list-item">{mgl.name}</li>
+                    </ul>
+                  );
+                })}
               </div>
             </div>
             <div className="card-text">
-              <div className="games">
-                <h4 className="games-title">Games</h4>
-                <span className="games-count">count</span>
-              </div>
             </div>
           </div>
         </div>
