@@ -47,15 +47,15 @@ function MGL() {
 
 
     return (
-        <div>
+        <div className="container">
             <div>
-            <h1>{mgl.name}</h1>
+            <div className="heading"><h1>{mgl.name}</h1>
             </div>
-            <h2>{mgl.description}</h2>
+            <h2>{mgl.description}</h2></div>
             <table className="table">
                 <thead>
                     <tr>
-                        <th>Name</th>
+                        <th></th>
                         <th></th>
                         <th></th>
                         <th></th>
