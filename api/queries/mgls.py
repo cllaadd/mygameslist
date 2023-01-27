@@ -19,7 +19,6 @@ class MGLQueries(Queries):
         self.collection.insert_one(props)
         props["id"] = str(props["_id"])
         props["account_id"] = str(props["account_id"])
-        print(props["games"])
         return MyGameListOut(**props)
 
     def get_all(self, account_id: str) -> List[MyGameListOut]:
@@ -33,9 +32,6 @@ class MGLQueries(Queries):
         return my_game_lists
 
     def get_one(self, mgl_id: str) -> List[MyGameListOut]:
-        # mgl = self.collection.find_one({"_id": ObjectId(f"{mgl_id}")})
-        # mgl["account_id"] = str(mgl["account_id"])
-        # mgl["id"] = str(mgl["_id"])
         single_mgl = []
         pipeline = [
             {'$match': {'_id' : ObjectId(mgl_id)}},
@@ -64,9 +60,7 @@ class MGLQueries(Queries):
         ]
         db = self.collection.aggregate(pipeline)
         for document in db:
-            print(document['games'])
             document['id'] = str(document['_id'])
-            print(document)
             document['account_id'] = str(document['account_id'])
             return MyGameListOut(**document)
 
@@ -115,5 +109,3 @@ class MGLQueries(Queries):
                 return_document = ReturnDocument.AFTER,
             )
             return ('Game Removed Successfully')
-        # except Exception as e:
-        #     print(f"{e} there was an error removing the game.")

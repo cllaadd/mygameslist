@@ -34,7 +34,6 @@ function MGL() {
         };
         const response = await fetch(`http://localhost:8000/api/mgls/${mgl_id}/remove/${game_id}`, fetchConfig)
         const data = await response.json();
-        console.log(data)
         getData();
 
     }

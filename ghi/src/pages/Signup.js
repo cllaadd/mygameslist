@@ -15,14 +15,12 @@ function SignupComponent() {
 
   const handleChange = (event) => {
     setAccount({ ...account, [event.target.name]: event.target.value });
-    console.log(account);
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = { ...account };
     if (data.password === data.passwordConfirm) {
-      console.log(data);
       const accountsUrl = "http://localhost:8000/api/accounts/";
       const fetchConfig = {
         method: "POST",

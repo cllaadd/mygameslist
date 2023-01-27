@@ -203,25 +203,9 @@ class GameQueries(Queries):
                         },
                     },
                 },
-                # },
-                # 'total_rating': {
-                #     '$toDouble': {
-                #         'input': '$total_rating',
-                #         'onError': 0,
-                #         'onNull': 0
-                #     }
-                # },
-                # 'total_rating_count': {
-                #     '$toDouble': {
-                #         'input': '$total_rating_count',
-                #         'onError': 0,
-                #         'onNull': 0
-                #     }
-                # }
             }},
             ]
         db = self.collection.aggregate(pipeline)
-        # db = self.collection.find({'_id': id})
         for document in db:
             document["id"] = str(document["_id"])
             single_game.append(GameDetailOut(**document))
