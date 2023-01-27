@@ -49,7 +49,7 @@ Output:
 }
 ```
 
-Creating a new game saves the name and cover URL, and the other fields are added from the database cached from the IGDB API.These games can be added to game lists by a user.
+Creating a new game saves the name and cover URL, and the other fields are added from the database cached from the IGDB API. These games can be added to game lists by a user.
 
 ## Games List
 
@@ -78,12 +78,12 @@ Output:
 }
 ```
 
-Creating a new list saves the account ID, name (of the list), description, and list of games. This adds a new games list to the database which can be viewed by a user and updated or deleted by its creator. Once a list is created, games can be added or removced form the list. Users will also be able to see the lists of other users.
+Creating a new list saves the account ID, name (of the list), description, and list of games. This adds a new games list to the database which can be viewed by a user and updated or deleted by its creator. Once a list is created, games can be added or removed form the list. Users will also be able to see the lists of other users.
 
 ## Accounts
 
 - Method: `POST`, `GET`, `PUT`, `DELETE`,
-- Path: `/api/accounts/`, `/api/account/{username}`
+- Path: `/api/accounts/`, `/api/accounts/{username}`
 
 Input:
 
