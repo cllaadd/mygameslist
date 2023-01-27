@@ -64,3 +64,6 @@ I finally figured out how to make a modal and how to add games to the lists. As 
 
 1/26
 Today I decided to see if I could get the user list to link to user pages. I created a new router on the backend for this that input username and get's all those user's lists. Anyone can see anyone else's lists at this point but in the future i think it would be cool to see if I can let users toggle their privacy on and off for each list or their entire profile. I also completed my unit test that checks to see if get_accounts works.
+
+1/27
+We worked on the rest of our unit tests and eliminating error mesages from the react console. I also updated the readme.
