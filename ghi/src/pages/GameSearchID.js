@@ -57,9 +57,11 @@ function GameSearchID() {
                      {games?.map(game => {
                         return (
                             <tr key={game.id}>
+                                <td>
                                 <a href={`/games/${game.id}`} onClick={() => setRefresh(true)}>
                                     <h3>{game.name}</h3>
                                 </a>
+                                </td>
                             <td><img src={game.cover === "cover not found" ? noimage : game.cover} className="img-fluid" /></td>
                             </tr>
                         );

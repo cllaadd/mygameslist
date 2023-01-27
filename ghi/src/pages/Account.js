@@ -37,15 +37,15 @@ function UserComponent() {
           />
         </div>
         <div className="card-body">
-          {users.map((username) => {
+          {users.map((username, index) => {
             return (
-              <h2 className="card-title text-center">{username.username}</h2>
+              <h2 key={index} className="card-title text-center">{username.username}</h2>
             );
           })}
           <div className="card-subtitle text-center">
-            {users.map((username) => {
+            {users.map((username, index) => {
               return (
-                <button className="btn btn-primary btn-sm view list">
+                <button key={index} className="btn btn-primary btn-sm view list">
                   {username.username}'s lists
                 </button>
               );

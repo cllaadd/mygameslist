@@ -41,9 +41,11 @@ function AllGamesList() {
           {games?.map((game) => {
             return (
               <tr key={game.id}>
+                <td>
                 <Link to={`/games/${game.id}`} onClick={() => setRefresh(true)}>
                   <h3>{game.name}</h3>
                 </Link>
+                </td>
                 <td>
                   <img
                     src={
