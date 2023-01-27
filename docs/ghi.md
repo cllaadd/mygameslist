@@ -1,1 +1,1 @@
-See excalidraw file.
+See excalidraw wireframes file.
