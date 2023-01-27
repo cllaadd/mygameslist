@@ -68,6 +68,7 @@ function MGL() {
                   </Link>
                 </td>
                 <td></td>
+                <td></td>
                 <td>
                   <button
                     className="btn btn-warning m-2"
