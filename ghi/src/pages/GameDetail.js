@@ -39,12 +39,12 @@ const CircularProgressBar = (props) => {
             strokeDashoffset: dashOffset
           }} />
         <text
-          className="circle-text"
-          x="50%"
-          y="50%"
-          dy=".3em"
-          textAnchor="middle">
-          {`${props.percentage}/100`}
+            className="circle-text"
+            x="50%"
+            y="50%"
+            dy=".3em"
+            textAnchor="middle">
+            {`${props.percentage}/100`}
         </text>
     </svg>
   );
@@ -99,7 +99,7 @@ const visibleAlternativeNames = showMoreAlternativeNames ? altnames.slice(0, sho
 
         {games?.map(game => {
             return (
-                <div>
+                <div key={game.id}>
 
                      <div className="game-header-container">
                         <div className="game-cover-name-container">
@@ -125,13 +125,13 @@ const visibleAlternativeNames = showMoreAlternativeNames ? altnames.slice(0, sho
                                         <p>
                                             <span>Genres: </span>
                                             {game.genres_id.map((genre, index) => (
-                                                <a className="genres"href={`/games/idsearch?search_param=Genres&search_param_name=${genre.name}&query_param=genres_id&param_id=${genre._id}`}>{genre.name}</a>
+                                                <a key={index} className="genres"href={`/games/idsearch?search_param=Genres&search_param_name=${genre.name}&query_param=genres_id&param_id=${genre._id}`}>{genre.name}</a>
                                             ))}
                                         </p>
                                         <p>
                                             <span>Platforms: </span>
                                             {game.platforms_id.map((platform, index) => (
-                                                <a className="platforms"href={`/games/idsearch?search_param=Platform&search_param_name=${platform.name}&query_param=platforms_id&param_id=${platform._id}`}>{platform.name}</a>
+                                                <a key={index} className="platforms"href={`/games/idsearch?search_param=Platform&search_param_name=${platform.name}&query_param=platforms_id&param_id=${platform._id}`}>{platform.name}</a>
                                             ))}
                                         </p>
                                         <div>{game.summary}</div>
@@ -144,7 +144,7 @@ const visibleAlternativeNames = showMoreAlternativeNames ? altnames.slice(0, sho
                                         sqSize="100"
                                         percentage={rating}/>
                                         <div className="game-rating-count">
-                                            <text classname="game-rating-text">
+                                            <text className="game-rating-text">
                                                 Based on {game.total_rating_count} user ratings
                                             </text>
                                         </div>
@@ -159,8 +159,8 @@ const visibleAlternativeNames = showMoreAlternativeNames ? altnames.slice(0, sho
                         <div className='screenshots-carousel' style={{maxWidth: 1024}}>
                             <Carousel>
                                 {game.screenshots.map((screenshot, index) => (
-                                    <div >
-                                        <img className="screenshots_image" src={screenshot} key={index} style={{height: "576px", width: "1024px"}}/>
+                                    <div key={index}>
+                                        <img className="screenshots_image" src={screenshot}  style={{height: "576px", width: "1024px"}}/>
                                     </div>
                                 ))}
                             </Carousel>
@@ -170,17 +170,17 @@ const visibleAlternativeNames = showMoreAlternativeNames ? altnames.slice(0, sho
                     <div className="right-side-sidebar-info">
 
                         <h4>Category</h4>
-                        <body>{game.category}</body>
+                        <div>{game.category}</div>
 
                         <h4>Collection</h4>
                         {game.collection_id.map((collection, index) => (
                             <div key={index}>
-                                <body>{collection.name}</body>
+                                <div>{collection.name}</div>
                             </div>
                             ))}
 
                         <h4>DLCS</h4>
-                        <body>{game.dlcs_id}</body>
+                        <div>{game.dlcs_id}</div>
 
                         <h4>Franchises</h4>
                         {game.franchises_id.map((franchise, index) => (
@@ -229,7 +229,7 @@ const visibleAlternativeNames = showMoreAlternativeNames ? altnames.slice(0, sho
                         <div className='similar-game-carousel' style={{maxWidth: 420}}>
                             <Carousel>
                                 {game.similar_games_id.map((similarGame, index) => (
-                                    <div>
+                                    <div key={index}>
                                         <img src={similarGame.cover} className="cover_art" alt={similarGame.name} />
                                         <a href={`/games/${similarGame.id}`} onClick={() => setRefresh(true)}>
                                             <h3>{similarGame.name}</h3>
@@ -250,12 +250,12 @@ const visibleAlternativeNames = showMoreAlternativeNames ? altnames.slice(0, sho
                     <h4>Collection</h4>
                     {game.collection_id.map((collection, index) => (
                         <div key={index}>
-                            <body>{collection.name}</body>
+                            <div>{collection.name}</div>
                         </div>
                         ))}
 
                     <h4>DLCS</h4>
-                    <body>{game.dlcs_id}</body>
+                    <div>{game.dlcs_id}</div>
 
 
 
@@ -287,54 +287,47 @@ const visibleAlternativeNames = showMoreAlternativeNames ? altnames.slice(0, sho
                     <h4>Platforms</h4>
                     {game.platforms_id.map((platform, index) => (
                         <div key={index}>
-                            <body>{platform.name}</body>
+                            <div>{platform.name}</div>
                         </div>
                         ))}
 
                     <h4>Player Perspectives</h4>
                     {game.player_perspectives_id.map((perspective, index) => (
                         <div key={index}>
-                            <body>{perspective.name}</body>
+                            <div>{perspective.name}</div>
                         </div>
                         ))}
 
                     <h4>Ports</h4>
-                    <body>{game.ports_id}</body>
+                    <div>{game.ports_id}</div>
 
                     <h4>Remakes</h4>
-                    <body>{game.remakes_id}</body>
+                    <div>{game.remakes_id}</div>
 
                     <h4>Remasters</h4>
-                    <body>{game.remasters_id}</body>
+                    <div>{game.remasters_id}</div>
 
                     <h4>Storyline</h4>
-                    <body>{game.storyline}</body>
+                    <div>{game.storyline}</div>
 
                     <h4>Status</h4>
-                    <body>{game.status}</body>
-
-                    {/* <h4>Screenshots</h4>
-                    <div style={{display: "flex", flexWrap: "nowrap", overflowX: "scroll"}}>
-                    {game.screenshots.map((screenshot, index) => (
-                        <img src={screenshot} key={index} className="img-fluid" style={{height: "288px", width: "512px"}}/>
-                    ))}
-                    </div> */}
+                    <div>{game.status}</div>
 
                     <h4>Themes</h4>
                     {game.themes_id.map((theme, index) => (
                         <div key={index}>
-                            <body>{theme.name}</body>
+                            <div>{theme.name}</div>
                         </div>
                         ))}
 
                     <h4>Total Rating Count</h4>
-                    <body>{game.total_rating_count}</body>
+                    <div>{game.total_rating_count}</div>
 
                     <h4>Version Parent</h4>
-                    <body>{game.version_parent_id}</body>
+                    <div>{game.version_parent_id}</div>
 
                     <h4>Version Title</h4>
-                    <body>{game.version_title}</body>
+                    <div>{game.version_title}</div>
                 </div>
 
 

@@ -54,13 +54,14 @@ function MyMGLs() {
 
   if (token && mgls.length > 0) {
     return (
-      <div>
-        <h1>My Game Lists</h1>
+      <div className="container">
+        <div className="heading"><h1>my game lists</h1></div>
+        <div>
         <table className="table">
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Description</th>
+              <th></th>
+              <th></th>
               <th></th>
               <th></th>
             </tr>
@@ -105,10 +106,11 @@ function MyMGLs() {
           Add new list
         </NavLink>
       </div>
+      </div>
     );
   } else if (token && mgls.length == 0) {
     return (
-      <div>
+      <div className="container">
         <h2>You do not have any lists yet</h2>
         <div>
           <NavLink
@@ -124,7 +126,7 @@ function MyMGLs() {
     );
   } else if (!token && mgls.length == 0) {
     return (
-      <div>
+      <div className="container">
         <h2>You must create an account or login to create a list</h2>
         <div>
           <NavLink
@@ -138,7 +140,7 @@ function MyMGLs() {
         </div>
         <div>
           <NavLink
-            className="btn btn-light"
+            className="btn btn-warning"
             id="add-mgl-link"
             aria-current="page"
             to="/signup"

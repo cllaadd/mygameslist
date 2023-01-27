@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useToken } from "../Auth";
 import { useNavigate } from "react-router-dom";
+import "../styling/forms.css";
 
 
 function MGLForm() {
@@ -49,12 +50,10 @@ function MGLForm() {
             <h1>Make a new list</h1>
             <form onSubmit={handleSubmit} id="create-automobile-form">
               <div className="form-floating mb-3">
-                <input onChange={handleChange} value={MGLData.name} placeholder="name" required type="text" name="name" id="name" className="form-control" />
-                <label htmlFor="name">Name</label>
+                <input onChange={handleChange} value={MGLData.name} placeholder="Enter a list name" required type="text" name="name" id="name" className="form-control input-form" />
               </div>
               <div className="form-floating mb-3">
-                <input onChange={handleChange} value={MGLData.description} placeholder="description" required type="text" name="description" id="description" className="form-control" />
-                <label htmlFor="description">Description</label>
+                <input onChange={handleChange} value={MGLData.description} placeholder="Enter a description" required type="text" name="description" id="description" className="form-control input-form" />
               </div>
               <button className="btn btn-primary">Create</button>
             </form>

@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { NavLink, useParams, Link } from "react-router-dom";
 import { useToken } from "../Auth";
+import "../styling/mgl.css";
 
 function MGL() {
     const [games, setGames] = useState([])
     const [mgl, setMGL] = useState([])
-    const [refresh, setRefresh] = useState(false)
     const {id} = useParams()
     const [token] = useToken();
 
@@ -15,7 +15,6 @@ function MGL() {
         const data = await response.json()
         setMGL(data)
         setGames(data.games)
-        setRefresh(false);
     }
 
     const handleRemove = async (mgl_id, game_id) => {
@@ -42,21 +41,21 @@ function MGL() {
 
     useEffect(() => {
         getData();
-    }, [id, refresh, token]
+    }, [id, token]
     )
 
 
 
     return (
-        <div>
+        <div className="container">
             <div>
-            <h1>{mgl.name}</h1>
+            <div className="heading"><h1>{mgl.name}</h1>
             </div>
-            <h2>{mgl.description}</h2>
+            <h2>{mgl.description}</h2></div>
             <table className="table">
                 <thead>
                     <tr>
-                        <th>Name</th>
+                        <th></th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -66,7 +65,7 @@ function MGL() {
                     {games.map(game => {
                         return (
                             <tr key={game.id}>
-                                <td><Link class="link" to={`/games/${game.id}`} onClick={() => setRefresh(true)}>
+                                <td><Link className="link" to={`/games/${game.id}`}>
                                     {game.name}
                                 </Link></td>
                                 <td></td>

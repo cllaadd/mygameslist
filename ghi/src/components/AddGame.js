@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useToken } from "../Auth";
-import { useNavigate} from "react-router-dom";
+import { NavLink, useNavigate} from "react-router-dom";
 import '../styling/forms.css';
-
 
 
 function AddGameForm({game_id, game_name, game_cover}) {
@@ -14,8 +13,6 @@ function AddGameForm({game_id, game_name, game_cover}) {
     const [token] = useToken();
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(true);
-
-
 
 
     const getMGLs = async () => {
@@ -40,10 +37,8 @@ function AddGameForm({game_id, game_name, game_cover}) {
     }
 
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = async event => {
     event.preventDefault();
-    console.log(mglData.mgl_id)
-    console.log(mglData)
     const mglUrl = `http://localhost:8000/api/mgls/${mglData.mgl_id}/add/${game_id}`;
     const fetchConfig = {
         method: 'put',
@@ -63,8 +58,8 @@ function AddGameForm({game_id, game_name, game_cover}) {
     const response = await fetch(mglUrl, fetchConfig);
     if (response.ok) {
         const addedGame = await response.json();
-        console.log(addedGame)
         setMGLData(noData)
+        setIsOpen(false)
         navigate(`/mgls/${mglData.mgl_id}`)
     } else {
         alert("Could not add game")
@@ -73,12 +68,15 @@ function AddGameForm({game_id, game_name, game_cover}) {
     }
 
     useEffect(() => {
-    if (isOpen) {
-        getMGLs()
-    } else {
-      handleSubmit()
-    }
-    }, [isOpen, token, mglData]);
+
+            if (isOpen && token) {
+                    getMGLs()
+            } else if (!isOpen && token){
+            handleSubmit()
+            } else {console.log("no lists or no acccount")}
+            }, [isOpen, token, mglData]);
+
+      if (token && mgls.length > 0) {
 
         return (
             <div className="form">
@@ -87,7 +85,7 @@ function AddGameForm({game_id, game_name, game_cover}) {
                         <div className="mgl-add-game-container">
                             <h1 className="mgl-add-game-title">Which list would you like to add {game_name} to?</h1>
                             <img src={game_cover}></img>
-                            <form onSubmit={handleSubmit} id="add-game-form">
+                            <form id="add-game-form">
                                 <div className="mb-3">
                                     <select onChange={handleChange} required id="mgl_id" name="mgl_id" className="form-select">
                                         <option className="mgl-add-game-title" value="">Choose a list</option>
@@ -99,9 +97,8 @@ function AddGameForm({game_id, game_name, game_cover}) {
                                             )
                                         })};
                                     </select>
-                                </div>
-
-                                <button onClick={() => setIsOpen(false)} className="btn btn-info">Add game</button>
+                                    </div>
+                                <button onClick={handleSubmit} className="btn btn-info">Add game</button>
                             </form>
                         </div>
                     </div>
@@ -109,6 +106,50 @@ function AddGameForm({game_id, game_name, game_cover}) {
             </div>
         );
 
-};
-
+} else if (token && mgls.length == 0) {
+    return (
+               <div className="shadow p-4 mt-4">
+                        <div className="mgl-add-game-container">
+                            <h1 className="mgl-add-game-title">You don't have any lists yet!</h1>
+                                <NavLink
+                                className="btn btn-info"
+                                id="add-mgl-link"
+                                aria-current="page"
+                                to="/mgls/new"
+                                >
+                                    Add new list
+                            </NavLink>
+                            </div>
+                        </div>
+        );
+} else if (!token && mgls.length == 0) {
+    return (
+        <div className="shadow p-4 mt-4">
+            <div className="mgl-add-game-container">
+                <h2 className="mgl-add-game-title">You must create an account or login to create a list!</h2>
+                <div>
+                <NavLink
+                    className="btn btn-info"
+                    id="add-mgl-link"
+                    aria-current="page"
+                    to="/login"
+                >
+                    Login
+                </NavLink>
+                </div>
+                <div>
+                <NavLink
+                    className="btn btn-warning"
+                    id="add-mgl-link"
+                    aria-current="page"
+                    to="/signup"
+                >
+                    Sign up
+                </NavLink>
+                </div>
+            </div>
+        </div>
+    );
+  }
+}
 export default AddGameForm;
