@@ -34,3 +34,13 @@ h1, h2 {
     padding: 2%;
 
 }
+
+.centered {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.padded {
+    padding: 10px;
+}

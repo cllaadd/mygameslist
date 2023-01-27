@@ -111,8 +111,8 @@ function MyMGLs() {
   } else if (token && mgls.length == 0) {
     return (
       <div className="container">
-        <h2>You do not have any lists yet</h2>
-        <div>
+        <h2>You do not have any lists yet.</h2>
+        <div className="centered">
           <NavLink
             className="btn btn-info"
             id="add-mgl-link"
@@ -127,8 +127,8 @@ function MyMGLs() {
   } else if (!token && mgls.length == 0) {
     return (
       <div className="container">
-        <h2>You must create an account or login to create a list</h2>
-        <div>
+        <h2>You must create an account or login to create a list.</h2>
+        <div className="centered"><div className="padded">
           <NavLink
             className="btn btn-info"
             id="add-mgl-link"
@@ -138,7 +138,7 @@ function MyMGLs() {
             Login
           </NavLink>
         </div>
-        <div>
+        <div className="padded">
           <NavLink
             className="btn btn-warning"
             id="add-mgl-link"
@@ -147,6 +147,7 @@ function MyMGLs() {
           >
             Sign up
           </NavLink>
+        </div>
         </div>
       </div>
     );

@@ -68,8 +68,6 @@ const GameDetail = () => {
     const handleOpenModal = () => setIsOpen(true);
     const handleCloseModal = () => setIsOpen(false);
 
-    const game_id = id
-
 
 
     useEffect(() => {
