@@ -28,7 +28,7 @@ const Carousel = (props) => {
                 {
                     currentIndex > 0 &&
                     <button onClick={prev} className="left-arrow">
-                        <i class="arrow left"></i>
+                        <i className="arrow left"></i>
                     </button>
                 }
                 <div className="carousel-content-wrapper">
@@ -42,7 +42,7 @@ const Carousel = (props) => {
                 {
                     currentIndex < (length - 1) &&
                     <button onClick={next} className="right-arrow">
-                        <i class="arrow right"></i>
+                        <i className="arrow right"></i>
                     </button>
                 }
             </div>
