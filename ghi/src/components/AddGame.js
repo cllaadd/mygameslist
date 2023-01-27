@@ -39,8 +39,6 @@ function AddGameForm({game_id, game_name, game_cover}) {
 
     const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(mglData.mgl_id)
-    console.log(mglData)
     const mglUrl = `http://localhost:8000/api/mgls/${mglData.mgl_id}/add/${game_id}`;
     const fetchConfig = {
         method: 'put',
@@ -60,7 +58,6 @@ function AddGameForm({game_id, game_name, game_cover}) {
     const response = await fetch(mglUrl, fetchConfig);
     if (response.ok) {
         const addedGame = await response.json();
-        console.log(addedGame)
         setMGLData(noData)
         navigate(`/mgls/${mglData.mgl_id}`)
     } else {

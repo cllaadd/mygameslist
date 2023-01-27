@@ -7,7 +7,6 @@ function UsersList() {
     const getUserData = async () => {
         const response = await fetch('http://localhost:8000/api/accounts/')
         const userData = await response.json()
-        console.log(userData)
         setUsers(userData)
     }
 
