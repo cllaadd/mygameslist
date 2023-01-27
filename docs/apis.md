@@ -54,7 +54,7 @@ Creating a new game saves the name and cover URL, and the other fields are added
 ## Games List
 
 - **Method**: `POST`, `GET`, `PUT`, `DELETE`,
-- **Path**: `/mgls/`, `mgls/{mgl_id}/`,
+- **Path**: `/mgls/`, `mgls/{mgl_id}/`, `mgls/{username}/`, `mgls/{mgl_id}/add/{game_id}`, `mgls/{mgl_id}/remove/{game_id}`,
 
 Input:
 
@@ -78,12 +78,12 @@ Output:
 }
 ```
 
-Creating a new list saves the account ID, name (of the list), description, and list of games. This adds a new games list to the database which can be viewed by a user and updated or deleted by its creator's.
+Creating a new list saves the account ID, name (of the list), description, and list of games. This adds a new games list to the database which can be viewed by a user and updated or deleted by its creator. Once a list is created, games can be added or removced form the list. Users will also be able to see the lists of other users.
 
 ## Accounts
 
 - Method: `POST`, `GET`, `PUT`, `DELETE`,
-- Path: `/api/accounts/`, `/api/accounts/{account_id}`
+- Path: `/api/accounts/`, `/api/account/{username}`
 
 Input:
 
@@ -91,8 +91,7 @@ Input:
 {
   "username": string,
   "password": string,
-  "profile_url": string,
-  "bio": string,
+
 }
 ```
 
@@ -102,9 +101,8 @@ Output:
 {
   "username": string,
   "password": string,
-  "profile_url": string,
-  "bio": string,
+
 }
 ```
 
-The Accounts API will create, update, or delete a user account. Users will only be required to enter username and password to create an account. The additional fields of a URL for profile picture and bio can be added later on the My Account page.
+The Accounts API will create, update, or delete a user account. Users will only be required to enter username and password to create an account. Other user will be able access those user's pages through their username.

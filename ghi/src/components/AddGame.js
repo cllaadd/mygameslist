@@ -37,7 +37,7 @@ function AddGameForm({game_id, game_name, game_cover}) {
     }
 
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = async event => {
     event.preventDefault();
     const mglUrl = `http://localhost:8000/api/mgls/${mglData.mgl_id}/add/${game_id}`;
     const fetchConfig = {
@@ -59,6 +59,7 @@ function AddGameForm({game_id, game_name, game_cover}) {
     if (response.ok) {
         const addedGame = await response.json();
         setMGLData(noData)
+        setIsOpen(false)
         navigate(`/mgls/${mglData.mgl_id}`)
     } else {
         alert("Could not add game")
@@ -84,7 +85,7 @@ function AddGameForm({game_id, game_name, game_cover}) {
                         <div className="mgl-add-game-container">
                             <h1 className="mgl-add-game-title">Which list would you like to add {game_name} to?</h1>
                             <img src={game_cover}></img>
-                            <form onSubmit={handleSubmit} id="add-game-form">
+                            <form id="add-game-form">
                                 <div className="mb-3">
                                     <select onChange={handleChange} required id="mgl_id" name="mgl_id" className="form-select">
                                         <option className="mgl-add-game-title" value="">Choose a list</option>
@@ -96,9 +97,8 @@ function AddGameForm({game_id, game_name, game_cover}) {
                                             )
                                         })};
                                     </select>
-                                </div>
-
-                                <button onClick={() => setIsOpen(false)} className="btn btn-info">Add game</button>
+                                    </div>
+                                <button onClick={handleSubmit} className="btn btn-info">Add game</button>
                             </form>
                         </div>
                     </div>
