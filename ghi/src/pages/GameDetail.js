@@ -194,28 +194,38 @@ const GameDetail = () => {
 
               <div className="right-side-sidebar-info">
                 <h4>Category</h4>
-                <div>{game.category}</div>
+                <div className="keyword-button">{game.category}</div>
 
                 <h4>Collection</h4>
                 {game.collection_id.map((collection, index) => (
                   <div key={index}>
-                    <div>{collection.name}</div>
+                    <div className="keyword-button">{collection.name}</div>
                   </div>
                 ))}
 
                 <h4>DLCS</h4>
-                <div>{game.dlcs_id}</div>
+                <div className="keyword-button">{game.dlcs_id}</div>
 
                 <h4>Franchises</h4>
                 {game.franchises_id.map((franchise, index) => (
                   <div key={index}>
                     <a
+                      className="keyword-button"
                       href={`/games/idsearch?search_param=Franchise&search_param_name=${franchise.name}&query_param=franchises_id&param_id=${franchise.id}`}
                     >
                       {franchise.name}
                     </a>
                   </div>
                 ))}
+                <div className="involved-companies">
+                  <h4 className="involved-companies">Involved Companies</h4>
+                  {game.involved_companies_id.map((company, index) => (
+                    <div key={index}>
+                      <h5>{company.name}</h5>
+                      <img src={company.logo} className="company-logo" />
+                    </div>
+                  ))}
+                </div>
                 <h4>Alternative Names</h4>
                 <div>
                   {visibleAlternativeNames.map((altname, index) => (
@@ -289,91 +299,65 @@ const GameDetail = () => {
                   </Carousel>
                 </div>
               </div>
-
-              <h4>Collection</h4>
-              {game.collection_id.map((collection, index) => (
-                <div key={index}>
-                  <div>{collection.name}</div>
+              <div className="all-other-info">
+                <div className="other-info-containers">
+                  <h4 className="other-info-title">Game Modes</h4>
+                  {game.game_modes_id.map((game_mode, index) => (
+                    <div key={index}>
+                      <a
+                        className="keyword-button"
+                        href={`/games/idsearch?search_param=Game Mode&search_param_name=${game_mode.name}&query_param=game_modes_id&param_id=${game_mode._id}`}
+                      >
+                        {game_mode.name}
+                      </a>
+                    </div>
+                  ))}
                 </div>
-              ))}
-
-              <h4>DLCS</h4>
-              <div>{game.dlcs_id}</div>
-
-              <h4>Game Modes</h4>
-              {game.game_modes_id.map((game_mode, index) => (
-                <div key={index}>
-                  <a
-                    href={`/games/idsearch?search_param=Game Mode&search_param_name=${game_mode.name}&query_param=game_modes_id&param_id=${game_mode._id}`}
-                  >
-                    {game_mode.name}
-                  </a>
+                <div className="other-info-containers">
+                  <h4 className="other-info-title">Player Perspectives</h4>
+                  {game.player_perspectives_id.map((perspective, index) => (
+                    <div key={index}>
+                      <div>{perspective.name}</div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-
-              <h4>Genres</h4>
-              {game.genres_id.map((genre, index) => (
-                <div key={index}>
-                  <a
-                    href={`/games/idsearch?search_param=Genres&search_param_name=${genre.name}&query_param=genres_id&param_id=${genre._id}`}
-                  >
-                    {genre.name}
-                  </a>
+                <div className="other-info-containers">
+                  <h4 className="other-info-title">Ports</h4>
+                  <div>{game.ports_id}</div>
                 </div>
-              ))}
-
-              <h4>Involved Companies</h4>
-              {game.involved_companies_id.map((company, index) => (
-                <div key={index}>
-                  <h5>{company.name}</h5>
-                  <img src={company.logo} className="company-logo" />
+                <div className="other-info-containers">
+                  <h4 className="other-info-title">Remakes</h4>
+                  <div>{game.remakes_id}</div>
                 </div>
-              ))}
-
-              <h4>Platforms</h4>
-              {game.platforms_id.map((platform, index) => (
-                <div key={index}>
-                  <div>{platform.name}</div>
+                <div className="other-info-containers">
+                  <h4 className="other-info-title">Remasters</h4>
+                  <div>{game.remasters_id}</div>
                 </div>
-              ))}
-
-              <h4>Player Perspectives</h4>
-              {game.player_perspectives_id.map((perspective, index) => (
-                <div key={index}>
-                  <div>{perspective.name}</div>
+                <div className="other-info-containers">
+                  <h4 className="other-info-title">Status</h4>
+                  <div>{game.status}</div>
                 </div>
-              ))}
-
-              <h4>Ports</h4>
-              <div>{game.ports_id}</div>
-
-              <h4>Remakes</h4>
-              <div>{game.remakes_id}</div>
-
-              <h4>Remasters</h4>
-              <div>{game.remasters_id}</div>
-
-              <h4>Storyline</h4>
-              <div>{game.storyline}</div>
-
-              <h4>Status</h4>
-              <div>{game.status}</div>
-
-              <h4>Themes</h4>
-              {game.themes_id.map((theme, index) => (
-                <div key={index}>
-                  <div>{theme.name}</div>
+                <div className="other-info-containers">
+                  <h4 className="other-info-title">Themes</h4>
+                  {game.themes_id.map((theme, index) => (
+                    <div key={index}>
+                      <div>{theme.name}</div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-
-              <h4>Total Rating Count</h4>
-              <div>{game.total_rating_count}</div>
-
-              <h4>Version Parent</h4>
-              <div>{game.version_parent_id}</div>
-
-              <h4>Version Title</h4>
-              <div>{game.version_title}</div>
+                <div className="other-info-containers">
+                  <h4 className="other-info-title">Version Parent</h4>
+                  <div>{game.version_parent_id}</div>
+                </div>
+                <div className="other-info-containers">
+                  <h4 className="other-info-title">Version Title</h4>
+                  <div>{game.version_title}</div>
+                </div>
+                <div className="other-info-containers-storyline">
+                  <h4 className="other-info-title">Storyline</h4>
+                  <div className="other-info-storyline">{game.storyline}</div>
+                </div>
+              </div>
             </div>
           );
         })}
