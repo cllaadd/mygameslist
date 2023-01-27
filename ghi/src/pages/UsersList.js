@@ -30,7 +30,7 @@ function UsersList() {
                         return (
                             <tr key={user.id}>
                                 <td>
-                                    <Link class="link" to={`/users/${user.username}`}>
+                                    <Link className="link" to={`/users/${user.username}`}>
                                     {user.username}
                                 </Link>
                                 </td>

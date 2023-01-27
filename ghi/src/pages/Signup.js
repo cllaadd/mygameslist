@@ -55,11 +55,11 @@ function SignupComponent() {
   };
 
   return (
-    <div class="container h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="card-body p-md-5">
-          <div class="row justify-content-center">
-            <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+    <div className="container h-100">
+      <div className="row d-flex justify-content-center align-items-center h-100">
+        <div className="card-body p-md-5">
+          <div className="row justify-content-center">
+            <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
               <h2>Sign Up</h2>
               <form onSubmit={handleSubmit} id="signup-form">
                 <div className="form-floating mb-3">
@@ -102,9 +102,9 @@ function SignupComponent() {
                 <button className="btn btn-info">Sign up</button>
               </form>
             </div>
-            <div class="col-md-10 col-lg-6 col-xl-7  align-items-center order-1 order-lg-2">
+            <div className="col-md-10 col-lg-6 col-xl-7  align-items-center order-1 order-lg-2">
               <img
-                class="img-fluid width=50% height=50%"
+                className="img-fluid width=50% height=50%"
                 src={controller}
                 alt="video game controller"
               />
