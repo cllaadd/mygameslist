@@ -50,12 +50,6 @@ async def get_token(
         }
         return AccountToken(**token_data)
 
-@router.get("/api/account/", response_model=AccountOut)
-async def get_user_account(
-    account_data: dict = Depends(authenticator.get_current_account_data)
-    ):
-    account = AccountOut(**account_data)
-    return account
 
 @router.get("/api/accounts/{username}", response_model=AccountOut)
 async def get_account(
