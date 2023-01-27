@@ -48,7 +48,7 @@ function User() {
                   return (
                     <ul key={mgl.id}>
                       <li className="list-item">
-                        <Link class="link" to={`/mgls/${mgl.id}`}>
+                        <Link className="link" to={`/mgls/${mgl.id}`}>
                                     {mgl.name}
                          </Link></li>
                     </ul>
