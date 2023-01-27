@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { Pagination } from "react-bootstrap";
 import imagenotavail from "/app/src/images/imagenotavail.jpg";
-import NavSearch from "../components/nav_name_search"
+import NavSearch from "../components/nav_name_search";
 
 function AllGamesList() {
   const [games, setgames] = useState([]);
@@ -42,9 +42,12 @@ function AllGamesList() {
             return (
               <tr key={game.id}>
                 <td>
-                <Link to={`/games/${game.id}`} onClick={() => setRefresh(true)}>
-                  <h3>{game.name}</h3>
-                </Link>
+                  <Link
+                    to={`/games/${game.id}`}
+                    onClick={() => setRefresh(true)}
+                  >
+                    <h3>{game.name}</h3>
+                  </Link>
                 </td>
                 <td>
                   <img

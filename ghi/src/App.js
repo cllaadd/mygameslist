@@ -43,7 +43,7 @@ function App() {
           <Route path="/account" element={<Account />}></Route>
           <Route path="/games/:id" element={<GameDetail />}></Route>
           <Route path="/games/idsearch/" element={<GameSearchID />}></Route>
-          <Route path="/searchresults" element={<SearchResults/>}></Route>
+          <Route path="/searchresults" element={<SearchResults />}></Route>
           <Route path="/mgls" element={<MyMGLs />}></Route>
           <Route path="/mgls/:id" element={<MGL />}></Route>
           <Route path="/mgls/new" element={<MGLForm />}></Route>
@@ -51,7 +51,6 @@ function App() {
         </Routes>
       </AuthProvider>
     </BrowserRouter>
-
   );
 }
 

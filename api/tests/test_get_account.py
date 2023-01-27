@@ -11,8 +11,11 @@ client = TestClient(app)
 class AccountQueriesMock:
     def get(self, username):
         return {
-            "id": "1", "username": username, "password": "password",
+            "id": "1",
+            "username": username,
+            "password": "password",
         }
+
 
 def test_get_account():
 
@@ -21,8 +24,10 @@ def test_get_account():
     response = client.get("/api/accounts/garrett")
 
     assert response.status_code == 200
-    assert response.json()== {
-       "id": "1", "username": "garrett", "password": "password",
+    assert response.json() == {
+        "id": "1",
+        "username": "garrett",
+        "password": "password",
     }
 
     app.dependency_overrides = {}

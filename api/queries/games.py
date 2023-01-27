@@ -9,9 +9,7 @@ class GameQueries(Queries):
     DB_NAME = "games"
     COLLECTION = "games_db"
 
-    def create(
-        self, game: GameIn
-    ) -> GameOut:
+    def create(self, game: GameIn) -> GameOut:
         props = game.dict()
         self.collection.insert_one(props)
         props["id"] = str(props["_id"])
@@ -33,13 +31,15 @@ class GameQueries(Queries):
             single_game.append(GameOut(**document))
         return single_game
 
-    def get_search(self, query_param: str, param_id: int, game_limit: int, game_offset: int) -> List[SearchGameOut]:
+    def get_search(
+        self, query_param: str, param_id: int, game_limit: int, game_offset: int
+    ) -> List[SearchGameOut]:
         games = []
-        number_of_games = self.collection.count_documents({f'{query_param}' : param_id})
+        number_of_games = self.collection.count_documents({f"{query_param}": param_id})
         pipeline = [
-            {'$match': {f'{query_param}' : param_id}},
-            {'$limit': game_limit},
-            {'$skip': game_offset},
+            {"$match": {f"{query_param}": param_id}},
+            {"$limit": game_limit},
+            {"$skip": game_offset},
         ]
         db = self.collection.aggregate(pipeline)
         for document in db:
@@ -48,13 +48,17 @@ class GameQueries(Queries):
             games.append(SearchGameOut(**document))
         return games
 
-    def get_name_search(self, param_name: str, game_limit: int, game_offset: int) -> List[SearchGameOut]:
+    def get_name_search(
+        self, param_name: str, game_limit: int, game_offset: int
+    ) -> List[SearchGameOut]:
         games = []
-        number_of_games = self.collection.count_documents({'$text': {'$search': param_name}})
+        number_of_games = self.collection.count_documents(
+            {"$text": {"$search": param_name}}
+        )
         pipeline = [
-            {'$match': {'$text' : {'$search': param_name}}},
-            {'$limit': game_limit},
-            {'$skip': game_offset},
+            {"$match": {"$text": {"$search": param_name}}},
+            {"$limit": game_limit},
+            {"$skip": game_offset},
         ]
         db = self.collection.aggregate(pipeline)
         for document in db:
@@ -62,149 +66,148 @@ class GameQueries(Queries):
             document["number_of_games"] = number_of_games
             games.append(SearchGameOut(**document))
         return games
-
 
     def get_game_detail(self, id: int) -> List[GameDetailOut]:
         single_game = []
         pipeline = [
-            {'$match': {'_id' : id}},
+            {"$match": {"_id": id}},
             {
-            '$lookup':
+                "$lookup": {
+                    "from": "genre",
+                    "localField": "genres_id",
+                    "foreignField": "_id",
+                    "as": "genres_id",
+                }
+            },
             {
-                'from' : 'genre',
-                'localField': 'genres_id',
-                'foreignField': '_id',
-                'as': 'genres_id'
-            }},
+                "$lookup": {
+                    "from": "game_mode",
+                    "localField": "game_modes_id",
+                    "foreignField": "_id",
+                    "as": "game_modes_id",
+                }
+            },
             {
-            '$lookup':
+                "$lookup": {
+                    "from": "perspective",
+                    "localField": "player_perspectives_id",
+                    "foreignField": "_id",
+                    "as": "player_perspectives_id",
+                }
+            },
             {
-                'from': 'game_mode',
-                'localField': 'game_modes_id',
-                'foreignField': '_id',
-                'as': 'game_modes_id'
-            }},
+                "$lookup": {
+                    "from": "platform",
+                    "localField": "platforms_id",
+                    "foreignField": "_id",
+                    "as": "platforms_id",
+                }
+            },
             {
-            '$lookup':
+                "$lookup": {
+                    "from": "themes",
+                    "localField": "themes_id",
+                    "foreignField": "_id",
+                    "as": "themes_id",
+                }
+            },
             {
-                'from': 'perspective',
-                'localField': 'player_perspectives_id',
-                'foreignField': '_id',
-                'as': 'player_perspectives_id'
-            }},
+                "$lookup": {
+                    "from": "keywords",
+                    "localField": "keywords_id",
+                    "foreignField": "_id",
+                    "as": "keywords_id",
+                }
+            },
             {
-            '$lookup':
+                "$lookup": {
+                    "from": "collections",
+                    "localField": "collection_id",
+                    "foreignField": "_id",
+                    "as": "collection_id",
+                }
+            },
             {
-                'from': 'platform',
-                'localField': 'platforms_id',
-                'foreignField': '_id',
-                'as': 'platforms_id'
-            }},
+                "$lookup": {
+                    "from": "franchises",
+                    "localField": "franchises_id",
+                    "foreignField": "_id",
+                    "as": "franchises_id",
+                }
+            },
             {
-            '$lookup':
+                "$lookup": {
+                    "from": "games_db",
+                    "localField": "similar_games_id",
+                    "foreignField": "_id",
+                    "as": "similar_games_id",
+                }
+            },
             {
-                'from': 'themes',
-                'localField': 'themes_id',
-                'foreignField': '_id',
-                'as': 'themes_id'
-            }},
+                "$lookup": {
+                    "from": "companies",
+                    "localField": "involved_companies_id",
+                    "foreignField": "_id",
+                    "as": "involved_companies_id",
+                }
+            },
             {
-            '$lookup':
-            {
-                'from' : 'keywords',
-                'localField': 'keywords_id',
-                'foreignField': '_id',
-                'as': 'keywords_id'
-            }},
-            {
-            '$lookup':
-            {
-                'from' : 'collections',
-                'localField': 'collection_id',
-                'foreignField':'_id',
-                'as': 'collection_id'
-            }},
-            {
-            '$lookup':
-            {
-                'from' : 'franchises',
-                'localField': 'franchises_id',
-                'foreignField':'_id',
-                'as': 'franchises_id'
-            }},
-            {
-            '$lookup':
-            {
-                'from' : 'games_db',
-                'localField': 'similar_games_id',
-                'foreignField':'_id',
-                'as': 'similar_games_id'
-            }},
-            {
-            '$lookup':
-            {
-                'from' : 'companies',
-                'localField': 'involved_companies_id',
-                'foreignField':'_id',
-                'as': 'involved_companies_id'
-            }},
-
-            {
-            '$addFields': {
-                'similar_games_id': {
-                    '$map': {
-                        'input': '$similar_games_id',
-                        'as': 'game',
-                        'in': {
-                            'name': '$$game.name',
-                            'cover': '$$game.cover',
-                            'id': '$$game._id',
-                        },
-                    }
-                },
-                'involved_companies_id': {
-                    '$map': {
-                        'input': '$involved_companies_id',
-                        'as': 'company',
-                        'in': {
-                            'name': '$$company.name',
-                            'logo': '$$company.logo',
-                            'id': '$$company._id',
-                        },
-                    }
-                },
-                'franchises_id': {
-                    '$map': {
-                        'input': '$franchises_id',
-                        'as': 'franchise',
-                        'in': {
-                            'name': '$$franchise.name',
-                            'id': '$$franchise._id',
-                        },
-                    }
-                },
-                'collection_id': {
-                    '$map': {
-                        'input': '$collection_id',
-                        'as': 'collection',
-                        'in': {
-                            'name': '$$collection.name',
-                            'id': '$$collection._id',
-                        },
-                    }
-                },
-                'keywords_id': {
-                    '$map': {
-                        'input': '$keywords_id',
-                        'as': 'keywords',
-                        'in': {
-                            'name': '$$keywords.name',
-                            'id': '$$keywords._id',
+                "$addFields": {
+                    "similar_games_id": {
+                        "$map": {
+                            "input": "$similar_games_id",
+                            "as": "game",
+                            "in": {
+                                "name": "$$game.name",
+                                "cover": "$$game.cover",
+                                "id": "$$game._id",
+                            },
+                        }
+                    },
+                    "involved_companies_id": {
+                        "$map": {
+                            "input": "$involved_companies_id",
+                            "as": "company",
+                            "in": {
+                                "name": "$$company.name",
+                                "logo": "$$company.logo",
+                                "id": "$$company._id",
+                            },
+                        }
+                    },
+                    "franchises_id": {
+                        "$map": {
+                            "input": "$franchises_id",
+                            "as": "franchise",
+                            "in": {
+                                "name": "$$franchise.name",
+                                "id": "$$franchise._id",
+                            },
+                        }
+                    },
+                    "collection_id": {
+                        "$map": {
+                            "input": "$collection_id",
+                            "as": "collection",
+                            "in": {
+                                "name": "$$collection.name",
+                                "id": "$$collection._id",
+                            },
+                        }
+                    },
+                    "keywords_id": {
+                        "$map": {
+                            "input": "$keywords_id",
+                            "as": "keywords",
+                            "in": {
+                                "name": "$$keywords.name",
+                                "id": "$$keywords._id",
+                            },
                         },
                     },
-                },
-            }},
-            ]
+                }
+            },
+        ]
         db = self.collection.aggregate(pipeline)
         for document in db:
             document["id"] = str(document["_id"])

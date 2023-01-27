@@ -3,8 +3,8 @@ from queries.accounts import AccountQueries
 from main import app
 
 
-
 client = TestClient(app)
+
 
 class AccountQueriesMock:
     def get_all(self):
@@ -13,12 +13,13 @@ class AccountQueriesMock:
             {"id": "2", "username": "richhomiequan", "password": "snuggle"},
         ]
 
+
 def test_get_all():
-    #arrange
+    # arrange
     app.dependency_overrides[AccountQueries] = AccountQueriesMock
-    #act
+    # act
     response = client.get("/api/accounts")
-    #assert
+    # assert
     assert response.status_code == 200
     assert len(response.json()) > 1
 

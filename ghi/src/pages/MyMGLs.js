@@ -17,7 +17,10 @@ function MyMGLs() {
         Authorization: `Bearer ${token}`,
       },
     };
-    const response = await fetch("http://localhost:8000/api/mgls/", fetchConfig);
+    const response = await fetch(
+      "http://localhost:8000/api/mgls/",
+      fetchConfig
+    );
     if (response.ok) {
       const data = await response.json();
       setMGLs(data.mgls);
@@ -55,57 +58,59 @@ function MyMGLs() {
   if (token && mgls.length > 0) {
     return (
       <div className="container">
-        <div className="heading"><h1>my game lists</h1></div>
+        <div className="heading">
+          <h1>my game lists</h1>
+        </div>
         <div>
-        <table className="table">
-          <thead>
-            <tr>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {mgls.map((mgl) => {
-              return (
-                <tr key={mgl.id}>
-                  <td>{mgl.name}</td>
-                  <td>{mgl.description}</td>
-                  <td>
-                    <button
-                      className="btn btn-light m-2"
-                      onClick={() => {
-                        goToList(mgl.id);
-                      }}
-                    >
-                      See list
-                    </button>
-                  </td>
-                  <td>
-                    <button
-                      className="btn btn-warning m-2"
-                      onClick={() => {
-                        handleDelete(mgl.id);
-                      }}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-        <NavLink
-          className="btn btn-info"
-          id="add-mgl-link"
-          aria-current="page"
-          to="/mgls/new"
-        >
-          Add new list
-        </NavLink>
-      </div>
+          <table className="table">
+            <thead>
+              <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {mgls.map((mgl) => {
+                return (
+                  <tr key={mgl.id}>
+                    <td>{mgl.name}</td>
+                    <td>{mgl.description}</td>
+                    <td>
+                      <button
+                        className="btn btn-light m-2"
+                        onClick={() => {
+                          goToList(mgl.id);
+                        }}
+                      >
+                        See list
+                      </button>
+                    </td>
+                    <td>
+                      <button
+                        className="btn btn-warning m-2"
+                        onClick={() => {
+                          handleDelete(mgl.id);
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+          <NavLink
+            className="btn btn-info"
+            id="add-mgl-link"
+            aria-current="page"
+            to="/mgls/new"
+          >
+            Add new list
+          </NavLink>
+        </div>
       </div>
     );
   } else if (token && mgls.length == 0) {
@@ -128,26 +133,27 @@ function MyMGLs() {
     return (
       <div className="container">
         <h2>You must create an account or login to create a list.</h2>
-        <div className="centered"><div className="padded">
-          <NavLink
-            className="btn btn-info"
-            id="add-mgl-link"
-            aria-current="page"
-            to="/login"
-          >
-            Login
-          </NavLink>
-        </div>
-        <div className="padded">
-          <NavLink
-            className="btn btn-warning"
-            id="add-mgl-link"
-            aria-current="page"
-            to="/signup"
-          >
-            Sign up
-          </NavLink>
-        </div>
+        <div className="centered">
+          <div className="padded">
+            <NavLink
+              className="btn btn-info"
+              id="add-mgl-link"
+              aria-current="page"
+              to="/login"
+            >
+              Login
+            </NavLink>
+          </div>
+          <div className="padded">
+            <NavLink
+              className="btn btn-warning"
+              id="add-mgl-link"
+              aria-current="page"
+              to="/signup"
+            >
+              Sign up
+            </NavLink>
+          </div>
         </div>
       </div>
     );

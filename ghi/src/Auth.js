@@ -88,8 +88,7 @@ export function useToken() {
     const form = new FormData();
     form.append("username", username);
     form.append("password", password);
-    const response = await fetch(url,
-    {
+    const response = await fetch(url, {
       method: "post",
       credentials: "include",
       body: form,
@@ -105,18 +104,20 @@ export function useToken() {
 
   async function signup(username, password) {
     const url = `${process.env.REACT_APP_API_HOST}/api/accounts/`;
-    const response = await fetch(url,
+    const response = await fetch(
+      url,
       // {headers: { Authorization: `Bearer ${token}` }},
       {
-      method: "post",
-      body: JSON.stringify({
-        username,
-        password,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+        method: "post",
+        body: JSON.stringify({
+          username,
+          password,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     if (response.ok) {
       await login(username, password);
     }

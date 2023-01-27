@@ -3,14 +3,16 @@ from queries.accounts import AccountQueries
 from main import app
 
 
-
 client = TestClient(app)
+
 
 class AccountQueriesCreateMock:
     created_account = None
+
     def create_account(self, account_data):
         self.created_account = account_data
         return True
+
 
 def test_create_account():
     account_queries_mock = AccountQueriesCreateMock()
