@@ -17,8 +17,8 @@ function UsersList() {
     )
 
     return (
-        <div>
-            <h1>Users</h1>
+        <div className="container">
+            <div className="heading"><h1>Users</h1></div>
             <table className="table">
                 <thead>
                     <tr>

@@ -16,7 +16,6 @@ from queries.accounts import (
 from models import (
     Account,
     AccountIn,
-    AccountUpdateIn,
     AccountOut
 )
 
@@ -55,34 +54,9 @@ async def get_token(
 async def get_account(
     username: str,
     repo: AccountQueries = Depends(),
-    ):
+):
     account = repo.get(username)
     return account
-
-
-async def update_account(
-    account_id: str,
-    info: AccountUpdateIn,
-    request: Request,
-    response: Response,
-    repo: AccountQueries = Depends(),
-):
-    if info.password is not None:
-        hashed_password = authenticator.hash_password(info.password)
-    else:
-        hashed_password = None
-
-    try:
-        account = repo.update(account_id, info, hashed_password)
-    except DuplicateAccountError:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Cannot Create An Account With Those Credentials",
-        )
-
-    form = AccountForm(username=info.email, password=info.password)
-    token = await authenticator.login(response, request, form, repo)
-    return AccountToken(account=account, **token.dict())
 
 
 @router.delete("/api/accounts/{account_id}", response_model=bool)
