@@ -79,10 +79,10 @@ function AddGameForm({ game_id, game_name, game_cover }) {
         <div className="form-content">
           <div className="shadow p-4 mt-4">
             <div className="mgl-add-game-container">
-              <h1 className="mgl-add-game-title">
+              <h2 className="mgl-add-game-title">
                 Which list would you like to add {game_name} to?
-              </h1>
-              <img src={game_cover}></img>
+              </h2>
+              <div className="padded"><img src={game_cover}></img></div>
               <form id="add-game-form">
                 <div className="mb-3">
                   <select

@@ -27,3 +27,7 @@ input::placeholder {
 .mgl-add-game-title {
   color: black !important;
 }
+
+.padded {
+  padding-bottom: 60px;
+}

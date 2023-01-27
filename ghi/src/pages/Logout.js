@@ -5,7 +5,7 @@ function LogoutComponent() {
   const [token, , logout, ,] = useToken();
   const navigate = useNavigate();
   logout(token);
-  // navigate("/")
+  navigate("/")
 }
 
 export default LogoutComponent;
