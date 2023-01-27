@@ -65,7 +65,7 @@ function MGL() {
                     {games.map(game => {
                         return (
                             <tr key={game.id}>
-                                <td><Link class="link" to={`/games/${game.id}`}>
+                                <td><Link className="link" to={`/games/${game.id}`}>
                                     {game.name}
                                 </Link></td>
                                 <td></td>
