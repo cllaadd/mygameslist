@@ -6,13 +6,19 @@ The application will need to get the following kinds of data from third-party so
 
 After registering a website on IGDB, you can receive a Client Secret and Client ID for use to access the api. Create a keys.py file in the api directory and add it to .gitignore. Then enter
 
+
 igdb_client_id="{Client ID}"
+
 igdb_access_key="Bearer {Client Secret}"
+
 
 into the keys.py file. After the docker containers are up and running, run this command in the api shell:
 
+
 python -m cache_database_setup
 
+
 After a few minutes the games will be cached into the database.
+
 
 In order for the search bar to work, download MongoDB Compass from https://www.mongodb.com/try/download/compass. Start a new connection and look for advanced connection options. Then enter the MONGO_INITDB_ROOT_USERNAME and MONGO_INITDB_ROOT_PASSWORD into the Authorization tab and connect using the default authorization mechanism.
