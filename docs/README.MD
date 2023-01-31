@@ -21,8 +21,8 @@ We are targeting gamers of all walks of life who want to build lists of games: g
 
 - New users can create an account with username and password. No email or further personal information is required.
 - Users can view a list of all games or a list of all users without being signed in. This will allow them to better understand how the site works.
-- Once they have created an account, users can begin to build their own lists, first by creating a list, and then by browing or searching for games and adding them to their desired list(s)
-- Registered users can view other user's accounts and lists
+- Once they have created an account, users can begin to build their own lists, first by creating a list, and then by browsing or searching for games and adding them to their desired list(s)
+- Registered users can view their own account and add a profile picture and bio
 
 ## Project Initialization
 
@@ -33,4 +33,5 @@ To fully enjoy this application on your local machine, please make sure to follo
 3. Run `docker volume create mongo-data`
 4. Run `docker compose build`
 5. Run `docker compose up`
-6. Open a browser and navigate to http://localhost:3000/
+6. Run `cache_database_setup.py`
+7. Open a browser and navigate to http://localhost:3000/
