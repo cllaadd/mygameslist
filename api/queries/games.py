@@ -17,7 +17,7 @@ class GameQueries(Queries):
 
     def get_all(self, game_limit: int, game_offset: int) -> List[GameOut]:
         games = []
-        db = self.collection.find().limit(game_limit).skip(game_offset)
+        db = self.collection.find().skip(game_offset).limit(game_limit)
         for document in db:
             document["id"] = str(document["_id"])
             games.append(GameOut(**document))
@@ -38,8 +38,8 @@ class GameQueries(Queries):
         number_of_games = self.collection.count_documents({f"{query_param}": param_id})
         pipeline = [
             {"$match": {f"{query_param}": param_id}},
-            {"$limit": game_limit},
             {"$skip": game_offset},
+            {"$limit": game_limit},
         ]
         db = self.collection.aggregate(pipeline)
         for document in db:
@@ -57,8 +57,9 @@ class GameQueries(Queries):
         )
         pipeline = [
             {"$match": {"$text": {"$search": param_name}}},
-            {"$limit": game_limit},
             {"$skip": game_offset},
+            {"$limit": game_limit},
+
         ]
         db = self.collection.aggregate(pipeline)
         for document in db:
