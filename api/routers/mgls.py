@@ -1,16 +1,16 @@
 from fastapi import APIRouter, Depends
-from models import (
+from models.mgls import (
     MyGameListOut,
     MyGameListIn,
-    AccountOut,
     MyGameListRepo,
     MyGameListDetailIn,
     MyGameListUpdateIn,
 )
+from models.accounts import AccountOut
 from queries.mgls import MGLQueries
 from queries.games import GameQueries
 from queries.accounts import AccountQueries
-from .authenticator import authenticator
+from authenticator import authenticator
 
 
 router = APIRouter(tags=["mgls"])

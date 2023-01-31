@@ -1,8 +1,7 @@
 from bson.objectid import ObjectId
 from typing import List
 from .client import Queries
-from models import GameIn, GameOut, GameDetailOut, SearchGameOut
-from search_game_name import search_game
+from models.games import GameIn, GameOut, GameDetailOut, SearchGameOut
 
 
 class GameQueries(Queries):
@@ -17,7 +16,7 @@ class GameQueries(Queries):
 
     def get_all(self, game_limit: int, game_offset: int) -> List[GameOut]:
         games = []
-        db = self.collection.find().skip(game_offset).limit(game_limit)
+        db = self.collection.find().limit(game_limit).skip(game_offset)
         for document in db:
             document["id"] = str(document["_id"])
             games.append(GameOut(**document))
@@ -38,8 +37,8 @@ class GameQueries(Queries):
         number_of_games = self.collection.count_documents({f"{query_param}": param_id})
         pipeline = [
             {"$match": {f"{query_param}": param_id}},
-            {"$skip": game_offset},
             {"$limit": game_limit},
+            {"$skip": game_offset},
         ]
         db = self.collection.aggregate(pipeline)
         for document in db:
@@ -57,9 +56,8 @@ class GameQueries(Queries):
         )
         pipeline = [
             {"$match": {"$text": {"$search": param_name}}},
-            {"$skip": game_offset},
             {"$limit": game_limit},
-
+            {"$skip": game_offset},
         ]
         db = self.collection.aggregate(pipeline)
         for document in db:

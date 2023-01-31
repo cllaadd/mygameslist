@@ -1,7 +1,8 @@
 from bson.objectid import ObjectId
 from typing import List
 from .client import Queries
-from models import MyGameListIn, MyGameListOut, GameOut
+from models.mgls import MyGameListIn, MyGameListOut
+from models.games import GameOut
 from pymongo import ReturnDocument, MongoClient
 import os
 

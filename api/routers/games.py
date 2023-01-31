@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, Response, HTTPException, status, Request
 from pydantic import BaseModel
-from models import GameIn, GameOut, GameList, SearchGameList
+from models.games import GameIn, GameOut, GameList, SearchGameList
 from datetime import datetime, timedelta
 from queries.games import GameQueries
 import requests

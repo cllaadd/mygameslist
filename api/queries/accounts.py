@@ -1,6 +1,6 @@
 from bson.objectid import ObjectId
 from .client import Queries
-from models import Account, AccountIn, AccountUpdateIn, AccountOut
+from models.accounts import Account, AccountIn, AccountUpdateIn, AccountOut
 from pymongo import ReturnDocument
 from pymongo.errors import DuplicateKeyError
 from typing import Union

@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers.authenticator import authenticator
-from routers import games, accounts, mgls
+from authenticator import authenticator
+from routers import games, mgls, accounts
 import os
 
 

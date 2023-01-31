@@ -12,7 +12,7 @@ function AllGamesList() {
   const [refresh, setRefresh] = useState(false);
 
   const getGameData = async () => {
-    // const gamesUrl = 'http://localhost:8000/api/games/'
+    // const gamesUrl = `${process.env.REACT_APP_API_HOST}/api/games/`
     // const fetchConfig = {query:{"limit": limit, "offset": offset}}
     window.scrollTo(0, 0);
     const response = await fetch(`${process.env.REACT_APP_API_HOST}/api/games/`);

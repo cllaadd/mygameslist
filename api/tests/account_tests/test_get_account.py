@@ -1,8 +1,8 @@
 from fastapi.testclient import TestClient
 from queries.accounts import AccountQueries
-from models import AccountOut
+from api.models.accounts import AccountOut
 from routers.accounts import AccountToken
-from routers.authenticator import authenticator
+from api.authenticator import authenticator
 from main import app
 
 client = TestClient(app)
