@@ -22,7 +22,7 @@ function AddGameForm({ game_id, game_name, game_cover }) {
       },
     };
     const response = await fetch(
-      "http://localhost:8000/api/mgls/",
+      `${process.env.REACT_APP_API_HOST}/api/mgls/`,
       fetchConfig
     );
     if (response.ok) {
@@ -39,7 +39,7 @@ function AddGameForm({ game_id, game_name, game_cover }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const mglUrl = `http://localhost:8000/api/mgls/${mglData.mgl_id}/add/${game_id}`;
+    const mglUrl = `${process.env.REACT_APP_API_HOST}/api/mgls/${mglData.mgl_id}/add/${game_id}`;
     const fetchConfig = {
       method: "put",
       body: JSON.stringify({

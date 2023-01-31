@@ -18,7 +18,7 @@ function MyMGLs() {
       },
     };
     const response = await fetch(
-      "http://localhost:8000/api/mgls/",
+      `${process.env.REACT_APP_API_HOST}/api/mgls/`,
       fetchConfig
     );
     if (response.ok) {
@@ -42,7 +42,7 @@ function MyMGLs() {
       },
     };
     const response = await fetch(
-      `http://localhost:8000/api/mgls/${mgl_id}`,
+      `${process.env.REACT_APP_API_HOST}/api/mgls/${mgl_id}`,
       fetchConfig
     );
     const data = await response.json();

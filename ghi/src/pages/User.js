@@ -9,14 +9,14 @@ function User() {
 
   const getUserData = async () => {
     const response = await fetch(
-      `http://localhost:8000/api/accounts/${username}`
+      `${process.env.REACT_APP_API_HOST}/api/accounts/${username}`
     );
     const userData = await response.json();
     setUser(userData);
   };
 
   const getMGLData = async () => {
-    const response = await fetch(`http://localhost:8000/api/mgls/${username}`);
+    const response = await fetch(`${process.env.REACT_APP_API_HOST}/api/mgls/${username}`);
     const mglData = await response.json();
     setMGLs(mglData.mgls);
   };

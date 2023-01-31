@@ -56,7 +56,6 @@ const GameDetail = () => {
   const [showMoreKeywords, setShowMoreKeywords] = useState(false);
   const [rating, setRating] = useState(false);
   const { id } = useParams();
-  const { handleSubmit } = useState();
   const [keywords, setKeywords] = useState([]);
   const [altnames, setAltNames] = useState([]);
   const [showLimitAlternativeNames, setShowLimitAlternativeNames] =
@@ -70,7 +69,7 @@ const GameDetail = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     const loadData = async () => {
-      const url = `http://localhost:8000/api/games/${id}`;
+      const url = `${process.env.REACT_APP_API_HOST}/api/games/${id}`;
       const response = await fetch(url);
 
       if (response.ok) {

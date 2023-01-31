@@ -22,7 +22,7 @@ function SearchResults() {
   const getGameData = async (search_param_name) => {
     window.scrollTo(0, 0);
     const response = await fetch(
-      `http://localhost:8000/api/games/name/search/?param_name=${search_param_name}`
+      `${process.env.REACT_APP_API_HOST}/api/games/name/search/?param_name=${search_param_name}`
     );
     const gameData = await response.json();
     setgames(gameData.games);

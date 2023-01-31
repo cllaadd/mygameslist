@@ -26,7 +26,7 @@ function GameSearchID() {
   const getGameData = async () => {
     window.scrollTo(0, 0);
     const response = await fetch(
-      `http://localhost:8000/api/games/search/?query_param=${query_param}&param_id=${param_id}`
+      `${process.env.REACT_APP_API_HOST}/api/games/search/?query_param=${query_param}&param_id=${param_id}`
     );
     const gameData = await response.json();
 

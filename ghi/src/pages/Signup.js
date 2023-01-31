@@ -21,7 +21,7 @@ function SignupComponent() {
     event.preventDefault();
     const data = { ...account };
     if (data.password === data.passwordConfirm) {
-      const accountsUrl = "http://localhost:8000/api/accounts/";
+      const accountsUrl = `${process.env.REACT_APP_API_HOST}/api/accounts/`;
       const fetchConfig = {
         method: "POST",
         body: JSON.stringify(data),

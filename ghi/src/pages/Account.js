@@ -9,7 +9,7 @@ function UserComponent() {
   const navigate = useNavigate();
 
   const getCurrentUser = async () => {
-    const response = await fetch("http://localhost:8000/api/token/", {
+    const response = await fetch(`${process.env.REACT_APP_API_HOST}/api/token/`, {
       credentials: "include",
     });
     const userData = await response.json();

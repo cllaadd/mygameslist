@@ -10,7 +10,7 @@ function MGL() {
   const [token] = useToken();
 
   const getData = async () => {
-    const response = await fetch(`http://localhost:8000/api/mgls/${id}/`);
+    const response = await fetch(`${process.env.REACT_APP_API_HOST}/api/mgls/${id}/`);
     const data = await response.json();
     setMGL(data);
     setGames(data.games);
@@ -30,7 +30,7 @@ function MGL() {
       },
     };
     const response = await fetch(
-      `http://localhost:8000/api/mgls/${mgl_id}/remove/${game_id}`,
+      `${process.env.REACT_APP_API_HOST}/api/mgls/${mgl_id}/remove/${game_id}`,
       fetchConfig
     );
     const data = await response.json();
